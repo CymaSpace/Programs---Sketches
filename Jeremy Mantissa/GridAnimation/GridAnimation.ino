@@ -99,13 +99,17 @@ void loop() {
       ledGridXZ[i][2] = fftColors[ ledID ];
   }
   
+  // apply the grid pixels to the LEDs
+  // it's just like an image/bitmap applied to a 3D grid
+  
   for(uint16_t i=0; i<stripC.numPixels()/GRID_H; i++){
       for(uint16_t j=0; j<GRID_H; j++){
       
         int p = i * GRID_H + j;
         
-        
-        
+        // make sure LED exits on strip 
+        // read position from map
+        // then apply color from grid to LED
         if( stripAMap[i] != -1 ) stripA.setPixelColor(p, ledGridXZ[stripAMap[i]][0]);
         if( stripBMap[i] != -1 ) stripB.setPixelColor(p, ledGridXZ[stripBMap[i]][1]);
         if( stripCMap[i] != -1 ) stripC.setPixelColor(p, ledGridXZ[stripCMap[i]][2]);
