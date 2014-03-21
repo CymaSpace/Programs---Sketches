@@ -1,0 +1,37 @@
+Sound Reactive (Frequency Specific) LED Light Strip
+
+We are using the WS2811 based LED strips, usually with the Adafruit Neopixel Library - http://learn.adafruit.com/adafruit-neopixel-uberguide/overview
+
+SPECIFICATIONS
+
+Triggering
+The program "listens" to 7 frequency bands via MSGEQ7 and at any point in time takes the band with the loudest peak and "spits" out it's associated color.whilst disregarding the other bands.
+If the dominate band shifts to a lower or higher band, then a different color would be generated.
+
+Intensity
+For as long as any frequency band is the "most active/changing", the program continues to generate lights of that color, if the dominate band is loud then the intensity of that color would be brighter, if it is softer then it would be dimmer.
+
+Movement
+The lights move from the starting point of the LED strip to the end point at varying speeds. The speed could also be determined by the dynamics
+
+Coloring
+7 Frequency Bands:
+
+Band 1 (Low): Red
+Band 2: Orange
+Band 3: Yellow
+Band 4: Green
+Band 5: Turquoise 
+Band 6: Blue
+Band 7: (high) Violet
+
+As a bonus, it would be interesting to assign a potentiometer to sweep the hue of the LEDs around the color wheel whilst keeping the same separation/ratios between each band.
+
+Stereo/Mono
+It would be great to make use of the stereo functionality of the MSGEQ7 shield and create a toggle switch to flip between mono and stereo operation.
+In mono, the light move from beginning to end of the strip. In stereo operation, the lights start in the center and move outward left and right depending on the panning. 
+
+For example of "Stereo Lights" see: http://www.jeremyblum.com/2011/12/25/tutorial-14-for-arduino-holiday-lights-and-sounds/
+
+Strip Length
+Length of the strip would be variable so could be assigned to a potentiometer where a low value would reduce the number of active LEDs and a high value would increase the number of LEDs. Typical range would be between 0 and 300 LEDs and should be an easy-to-adjust variable at the beginning of the script.
