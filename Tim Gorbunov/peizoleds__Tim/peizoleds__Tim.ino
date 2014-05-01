@@ -1,6 +1,60 @@
-#include <Adafruit_NeoPixel.h>
+/* progmram by Tim Gorbunov which moves a led dot left and right
+based on piezo pressure sensor, the speed of the strip is set by 
+the delays variable
+strip length is set to whatever you like.
+sensor inputs are set in the loop function
+*/
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, 2, NEO_GRB + NEO_KHZ800);
+
+#include <Adafruit_NeoPixel.h>
+int stripl = 150; //strip length
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(stripl, 6, NEO_GRB + NEO_KHZ800);
+int halfstrip = stripl / 2 ;
+int change = 0;
+int temp = 0;
+int lastchange = 0;
+int s1;
+int s2;
+int delays = 2; //speed of moving led
+void shows(){
+   if (s1 != s2){
+
+     
+ 
+    lastchange = temp;
+     change = s1-s2; 
+     change = change + halfstrip ; 
+   if (lastchange > change){
+    change = lastchange - 1; 
+   } else if (lastchange < change){
+     
+    change = lastchange + 1; 
+    
+   }
+   else {
+   loop(); 
+   }
+   
+  
+ 
+   for(uint16_t i=0; i<stripl; i++) {
+     if (i == change){
+      strip.setPixelColor(i, 200, 0, 0);
+      temp = i;
+     } else{
+     strip.setPixelColor(i, 0, 0, 0);
+     }
+   }
+  
+  
+    strip.show();
+     delay(delays);
+ if (change != lastchange){
+ 
+   shows(); 
+ }
+   }
+}
 
 void setup() {
 
@@ -11,29 +65,10 @@ void setup() {
 
 
 void loop() {
-  int s1 = analogRead(A0);
-  int s2 = analogRead(A1);
-   s1 = map(s1, 0, 1023, 0, 30);
-   s2 = map(s2, 0, 1023, 0, 30);
-   int change = 0;
-   if (s1 == s2){
-    change == 0 
-   }else {
-    change = s1-s2; 
-     
-   }
-   change = change + 30;
-  int  half =   strip.numPixels()/2;
-   for(uint16_t i=0; i<strip.numPixels(); i++) {
-     if (i == change){
-      strip.setPixelColor(i, 200, 0, 0);
-     } else{
-     strip.setPixelColor(i, 0, 0, 0);
-     }
-      strip.show();
-      delay(2);
-  }
- 
-
+  s1 = analogRead(A0);
+  s2 = analogRead(A1);
+   s1 = map(s1, 0, 1023, 0, halfstrip -1);
+   s2 = map(s2, 0, 1023, 0, halfstrip);
+   shows();
 }
 
