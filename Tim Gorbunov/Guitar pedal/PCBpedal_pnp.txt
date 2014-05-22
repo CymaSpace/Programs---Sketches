@@ -1,0 +1,50 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=PCBpedal
+*Date=16:17:09
+*CreatedBy=Fritzing 0.8.7b.01.24.1bf5
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;33pF;1206 [SMD, multilayer];26.8132;-31.0945;-90;Top;C5
+2;200k;1206 [SMD];36.7754;-32.4121;180;Top;R3
+3;;;16.8593;-26.6769;0;Bottom;Via3
+4;5V;TO220 [THT];5.64755;-29.2547;-90;Bottom;U2
+5;22pF;1206 [SMD, multilayer];37.2002;-2.94796;90;Top;C2
+6;0.1µF;1206 [SMD, multilayer];29.3645;-29.1682;90;Top;C6
+7;;;31.9111;-27.8811;0;Bottom;Via2
+8;;THT;34.2762;-8.08852;180;Bottom;XTAL1
+9;22pF;1206 [SMD, multilayer];34.4665;-2.89872;90;Top;C1
+10;;;38.9612;-11.0938;0;Bottom;Via1
+11;;dip;28.0752;-20.5499;-90;Bottom;U1
+12;10µF;1010 [SMD, electrolytic];22.4171;-6.33811;90;Top;C3
+13;;;47.8236;-1.96432;0;Bottom;Hole4
+14;10µF;1010 [SMD, electrolytic];9.71714;-6.33811;90;Top;C4
+15;;;2.14451;-2.12378;0;Bottom;Hole3
+16;220;1206 [SMD];42.3154;-6.96012;180;Top;R5
+17;;molex-1x3_lock;47.7503;-9.11819;90;Bottom;JP3
+18;10k;1206 [SMD];28.6166;-12.6176;-90;Top;R4
+19;;;47.6743;-32.705;0;Bottom;Hole2
+20;;;28.8137;-33.945;0;Bottom;Via7
+21;;molex-1x2_lock;41.9842;-2.75614;0;Bottom;JP2
+22;33pF;1206 [SMD, multilayer];41.9352;-31.257;-90;Top;C8
+23;;;2.10838;-32.6948;0;Bottom;Hole1
+24;;;13.6016;-28.5411;0;Bottom;Via6
+25;;soic8;21.4134;-28.5631;90;Top;IC2
+26;0.1µF;1206 [SMD, multilayer];45.8889;-29.5707;0;Top;C9
+27;200k;1206 [SMD];22.5531;-32.3804;180;Top;R2
+28;;molex-1x6-ra;51.1223;-20.817;90;Bottom;JP4
+29;;;21.7135;-29.2734;0;Bottom;Via5
+30;;soic8;36.6534;-28.5631;90;Top;IC1
+31;0.1µF;1206 [SMD, multilayer];43.6201;-10.7728;90;Top;C10
+32;;usb-b-pth;2.25769;-17.7881;0;Bottom;X1
+33;;;31.8735;-26.7146;0;Bottom;Via4
+34;;THT;15.6964;-13.7885;-90;Bottom;J1
+35;0.1µF;1206 [SMD, multilayer];41.1775;-10.7573;-90;Top;C7
