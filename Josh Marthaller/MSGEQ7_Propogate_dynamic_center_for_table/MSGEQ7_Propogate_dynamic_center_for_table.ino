@@ -1,11 +1,8 @@
 //code from https://github.com/jdbugman/anduino-neopixel/blob/master/soundNeo/soundNeo.ino
 #include <Adafruit_NeoPixel.h>
-#define PIN 5
+#define PIN 6
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(150, PIN, NEO_GRB + NEO_KHZ800); //first number controls the amount of pixels you have (add 4 so the drip falls off the edge)
 
-Adafruit_NeoPixel::setPixelColorB( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
-  setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
-}
 //length of LED strip 
 int led_strip_length = 150;
 
@@ -15,14 +12,21 @@ int prop_his[150];
 
 //if # is 10, it updates every 10th iteration, thus higher number makes
 //refresh rate slower
-int refresh = 9; //higher number refreshes slow
+int refresh = 4; //higher number refreshes slow
 int refresh_counter = 0;
+int taper = 15; // higher number tapers faster
+
+int delay_setting = 30; //lag time
+int delay_counter = 0;
 
 //where to start / end the sides
 float left_start = 75;
 float left_end = 1;
 float right_start = 76;
 float right_end = 150;
+
+float go_left_start = 0;
+float go_right_start = 0;
 
 //pin for pint dial
 int analogPinpot = 2;
@@ -39,9 +43,17 @@ int spectrumValueL[6];
 int spectrumValueR[6]; // to hold a2d values
 int previousSpectrumValueL[6]; // to hold a2d values
 int previousSpectrumValueR[6]; // to hold a2d values
-int global_brightness = 96; // Sets global brightness, i.e. 64 is 1/4 brightness.
+int global_brightness = 255; // Sets global brightness, i.e. 64 is 1/4 brightness.
 int useColor[2];
 int num;
+int brightness = 255;
+
+int sensor1 = 0;
+int sensor2 = 0;
+int sensor3 = 0;
+int sensor4 = 0;
+
+int pot = 0.0;
  
  
 void setup() {
@@ -73,7 +85,7 @@ void runTime(){
   int changePinL = 0;
   int changePinR = 0;
   int k,i,r,g,b;
-  float pot;
+ 
   int use_ls, use_le, use_rs, use_re;
   
   
@@ -82,10 +94,92 @@ void runTime(){
   //these will override the default setting if used
 
   //--fetch pentimoter value 
-  pot = analogRead(analogPinpot);
-  Serial.println(pot);
+  //pot = analogRead(analogPinpot);
   
-  if (pot >=400 && pot <= 600)
+
+  int thres = 100;
+  
+    delay_counter++;
+  if(delay_counter>=delay_setting )
+  {
+    delay_counter = 0;
+  sensor1 = analogRead(2);
+  sensor2 = analogRead(3);
+  sensor3 = analogRead(4);
+  sensor4 = analogRead(5);
+  
+  
+  //Serial.println(sensor1);
+  if(sensor1 > thres && go_left_start == 0 &&
+  (sensor1 >sensor2) &&
+  (sensor1 >sensor3)  &&
+  (sensor1 >sensor4)
+  )
+  {
+    go_left_start = 120;
+   
+  }
+  
+  if(sensor2 > thres && go_left_start == 0 &&
+  (sensor2 >sensor1) &&
+  (sensor2 >sensor3)  &&
+  (sensor2 >sensor4)
+  )
+  {
+    go_left_start = 8;
+
+  }
+  
+  
+  if(sensor3 > thres && go_left_start == 0 &&
+  (sensor3 >sensor2) &&
+  (sensor3 >sensor1)  &&
+  (sensor3 >sensor4)
+  )
+  {
+    go_left_start = 21;
+
+  }
+  
+  if(sensor4 > thres && go_left_start == 0 && 
+  (sensor4 >sensor2) &&
+  (sensor4 >sensor3)  &&
+  (sensor4 >sensor1)
+  )
+  {
+    go_left_start = 81;
+ 
+  }
+  
+  }
+  
+  //strip.setPixelColor(10,255,0,0); 
+  if(go_left_start)
+  {
+    
+    
+    if(go_left_start < left_start)
+      left_start-= 2;
+    else
+      left_start+= 2;
+      
+    if( abs(go_left_start-left_start) <= 2)
+    {
+      left_start = go_left_start;
+      go_left_start = 0;
+     
+    }
+  }
+    
+  right_start = left_start +1;
+ 
+    use_ls = left_start;
+    use_le = left_end;
+    use_rs = right_start;
+    use_re = right_end;
+
+  /*
+  if (pot >=475 && pot <= 525)
   {
     use_ls = left_start;
     use_le = left_end;
@@ -95,18 +189,19 @@ void runTime(){
   else
   {
    
-   if(pot<400)
+   if(pot<475)
    {
-    use_ls = round( (pot/400) * left_start);
+    use_ls = round( (pot/475) * left_start);
     use_rs = use_ls+1;
     
    } 
-   if(pot>600)
+   if(pot>525)
    {
-    use_ls = round( ((pot-600)/400) * left_start) + left_start;
+    use_ls = round( ((pot-525)/475) * left_start) + left_start;
     use_rs = use_ls+1;
     
    } 
+   
    
    if(use_ls<1)
    {
@@ -120,6 +215,8 @@ void runTime(){
    }
     
   }
+  */
+  
   //Serial.println(pot/400);
   //Serial.println(use_rs);
   //Serial.println(use_ls);
@@ -148,6 +245,13 @@ void runTime(){
         changeL = abs(previousSpectrumValueL[i]-spectrumValueL[i]);
         if( spectrumValueL[i] > minFilter  )
           changePinL = (i+1);
+          
+          
+          taper =  35 - (.1 * spectrumValueL[i]);
+          
+          if(taper<10) { taper = 10; }
+          if(taper > 25) { taper = 25; }
+          Serial.println(taper);
           
     
 
@@ -207,40 +311,25 @@ void runTime(){
   for (k = 0; k <= led_strip_length; k++)
   {
     num = prop[k];
-   
+    brightness = (255 - (abs(k - use_ls)*taper));
+    if(brightness>255)
+      brightness = 255;
+    if(brightness<4)
+      brightness = 4;
+    //Serial.println(brightness);
+    //brightness = 10;
+    //brightness = 2;
     if(num>-1){
     get_color();
-    strip.setPixelColor( k, useColor[0], useColor[1], useColor[2]);
+    strip.setPixelColor( k, useColor[0] * brightness /255 , useColor[1] * brightness /255, useColor[2] * brightness /255);
     }
   }
+  
  
  
- /*
-  //current;
-  prop_left[0] = changePinL;
-  //save the history
-  for (k = 1; k <strip_length; k++)
-  {
-    prop_left_his[k] = prop_left[k-1];
-  }
- 
-  for (k = 1; k <strip_length; k++)
-  {
-    prop_left[k] = prop_left_his[k];
-  }
- 
-  for (k = 0; k <strip_length; k++)
-  {
-    num = prop_left[k];
-    if(num>-1)
-    {
-    get_color();
-    strip.setPixelColor((strip_length+k), useColor[0], useColor[1], useColor[2]);
-    }
-  }
-  */
  
   }
+ 
  
 
  
@@ -250,7 +339,7 @@ void runTime(){
    digitalWrite(strobePin, HIGH);
   // }
  
- 
+
  
   strip.setBrightness(global_brightness);
   strip.show();
