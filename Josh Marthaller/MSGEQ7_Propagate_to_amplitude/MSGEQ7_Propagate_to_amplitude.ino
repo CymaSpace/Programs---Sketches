@@ -12,17 +12,23 @@ int spectrumValueL[6];
 int spectrumValueR[6]; // to hold a2d values
 int previousSpectrumValueL[6]; // to hold a2d values
 int previousSpectrumValueR[6]; // to hold a2d values
-int global_brightness = 40; // Sets global brightness, i.e. 64 is 1/4 brightness.
+int global_brightness = 255; // Sets global brightness, i.e. 64 is 1/4 brightness.
 int useColor[2];
 int num;
 int prop[CNT_LIGHTS];
 int prop_history[CNT_LIGHTS];
 int refresh_counter = 0;
+int analogPinpot = 2;// dial for speed
+int use_refresh = 0;
+float use_brightness = 0;
+int tmp_refresh_adj = 0;
+
 
 //lowest reading the MSGEQ7 should recognize 1-1000 range
 int minFilter = 50;
 //higher number refreshes slow - refreshed every nth interation
 int refresh = 15;
+
 
 
  
@@ -56,6 +62,7 @@ void runTime()
   int changePinL = 0;
   int changePinR = 0;
   int k,i,r,g,b;
+  float pot_value = 0.0;
   int use_le = 0;
   int use_ls = ((CNT_LIGHTS/2)-1);
   int use_rs = ((CNT_LIGHTS/2)+0);
@@ -80,6 +87,11 @@ void runTime()
     spectrum_totalL+= spectrumValueL[i];
     spectrum_totalR+= spectrumValueR[i];
     
+    if( spectrumValueL[i] > 400 && i <=1)
+          tmp_refresh_adj+= 23;
+    if( spectrumValueR[i] > 400 && i <=1)
+          tmp_refresh_adj+= 23;
+    
     /*
     //figure out which pin changed the most since last reading
     if( abs(previousSpectrumValueL[i]-spectrumValueL[i]) > changeL)
@@ -103,12 +115,33 @@ void runTime()
   changePinL = (spectrum_totalL);
   changePinR = (spectrum_totalR);
  
+  use_refresh = refresh;
+  use_brightness = global_brightness;
   
+  //for use of dial
+  /*
+  pot_value = analogRead(analogPinpot);
+  if(pot_value > 50)
+  {
+    //Serial.println(pot_value);
+    use_refresh = pot_value / 10;
+    //use_brightness = round(255 * (pot_value / 700));
+    //Serial.println(use_brightness);
+  }
+  */
+  
+  
+
+  if(tmp_refresh_adj < 0) { tmp_refresh_adj = 0; }
+  if(tmp_refresh_adj > 200) { tmp_refresh_adj = 200; }
+ 
   refresh_counter++;
-  if(refresh_counter>=refresh)
+  //if(refresh_counter>=use_refresh)
+  if(refresh_counter>=(refresh - round(tmp_refresh_adj * .1)))
   {
     //reset the counter
     refresh_counter = 0;
+    tmp_refresh_adj-= 1;
          
     //save the history - RIGHT SIDE
     for (k = use_rs; k <= use_re; k++)
@@ -152,7 +185,7 @@ void runTime()
   }//if refresh  
 
   digitalWrite(strobePin, HIGH); 
-  strip.setBrightness(global_brightness);
+  strip.setBrightness(use_brightness);
   strip.show();
 }
  
@@ -193,9 +226,10 @@ void get_color()
     {
       r = 255; g = 0; b = 153;
     }
-   
-    useColor[0] = r;
-    useColor[1] = g;
+    // G R B for bullet light strand...
+    // R G B for NEOPixel flat LED strand
+    useColor[0] = g;
+    useColor[1] = r;
     useColor[2] = b;
     
 }
