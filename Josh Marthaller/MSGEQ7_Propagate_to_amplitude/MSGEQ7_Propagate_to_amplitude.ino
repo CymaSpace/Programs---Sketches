@@ -27,7 +27,7 @@ int tmp_refresh_adj = 0;
 //lowest reading the MSGEQ7 should recognize 1-1000 range
 int minFilter = 50;
 //higher number refreshes slow - refreshed every nth interation
-int refresh = 15;
+int refresh = 20;
 
 
 
@@ -119,7 +119,6 @@ void runTime()
   use_brightness = global_brightness;
   
   //for use of dial
-  /*
   pot_value = analogRead(analogPinpot);
   if(pot_value > 50)
   {
@@ -128,7 +127,7 @@ void runTime()
     //use_brightness = round(255 * (pot_value / 700));
     //Serial.println(use_brightness);
   }
-  */
+ 
   
   
 
@@ -136,8 +135,9 @@ void runTime()
   if(tmp_refresh_adj > 200) { tmp_refresh_adj = 200; }
  
   refresh_counter++;
+  //tmp_refresh_adj = 0;
   //if(refresh_counter>=use_refresh)
-  if(refresh_counter>=(refresh - round(tmp_refresh_adj * .1)))
+  if(refresh_counter>=(use_refresh - round(tmp_refresh_adj * .1)))
   {
     //reset the counter
     refresh_counter = 0;
