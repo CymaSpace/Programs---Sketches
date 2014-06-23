@@ -233,6 +233,3 @@ void get_color()
     useColor[2] = b;
     
 }
-
-
-
