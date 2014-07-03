@@ -1,7 +1,7 @@
 //code from https://github.com/jdbugman/anduino-neopixel/blob/master/soundNeo/soundNeo.ino
 #include <Adafruit_NeoPixel.h>
-#define PIN 6
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(150, PIN, NEO_GRB + NEO_KHZ800); //first number controls the amount of pixels you have (add 4 so the drip falls off the edge)
+#define PIN 5
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(147, PIN, NEO_GRB + NEO_KHZ800); //first number controls the amount of pixels you have (add 4 so the drip falls off the edge)
 
 //length of LED strip 
 int led_strip_length = 150;
@@ -68,7 +68,7 @@ void setup() {
   digitalWrite(resetPin, LOW);
   digitalWrite(strobePin, HIGH);
   
-  pinMode(analogPinpot, INPUT);
+  //pinMode(analogPinpot, INPUT);
 }
  
 void loop() {    
@@ -171,6 +171,7 @@ void runTime(){
     }
   }
     
+    //left_start = 75;
   right_start = left_start +1;
  
     use_ls = left_start;
@@ -237,8 +238,17 @@ void runTime(){
     delayMicroseconds(30); // to allow the output to settle
     spectrumValueL[i] = analogRead(analogPinL);
     spectrumValueR[i] = analogRead(analogPinR);
- 
    
+  /*   
+    Serial.print("Band: ");
+    Serial.print(i);
+    Serial.print(" Val: ");
+    Serial.print(spectrumValueL[i]);
+    Serial.print(" Val: ");
+    Serial.print(spectrumValueR[i]);
+    Serial.println();
+   */ 
+    
     //figure out which pin changed the most since last reading
     if( abs(previousSpectrumValueL[i]-spectrumValueL[i]) > changeL)
     {
@@ -251,7 +261,7 @@ void runTime(){
           
           if(taper<10) { taper = 10; }
           if(taper > 25) { taper = 25; }
-          Serial.println(taper);
+         // Serial.println(taper);
           
     
 
@@ -266,6 +276,8 @@ void runTime(){
           
           
     }
+    
+     digitalWrite(strobePin, HIGH);
    
   }
  
@@ -326,7 +338,7 @@ void runTime(){
   }
   
  
- 
+
  
   }
  
@@ -336,7 +348,7 @@ void runTime(){
  
    //if(changePin > 0)
   // {
-   digitalWrite(strobePin, HIGH);
+   
   // }
  
 

@@ -106,8 +106,8 @@ void sevenWaves(){
     digitalWrite(strobePin, LOW);
     delayMicroseconds(30); // to allow the output to settle
     spectrumValue[i] = analogRead(analogPin);
-           
-      
+    
+   
     if (i==0)
       middlePin = waveSize +1;
     else
