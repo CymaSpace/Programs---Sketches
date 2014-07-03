@@ -259,8 +259,8 @@ void runTime(){
           
           taper =  35 - (.1 * spectrumValueL[i]);
           
-          if(taper<10) { taper = 10; }
-          if(taper > 25) { taper = 25; }
+          if(taper<6) { taper = 6; }
+          if(taper > 35) { taper = 35; }
          // Serial.println(taper);
           
     
@@ -326,8 +326,8 @@ void runTime(){
     brightness = (255 - (abs(k - use_ls)*taper));
     if(brightness>255)
       brightness = 255;
-    if(brightness<4)
-      brightness = 4;
+    if(brightness<0)
+      brightness = 0;
     //Serial.println(brightness);
     //brightness = 10;
     //brightness = 2;
