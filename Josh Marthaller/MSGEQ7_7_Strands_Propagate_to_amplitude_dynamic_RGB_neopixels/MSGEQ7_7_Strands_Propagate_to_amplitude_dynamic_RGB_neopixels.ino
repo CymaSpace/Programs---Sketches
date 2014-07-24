@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
-#define PIN 6
-#define CNT_LIGHTS 50
+#define PIN 5
+#define CNT_LIGHTS 148
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -334,8 +334,8 @@ void getRGB()
   b = bz * 255;
   g = gz * 255;
   
-    useColor[0] = g;
-    useColor[1] = r;
+    useColor[0] = r;
+    useColor[1] = g;
     useColor[2] = b;
   
   
