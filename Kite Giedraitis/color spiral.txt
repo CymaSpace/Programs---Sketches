@@ -1,0 +1,73 @@
+desc: color spiral by Kite Giedraitis / TallKite Software
+
+// MIDI-only effect for REAPER
+// Visualizes the 12-tone scale as a color spiral triggered by MIDI notes
+// INSTALL .txt file to Applications/REAPER/Effects/MIDI
+in_pin:none
+out_pin:none
+
+slider1: 0 <0, 16, 1> midi in channel (0 = all channels)
+
+@init
+samplecount = 0;
+
+lowNote = 36;			// C2
+hiNote = 96;			// C7, 5 octave range total
+Veloc = 0;			// velocity of each of the 128 midi notes
+
+Colors = 128;			// colors of each of the 12 notes
+Colors [0] = 255;	Colors [1] = 0;		Colors [2] = 0; 
+Colors [3] = 255;	Colors [4] = 127;	Colors [5] = 0; 
+Colors [6] = 255;	Colors [7] = 255;	Colors [8] = 0; 
+Colors [9] = 127;	Colors [10] = 255;	Colors [11] = 0; 
+Colors [12] = 0;	Colors [13] = 255;	Colors [14] = 0; 
+Colors [15] = 0;	Colors [16] = 255;	Colors [17] = 127; 
+Colors [18] = 0;	Colors [19] = 255;	Colors [20] = 255; 
+Colors [21] = 0;	Colors [22] = 127;	Colors [23] = 255; 
+Colors [24] = 0;	Colors [25] = 0;	Colors [26] = 255; 
+Colors [27] = 127;	Colors [28] = 0;	Colors [29] = 255; 
+Colors [30] = 255;	Colors [31] = 0;	Colors [32] = 255; 
+Colors [33] = 255;	Colors [34] = 0;	Colors [35] = 127; 
+
+@block
+
+while (midirecv (blockOffset, status, databytes) ? (
+   midiPass = 1;					// flag to pass midi through
+   msgNum = (status & 240) / 16;             		// message # portion of the status byte
+   channelNum = status & 15;				// channels 1-16 are really 0-15
+   note = CCnum = LSB = databytes & 127;  		// LSB = least significant byte
+   velocity = CCvalue = MSB = (databytes / 256) | 0;	// MSB = most significant byte
+   (channelNum == slider1 - 1) || (slider1 == 0) ? (	// midi on "our" channel?      
+      msgNum == 9 ? Veloc [note] = velocity;
+   );
+   midiPass ? midisend (blockOffset | 0, (16 * msgNum + channelNum) | 0, databytes | 0);
+   1;  // Force while() to loop as long as midirecv() is true
+));
+
+samplecount += samplesblock;			// keep track of time
+
+
+@gfx
+armGap = gfx_h / 13;			// gap between the arms of the spiral
+gfx_x = gfx_w / 2;			// start at the center of the screen
+gfx_y = gfx_h / 2;
+
+p = 0;
+loop (hiNote - lowNote + 1,
+   q = (30 / 57.2957795) * p;		// q = angle in radians
+   r = armGap * (1 + p / 12);		// r = radius
+   gfx_r = Colors [3 * (p % 12)] / 256;
+   gfx_g = Colors [3 * (p % 12) + 1] / 256;
+   gfx_b = Colors [3 * (p % 12) + 2] / 256;
+   p == 0 ? gfx_r = gfx_g = gfx_b = 0;	// don't draw the first line
+   gfx_lineto (gfx_w / 2 + r * sin (q),
+               gfx_h / 2 - r * cos (q));
+   v = Veloc [p + lowNote] / 127;	// v = scaled velocity of this note
+   gfx_r *= v;				// dim the color to match the velocity
+   gfx_g *= v;
+   gfx_b *= v;
+   v > 0 ? gfx_circle (gfx_x, gfx_y, armGap / 3, 1);
+   p += 1;
+);
+
+
