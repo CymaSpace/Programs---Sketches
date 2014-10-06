@@ -1,13 +1,13 @@
 #include <Adafruit_NeoPixel.h>
-#define PIN 6
-#define CNT_LIGHTS 148
+#define PIN 3
+#define CNT_LIGHTS 50
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
 int analogPinL = 1; // read from multiplexer using analog input 0
 int analogPinR = 0; // read from multiplexer using analog input 0
-int strobePin = 4; // strobe is attached to digital pin 2
-int resetPin = 5; // reset is attached to digital pin 3
+int strobePin = 13; // strobe is attached to digital pin 2
+int resetPin = 12; // reset is attached to digital pin 3
 int spectrumValueL[6];
 int spectrumValueR[6]; // to hold a2d values
 int previousSpectrumValueL[6]; // to hold a2d values
@@ -20,10 +20,11 @@ int prop[CNT_LIGHTS];
 int prop_history[CNT_LIGHTS];
 int refresh_counter = 0;
 int analogPinpot = 2;// dial for speed
+int analogpotrange = 3;// dial for range
 int use_refresh = 0;
 float use_brightness = 0;
 int tmp_refresh_adj = 0;
-
+float pot_range = 0.0;
 
 //lowest reading the MSGEQ7 should recognize 1-1000 range
 int minFilter = 50;
@@ -64,6 +65,7 @@ void runTime()
   int changePinR = 0;
   int k,i,r,g,b;
   float pot_value = 0.0;
+  
   int use_le = 0;
   int use_ls = ((CNT_LIGHTS/2)-1);
   int use_rs = ((CNT_LIGHTS/2)+0);
@@ -123,6 +125,7 @@ void runTime()
   
   //for use of dial
   pot_value = analogRead(analogPinpot);
+  pot_range = analogRead(analogpotrange);
   if(pot_value > 50)
   {
     //Serial.println(pot_value);
@@ -188,7 +191,7 @@ void runTime()
   }//if refresh  
 
   
-  strip.setBrightness(use_brightness);
+  //strip.setBrightness(use_brightness);
   strip.show();
 }
  
@@ -271,7 +274,9 @@ void getWaveLength()
   float maxVal = 4700;
   float minWave = 350;
   float maxWave = 650;
-  if(num>4700)
+  maxVal = pot_range * 5;
+  minVal = pot_range / 2;
+  if(num>maxVal)
     maxVal = num;
     
   waveValue = ((num - minVal) / (maxVal-minVal) * (maxWave - minWave)) + minWave;
