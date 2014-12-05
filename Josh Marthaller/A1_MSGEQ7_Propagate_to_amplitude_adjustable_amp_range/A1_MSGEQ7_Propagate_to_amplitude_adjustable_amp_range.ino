@@ -1,13 +1,13 @@
 #include <Adafruit_NeoPixel.h>
-#define PIN 3
+#define PIN 6
 #define CNT_LIGHTS 50
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
 int analogPinL = 1; // read from multiplexer using analog input 0
 int analogPinR = 0; // read from multiplexer using analog input 0
-int strobePin = 13; // strobe is attached to digital pin 2
-int resetPin = 12; // reset is attached to digital pin 3
+int strobePin = 12; // strobe is attached to digital pin 2
+int resetPin = 13; // reset is attached to digital pin 3
 int spectrumValueL[6];
 int spectrumValueR[6]; // to hold a2d values
 int previousSpectrumValueL[6]; // to hold a2d values
