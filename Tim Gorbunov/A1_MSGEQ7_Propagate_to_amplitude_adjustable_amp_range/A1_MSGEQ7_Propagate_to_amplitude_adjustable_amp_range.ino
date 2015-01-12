@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6
-#define CNT_LIGHTS 50
+#define CNT_LIGHTS 100
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -26,6 +26,10 @@ float use_brightness = 0;
 int tmp_refresh_adj = 0;
 float pot_range = 0.0;
 
+int colstate = 0;
+
+
+int stomp = 5;
 //lowest reading the MSGEQ7 should recognize 1-1000 range
 int minFilter = 50;
 //higher number refreshes slow - refreshed every nth interation
@@ -40,6 +44,7 @@ void setup()
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
   pinMode(analogPinL, INPUT);
+  pinMode(stomp, INPUT);
   pinMode(analogPinR, INPUT);
   pinMode(strobePin, OUTPUT);
   pinMode(resetPin, OUTPUT);
@@ -49,7 +54,12 @@ void setup()
 }
  
 void loop() 
-{    
+{  
+    if (digitalRead(stomp) == HIGH){
+      delay(100);
+      if(colstate < 2){colstate++;}
+      else if(colstate == 2){colstate=0;}
+    }  
    runTime();
 }
  
@@ -205,10 +215,22 @@ void get_color()
   if(num < 500)
   {
     r = 0; g = 0; b = 0;
-    
+    if(colstate == 0){
     useColor[0] = g;
     useColor[1] = r;
     useColor[2] = b;
+   }
+   if(colstate == 1){
+    useColor[0] = r;
+    useColor[1] = g;
+    useColor[2] = b;
+   }
+   if(colstate == 2){
+    useColor[0] = b;
+    useColor[1] = g;
+    useColor[2] = r;
+   }
+   //Serial.println(colstate);
   }
   
   if(num>500)
@@ -339,10 +361,21 @@ void getRGB()
   b = bz * 255;
   g = gz * 255;
   
+   if(colstate == 0){
     useColor[0] = g;
     useColor[1] = r;
     useColor[2] = b;
-  
+   }
+   if(colstate == 1){
+    useColor[0] = r;
+    useColor[1] = g;
+    useColor[2] = b;
+   }
+   if(colstate == 2){
+    useColor[0] = b;
+    useColor[1] = g;
+    useColor[2] = r;
+   }
   
   
 }
