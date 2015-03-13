@@ -119,7 +119,9 @@ void runTime()
   
   changePinL = (spectrum_totalL);
   changePinR = (spectrum_totalR);
- 
+ Serial.println(changePinL):
+ Serial.println("  "):
+ Serial.println(changePinR):
   use_refresh = refresh;
   use_brightness = global_brightness;
   

@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6
-#define CNT_LIGHTS 100
+#define CNT_LIGHTS 151
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -136,10 +136,16 @@ void runTime()
   //for use of dial
   pot_value = analogRead(analogPinpot);
   pot_range = analogRead(analogpotrange);
-  if(pot_value > 50)
+  if(pot_value < 1000)
   {
+    if (pot_value > 20){
     //Serial.println(pot_value);
-    use_refresh = pot_value / 10;
+    use_refresh = pot_value / 50;
+  }
+  else
+  {
+     use_refresh = 0;
+  }
     //use_brightness = round(255 * (pot_value / 700));
     //Serial.println(use_brightness);
   }
