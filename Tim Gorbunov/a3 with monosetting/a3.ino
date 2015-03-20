@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
+#include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 151
+#define CNT_LIGHTS 90
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -26,6 +27,7 @@ float use_brightness = 0;
 int tmp_refresh_adj = 0;
 float pot_range = 0.0;
 
+boolean monomode = 0;
 int colstate = 0;
 int counter = 4;
 
@@ -39,10 +41,11 @@ int refresh = 20;
 
  
 void setup() 
-{
+{  
   Serial.begin(9600); // print to serial monitor
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+  if (EEPROM.read(1) > 1){EEPROM.write(1,0);}
   pinMode(analogPinL, INPUT);
   pinMode(stomp, INPUT);
   pinMode(analogPinR, INPUT);
@@ -51,6 +54,17 @@ void setup()
   analogReference(DEFAULT);
   digitalWrite(resetPin, LOW);
   digitalWrite(strobePin, HIGH); 
+   Serial.println(EEPROM.read(1));
+  if (digitalRead(stomp) == HIGH){
+    if (EEPROM.read(1) == 0){
+      EEPROM.write(1,1);
+    }else if (EEPROM.read(1) == 1) {
+      EEPROM.write(1,0);
+    }  
+  }
+  monomode = EEPROM.read(1);
+  Serial.println(EEPROM.read(1));
+  Serial.println(monomode);
 }
  
 void loop() 
@@ -59,8 +73,9 @@ void loop()
       delay(100);
       if(colstate < 2){colstate++;}
       else if(colstate == 2){colstate=0;}
-    }  
+    }
    runTime();
+   //EEPROM.write(1, monomode);
 }
  
  
@@ -85,7 +100,7 @@ void runTime()
   int spectrum_counts = 0;
   
  
- if (counter >= 4){
+ //if (counter >= 4){
   //get readings from chip
   for (i = 0; i < 7; i++)
   {
@@ -126,15 +141,19 @@ void runTime()
     digitalWrite(strobePin, HIGH); 
    
   }//for i
-  changePinL = (spectrum_totalL);
-  changePinR = (spectrum_totalR);
-  counter = 0;
- }//counter for sample rate
- else {
-   counter++;
+
+  if (monomode == 1){
+    changePinL = spectrum_totalR;
+  }else if (monomode == 0){
+    changePinL = spectrum_totalL;
+  }
+  changePinR = spectrum_totalR;
+ // counter = 0;
+ //}//counter for sample rate
+
+ // counter++;
+
  
- 
- }
   
  
   use_refresh = refresh;
