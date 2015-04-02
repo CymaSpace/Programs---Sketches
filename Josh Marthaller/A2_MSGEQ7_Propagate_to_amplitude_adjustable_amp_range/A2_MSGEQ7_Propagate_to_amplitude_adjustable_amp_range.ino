@@ -150,7 +150,7 @@ void runTime()
     //Serial.println(use_brightness);
   }
  
-  
+  Serial.println(pot_value);
   
 
   if(tmp_refresh_adj < 0) { tmp_refresh_adj = 0; }

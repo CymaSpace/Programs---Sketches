@@ -1,7 +1,7 @@
 //code from https://github.com/jdbugman/anduino-neopixel/blob/master/soundNeo/soundNeo.ino
 #include <Adafruit_NeoPixel.h>
 
-#define PIN 5
+#define PIN 6
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(7, PIN, NEO_GRB + NEO_KHZ800); //first number controls the amount of pixels you have (add 4 so the drip falls off the edge)
 
@@ -13,8 +13,8 @@ int waveSize = 4; // size 4 uses 9 lights. One in the middle, 4 on each side.  (
 
 //values for MSGEQ7 Chip
 int analogPin = 0; // read from multiplexer using analog input 0
-int strobePin = 4; // strobe is attached to digital pin 2
-int resetPin = 5; // reset is attached to digital pin 3
+int strobePin = 12; // strobe is attached to digital pin 2
+int resetPin = 13; // reset is attached to digital pin 3
 int spectrumValue[7]; // to hold a2d values
 //int j =0;
 

@@ -1,4 +1,4 @@
-#include <Adafruit_NeoPixel.h>
+#include "Adafruit_NeoPixel.h"
 #include "EEPROM.h"
 #define PIN 6
 #define CNT_LIGHTS 90
@@ -33,9 +33,9 @@ int counter = 4;
 
 int stomp = 5;
 //lowest reading the MSGEQ7 should recognize 1-1000 range
-int minFilter = 50;
+int minFilter = 70;
 //higher number refreshes slow - refreshed every nth interation
-int refresh = 20;
+int refresh = 10;
 
 
 
@@ -47,6 +47,7 @@ void setup()
   strip.show(); // Initialize all pixels to 'off'
   if (EEPROM.read(1) > 1){EEPROM.write(1,0);}
   pinMode(analogPinL, INPUT);
+  pinMode(analogPinR, INPUT);
   pinMode(stomp, INPUT);
   pinMode(analogPinR, INPUT);
   pinMode(strobePin, OUTPUT);
@@ -109,6 +110,9 @@ void runTime()
     previousSpectrumValueR[i] = spectrumValueR[i];
     digitalWrite(strobePin, LOW);
     delayMicroseconds(30); // to allow the output to settle
+    //Serial.print(i);
+    //Serial.print("  ");
+    Serial.println(analogRead(analogPinR));
     spectrumValueL[i] = analogRead(analogPinL);
     spectrumValueR[i] = analogRead(analogPinR);
     
@@ -152,7 +156,7 @@ void runTime()
  //}//counter for sample rate
 
  // counter++;
-
+//Serial.println(spectrum_totalR);
  
   
  
