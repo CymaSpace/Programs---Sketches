@@ -1,4 +1,4 @@
-#include "Adafruit_NeoPixel.h"
+#include <Adafruit_NeoPixel.h>
 #include "EEPROM.h"
 #define PIN 6
 #define CNT_LIGHTS 90
@@ -112,7 +112,6 @@ void runTime()
     delayMicroseconds(30); // to allow the output to settle
     //Serial.print(i);
     //Serial.print("  ");
-    Serial.println(analogRead(analogPinR));
     spectrumValueL[i] = analogRead(analogPinL);
     spectrumValueR[i] = analogRead(analogPinR);
     
