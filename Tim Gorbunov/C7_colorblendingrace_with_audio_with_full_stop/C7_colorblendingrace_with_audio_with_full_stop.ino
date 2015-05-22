@@ -10,18 +10,22 @@ int strobePin = 12; // strobe is attached to digital pin 2
 int resetPin = 13; // reset is attached to digital pin 3
 int msgReadings[7] = {0,0,0,0,0,0,0};
 
-
-int speeds[7] = {0,0,0,0,0,0,0};
-int speedin[7] = {7,7,7,7,7,7,7};
+int resolution = 100; //speed resulution
+int stoptres = 5; // threshold for full stop
+int moment = 10; //higher number means led will have more momentum
+int momcount = 0;
+float scale[7] = {1.6,1.5,1,1,1.2,1.5,1.8};
+int speeds[7] = {0,0,0,0,0,0,0}; //counter for movement delay
+int speedin[7] = {7,7,7,7,7,7,7}; //setspeed
 int leddat[CNT_LIGHTS][3];
 int ledw = CNT_LIGHTS/7;
 int leds[7][4] = {{0, 0, 255, ledw*1}, 
-                 {0, 255, 0, ledw*2}, 
-                 {0, 255, 50, ledw*3}, 
-                 {255, 0, 0, ledw*4}, 
-                 {255, 0, 255, ledw*5}, 
-                 {255, 255, 0, ledw*6}, 
-                 {255, 255, 255, ledw*7}}; //grb + position
+                 {128, 0, 128, ledw*2}, 
+                 {0, 255, 255, ledw*3}, 
+                 {0, 255, 0, ledw*4}, 
+                 {255, 255, 0, ledw*5}, 
+                 {255, 128, 0, ledw*6}, 
+                 {255, 0, 0, ledw*7}}; //grb + position
 
 
 void setup() {
@@ -76,14 +80,16 @@ void moveled(){
  
  //________set positions with speed
    for(int n=0; n<7; n++){
-     if (leds[n][3]<CNT_LIGHTS-1){
-       if (speeds[n] == speedin[n]){
-         leds[n][3]+=1;
-         speeds[n] = 0;
+     if (speedin[n] <= resolution-stoptres){
+       if (leds[n][3]<CNT_LIGHTS-1){
+         if (speeds[n] == speedin[n]){
+           leds[n][3]+=1;
+           speeds[n] = 0;
+         }
+       } else{
+          leds[n][3]=1;
+          speeds[n] = 0;
        }
-     } else{
-        leds[n][3]=1;
-        speeds[n] = 0;
      }
   }
 
@@ -117,7 +123,7 @@ void clearleddat(){
 }
 
 void getaudio(){
-      
+  momcount++;   
   digitalWrite(resetPin, HIGH);
   digitalWrite(resetPin, LOW);
   for (int i = 0; i < 7; i++)
@@ -129,24 +135,31 @@ void getaudio(){
   } 
   for (int i = 0; i < 7; i++)
   {
-    int maps = map(msgReadings[i], 110, 1000, 50, 1);
-    maps = constrain(maps, 2, 50);
+    int maps = map(msgReadings[i]*scale[i], 110, 1000, resolution, 1);
+    maps = constrain(maps, 1, resolution);
+    
+    if (maps < speedin[i]){
+      speedin[i]  = maps;
+      if (speeds[i] >= speedin[i])
+        speeds[i] = speedin[i]-1;
+      
+    }
+    else if (maps > speedin[i]){
+      if (momcount >= moment){
+        speedin[i]+=1;
+      }
+    }
+    /*
+    /Serial.println(momcount);
     Serial.print(maps);
-    Serial.print("  ");
-    if (speedin[i] <= maps){
-      if (speeds[i] > speedin[i])
-        speeds[i] = speedin[i];
-      else
-        speedin[i]+=3;
-    }
-    else if (speedin[i] > maps){
-      if (speeds[i] > speedin[i])
-        speeds[i] = speedin[i];
-      else
-        speedin[i]-=3;
-    }
-    
-    
+    Serial.print(":");
+    Serial.print(speedin[i]);
+    Serial.print(":");
+    Serial.print(speeds[i]);
+    Serial.print("  ");*/
   }
-  Serial.println();
+  if (momcount >= moment)
+    momcount = 0;
+  Serial.print(momcount);
+ Serial.println();
 }

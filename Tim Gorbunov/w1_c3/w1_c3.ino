@@ -1,18 +1,17 @@
-#include <Adafruit_NeoPixel.h>
-#define PIN 6
-#define CNT_LIGHTS 120
+//light blue
+#include <SPI.h>
+#include "nRF24L01.h"
+#include "RF24.h"
+int msg[2];
+RF24 radio(9,10);
+const uint64_t pipe = 0xE8E8F0F0E1LL;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
-//fixed settings 
-int analogPinL = 1; // read from multiplexer using analog input 0
-int analogPinR = 0; // read from multiplexer using analog input 0
-int strobePin = 12; // strobe is attached to digital pin 2
-int resetPin = 13; // reset is attached to digital pin 3
-int msgReadings[7] = {0,0,0,0,0,0,0};
+#define CNT_LIGHTS 100
+int strip[CNT_LIGHTS][3];
 
 
 int speeds[7] = {0,0,0,0,0,0,0};
-int speedin[7] = {7,7,7,7,7,7,7};
+int speedin[7] = {0,0,0,0,0,0,0};
 int leddat[CNT_LIGHTS][3];
 int ledw = CNT_LIGHTS/7;
 int leds[7][4] = {{0, 0, 255, ledw*1}, 
@@ -22,27 +21,24 @@ int leds[7][4] = {{0, 0, 255, ledw*1},
                  {255, 0, 255, ledw*5}, 
                  {255, 255, 0, ledw*6}, 
                  {255, 255, 255, ledw*7}}; //grb + position
+                 
+                 
+void setup(void){
+ Serial.begin(115200);
+ radio.begin();
+ radio.openWritingPipe(pipe);}
 
-
-void setup() {
-  Serial.begin(9600); // print to serial monitor
-  strip.begin();
-  strip.show();
-  pinMode(analogPinL, INPUT);
-  pinMode(analogPinR, INPUT);
-  pinMode(strobePin, OUTPUT);
-  pinMode(resetPin, OUTPUT);
-  digitalWrite(resetPin, LOW);
-  digitalWrite(strobePin, HIGH);
-}
-
-void loop() {
-    getaudio();
+void loop(void){
+  speedin[0] = 5;
+      speedin[1] = 4;
+      speedin[2] = 3;
+      speedin[3] = 7;
+      speedin[4] = 8;
+      speedin[5] = 9;
+      speedin[6] = 3;
+    
     moveled(); //move led forward one
-    //delay(100);
 }
-
-
 
 void moveled(){
   //leddat[10][2] = 255;
@@ -101,9 +97,9 @@ void setled(){
     int r = leddat[i][0];
     int g = leddat[i][1];
     int b = leddat[i][2];
-    strip.setPixelColor(i , r, g, b);
+    stripSet(i , r, g, b);
   }
-  strip.show();
+  stripShow();
   clearleddat();
 }
 
@@ -116,37 +112,23 @@ void clearleddat(){
   }
 }
 
-void getaudio(){
-      
-  digitalWrite(resetPin, HIGH);
-  digitalWrite(resetPin, LOW);
-  for (int i = 0; i < 7; i++)
-  {
-    digitalWrite(strobePin, LOW);
-     delayMicroseconds(30); // to allow the output to settle
-    msgReadings[i] = analogRead(analogPinR);
-    digitalWrite(strobePin, HIGH); 
-  } 
-  for (int i = 0; i < 7; i++)
-  {
-    int maps = map(msgReadings[i], 110, 1000, 50, 1);
-    maps = constrain(maps, 2, 50);
-    Serial.print(maps);
-    Serial.print("  ");
-    if (speedin[i] <= maps){
-      if (speeds[i] > speedin[i])
-        speeds[i] = speedin[i];
-      else
-        speedin[i]+=3;
+
+void stripSet(int led, int r, int g, int b){
+  strip[led-1][0] = r;
+  strip[led-1][1] = g;
+  strip[led-1][2] = b;
+}
+void stripShow(){
+  msg[0] = 4;
+  radio.write(msg, 4);
+  for (int i=0; i<CNT_LIGHTS; i++){
+    msg[0] = 0;
+    msg[1] = 0;
+    radio.write(msg, 4);
+    for (int k=1; k<4; k++){
+      msg[0] = k;
+      msg[1] = strip[i][k-1];
+      radio.write(msg, 4);
     }
-    else if (speedin[i] > maps){
-      if (speeds[i] > speedin[i])
-        speeds[i] = speedin[i];
-      else
-        speedin[i]-=3;
-    }
-    
-    
   }
-  Serial.println();
 }
