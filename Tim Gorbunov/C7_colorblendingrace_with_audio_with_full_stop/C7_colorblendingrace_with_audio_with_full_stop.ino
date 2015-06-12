@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6
-#define CNT_LIGHTS 120
+#define CNT_LIGHTS 151
+
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 

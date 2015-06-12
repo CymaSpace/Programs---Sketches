@@ -2,7 +2,7 @@
 #include <avr/power.h>
 #define PIN 6
 #define actCNT_LIGHTS 465 // the actual number of lights represented
-#define CNT_LIGHTS 155 //number of led desired
+#define CNT_LIGHTS 465 //number of led desired
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(actCNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 

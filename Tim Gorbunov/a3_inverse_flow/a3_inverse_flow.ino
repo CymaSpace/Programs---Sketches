@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
+#include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 51
+#define CNT_LIGHTS 151
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -25,32 +26,57 @@ int use_refresh = 0;
 float use_brightness = 0;
 int tmp_refresh_adj = 0;
 float pot_range = 0.0;
-int thre = 400;
+
+boolean monomode = 0;
+int colstate = 0;
+int counter = 4;
+
+int stomp = 5;
 //lowest reading the MSGEQ7 should recognize 1-1000 range
-int minFilter = 50;
+int minFilter = 70;
 //higher number refreshes slow - refreshed every nth interation
-int refresh = 20;
+int refresh = 10;
 
 
 
  
 void setup() 
-{
+{  
   Serial.begin(9600); // print to serial monitor
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+  if (EEPROM.read(1) > 1){EEPROM.write(1,0);}
   pinMode(analogPinL, INPUT);
+  pinMode(analogPinR, INPUT);
+  pinMode(stomp, INPUT);
   pinMode(analogPinR, INPUT);
   pinMode(strobePin, OUTPUT);
   pinMode(resetPin, OUTPUT);
   analogReference(DEFAULT);
   digitalWrite(resetPin, LOW);
   digitalWrite(strobePin, HIGH); 
+   Serial.println(EEPROM.read(1));
+  if (digitalRead(stomp) == HIGH){
+    if (EEPROM.read(1) == 0){
+      EEPROM.write(1,1);
+    }else if (EEPROM.read(1) == 1) {
+      EEPROM.write(1,0);
+    }  
+  }
+  monomode = EEPROM.read(1);
+  Serial.println(EEPROM.read(1));
+  Serial.println(monomode);
 }
  
 void loop() 
-{    
+{  
+    if (digitalRead(stomp) == HIGH){
+      delay(100);
+      if(colstate < 2){colstate++;}
+      else if(colstate == 2){colstate=0;}
+    }
    runTime();
+   //EEPROM.write(1, monomode);
 }
  
  
@@ -75,18 +101,17 @@ void runTime()
   int spectrum_counts = 0;
   
  
- 
+ //if (counter >= 4){
   //get readings from chip
   for (i = 0; i < 7; i++)
   {
-   // if (i != 6){
-      
-    
     spectrum_counts++;
     previousSpectrumValueL[i] = spectrumValueL[i];
     previousSpectrumValueR[i] = spectrumValueR[i];
     digitalWrite(strobePin, LOW);
     delayMicroseconds(30); // to allow the output to settle
+    //Serial.print(i);
+    //Serial.print("  ");
     spectrumValueL[i] = analogRead(analogPinL);
     spectrumValueR[i] = analogRead(analogPinR);
     
@@ -117,26 +142,39 @@ void runTime()
     */
     
     digitalWrite(strobePin, HIGH); 
-   //} 
+   
   }//for i
+
+  if (monomode == 1){
+    changePinL = spectrum_totalR;
+  }else if (monomode == 0){
+    changePinL = spectrum_totalL;
+  }
+  changePinR = spectrum_totalR;
+ // counter = 0;
+ //}//counter for sample rate
+
+ // counter++;
+//Serial.println(spectrum_totalR);
+ 
   
-  changePinL = (spectrum_totalL);
-  changePinR = (spectrum_totalR);
- /*
- Serial.print(changePinL);
- Serial.print("  ");
- Serial.println(changePinR);
- //*/
+ 
   use_refresh = refresh;
   use_brightness = global_brightness;
   
   //for use of dial
   pot_value = analogRead(analogPinpot);
   pot_range = analogRead(analogpotrange);
-  if(pot_value > 50)
+  if(pot_value < 1000)
   {
+    if (pot_value > 20){
     //Serial.println(pot_value);
-    use_refresh = pot_value / 10;
+    use_refresh = pot_value / 50;
+  }
+  else
+  {
+     use_refresh = 0;
+  }
     //use_brightness = round(255 * (pot_value / 700));
     //Serial.println(use_brightness);
   }
@@ -209,16 +247,28 @@ void get_color()
   //Serial.println(num);
   //num=6000;
   
-  if(num < thre)
+  if(num < 500)
   {
     r = 0; g = 0; b = 0;
-    
+    if(colstate == 0){
     useColor[0] = g;
     useColor[1] = r;
     useColor[2] = b;
+   }
+   if(colstate == 1){
+    useColor[0] = r;
+    useColor[1] = g;
+    useColor[2] = b;
+   }
+   if(colstate == 2){
+    useColor[0] = b;
+    useColor[1] = g;
+    useColor[2] = r;
+   }
+   //Serial.println(colstate);
   }
   
-  if(num>=thre)
+  if(num>500)
   {
     getWaveLength();
     getRGB();  
@@ -228,66 +278,23 @@ void get_color()
 
  
     
-  
-  /*
  
-  // RGB for bands 1-7
-    if(num<500)
-    {
-      r = 0; g = 0; b = 0;
-    }
-    if(num>500 && num <=750)
-    {
-      r = 255; g = 0; b = 0;
-    }
-    if(num>750 && num <=1000)
-    {
-      r = 255; g = 153; b= 0;
-    }
-    if(num>1000 && num <=1250)
-    {
-      r = 255; g = 255; b = 0;
-    }
-    if(num>1250 && num <=1500)
-    {
-      r = 0; g = 255; b = 0;
-    }
-    if(num>1500 && num <=1750)
-    {
-      r = 0; g = 255; b = 255;
-    }
-    if(num>1750 && num <=2000)
-    {
-      r = 0; g = 0 ; b = 255;
-    }
-    if(num>2000)
-    {
-      r = 255; g = 0; b = 153;
-    }
-    // G R B for bullet light strand...
-    // R G B for NEOPixel flat LED strand
-    useColor[0] = g;
-    useColor[1] = r;
-    useColor[2] = b;
-    
-   //test 
-   */
     
 }
 
 void getWaveLength()
 {
-  float minVal = thre;
+  float minVal = 500;
   float maxVal = 4700;
   float minWave = 350;
-  float maxWave = 600;
-  maxVal = 1000  ;//pot_range * 5;
-  minVal = 400;//pot_range / 2;
+  float maxWave = 650;
+  maxVal = pot_range * 5;
+  minVal = pot_range / 2;
   if(num>maxVal)
     maxVal = num;
     
   waveValue = ((num - minVal) / (maxVal-minVal) * (maxWave - minWave)) + minWave;
-  //Serial.print(num);
+ // Serial.print(num);
   //Serial.println();
   //Serial.print(waveValue);
   //Serial.println();
@@ -346,10 +353,21 @@ void getRGB()
   b = bz * 255;
   g = gz * 255;
   
+   if(colstate == 0){
+    useColor[0] = g;
+    useColor[1] = r;
+    useColor[2] = b;
+   }
+   if(colstate == 1){
     useColor[0] = r;
     useColor[1] = g;
     useColor[2] = b;
-  
+   }
+   if(colstate == 2){
+    useColor[0] = b;
+    useColor[1] = g;
+    useColor[2] = r;
+   }
   
   
 }
