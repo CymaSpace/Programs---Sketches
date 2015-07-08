@@ -197,7 +197,7 @@ void loop()
   strip.show();
 }
  
-void getColor(num)
+void getColor(int num) 
 {
   int r,g,b;
   
