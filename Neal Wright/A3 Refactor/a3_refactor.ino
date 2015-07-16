@@ -299,4 +299,3 @@ void getRGB(float waveValue)
   
 }
 
-

@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 151
+#define CNT_LIGHTS 51
 
 // Instantiate Neopixel Strip
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
@@ -63,7 +63,7 @@ void setup()
   digitalWrite(resetPin, LOW);
   digitalWrite(strobePin, HIGH); 
 
-  // If stomp is being pressed during setup, set monomode to True
+  // Check whether the stomp button is pressed and set the EEPROM
   if (digitalRead(stomp) == HIGH){
     if (EEPROM.read(1) == 0){
       EEPROM.write(1,1);
@@ -72,13 +72,13 @@ void setup()
     }  
   }
 
-  // Set monomode based on the EEPROM state
+  // Set monomode based on the stomp button state
   monomode = EEPROM.read(1);
 }
  
 void loop() 
 {  
-  // If stomp button is pressed, change colorState
+  // If stomp button is being pressed, alter color state for monomode
   if (digitalRead(stomp) == HIGH){
     delay(100);
     if(colorState < 2){colorState++;}
@@ -89,18 +89,20 @@ void loop()
   digitalWrite(resetPin, HIGH);
   digitalWrite(resetPin, LOW);
 
-  int spectrum_totalL = 0;
-  int spectrum_totalR = 0;
+  int changePinL = 0;
+  int changePinR = 0;
   int k,i; // Looping variables
   float pot_value = 0.0;
   
-  int left_end_point = 0;
-  int left_start_point = ((CNT_LIGHTS/2)-1);
-  int right_start_point = ((CNT_LIGHTS/2));
-  int right_end_point = (CNT_LIGHTS-1);
+  int use_le = 0;
+  int use_ls = ((CNT_LIGHTS/2)-1);
+  int use_rs = ((CNT_LIGHTS/2)+0);
+  int use_re = (CNT_LIGHTS-1);
+  int spectrum_totalL = 0;
+  int spectrum_totalR = 0;
   int spectrum_counts = 0;
 
-  //get readings from chip, sum freq values
+  //get readings from chip
   for (i = 0; i < 7; i++)
   {
     spectrum_counts++;
@@ -112,25 +114,24 @@ void loop()
     spectrumValueL[i] = analogRead(analogPinL);
     spectrumValueR[i] = analogRead(analogPinR);
     
-    spectrum_totalL += spectrumValueL[i];
-    spectrum_totalR += spectrumValueR[i];
+    spectrum_totalL+= spectrumValueL[i];
+    spectrum_totalR+= spectrumValueR[i];
     
-    // If a drumbeat is detected, increase the refresh value temporarily
     if( spectrumValueL[i] > 400 && i <=1)
           tmp_refresh_adj+= 23;
     if( spectrumValueR[i] > 400 && i <=1)
           tmp_refresh_adj+= 23;
     
-    // strobe to the next frequency
     digitalWrite(strobePin, HIGH); 
    
   }//for i
 
   if (monomode == 1){
-    spectrum_totalL = spectrum_totalR;
+    changePinL = spectrum_totalR;
   } else if (monomode == 0){
-    spectrum_totalL = spectrum_totalL;
+    changePinL = spectrum_totalL;
   }
+  changePinR = spectrum_totalR;
  
   use_refresh = refresh;
   use_brightness = global_brightness;
@@ -151,36 +152,35 @@ void loop()
  
   refresh_counter++;
 
-  if(refresh_counter >= (use_refresh - round(tmp_refresh_adj * .1))) {
-
+  if(refresh_counter>=(use_refresh - round(tmp_refresh_adj * .1))) {
     //reset the counter
     refresh_counter = 0;
     tmp_refresh_adj-= 1;
          
     //save the history - RIGHT SIDE
-    for (k = right_start_point; k <= right_end_point; k++) {
+    for (k = use_rs; k <= use_re; k++) {
       prop_history[k] = prop[k-1];
     }//for
      
-    for (k = right_start_point; k <= right_end_point; k++) {
+    for (k = use_rs; k <= use_re; k++) {
       prop[k] = prop_history[k];
     }//for
     
     
     //save the history - LEFT SIDE
-    for (k = left_start_point; k >= left_end_point; k--)
+    for (k = use_ls; k >= use_le; k--)
     {
       prop_history[k] = prop[k+1];
     }//for
      
-    for (k = left_start_point; k >= left_end_point; k--)
+    for (k = use_ls; k >= use_le; k--)
     {
       prop[k] = prop_history[k];
     }//for
     
     //current;
-    prop[right_start_point] = spectrum_totalR;
-    prop[left_start_point] = spectrum_totalL;
+    prop[use_rs] = changePinR;
+    prop[use_ls] = changePinL;
             
     for (k = 0; k < CNT_LIGHTS; k++) {
       int num;
@@ -197,7 +197,7 @@ void loop()
   strip.show();
 }
  
-void getColor(int num) 
+void getColor(num)
 {
   int r,g,b;
   
@@ -234,68 +234,70 @@ float getWaveLength(int num)
 
 void getRGB(float waveValue)
 {
-
   float rz = 0, gz = 0, bz = 0;
   int r,g,b;
   
-  // If wave value is within a certain range, set color value (0.0 - 1.0)
-  if(waveValue >380 && waveValue <=439) {
+  if(waveValue >380 && waveValue <=439)
+  {
     rz = (waveValue-440)/(440-380);
     gz = 0;
     bz = 1;
   }
   
-  if(waveValue >=440 && waveValue <=489) {
+  if(waveValue >=440 && waveValue <=489)
+  {
     rz = 0;
     gz = (waveValue-440)/(490-440);
     bz = 1;
   }
   
-  if(waveValue >=490 && waveValue <=509) {
+  if(waveValue >=490 && waveValue <=509)
+  {
     rz = 0;
     gz = 1;
     bz = (waveValue-510)/(510-490);
   }
   
-  if(waveValue >=510 && waveValue <=579) {
+  if(waveValue >=510 && waveValue <=579)
+  {
     rz = (waveValue-510)/(580-510);
     gz = 1;
     bz = 0;
   }
   
-  if(waveValue >=580 && waveValue <=644) {
+  if(waveValue >=580 && waveValue <=644)
+  {
     rz = 1;
     gz = (waveValue-645)/(645-580);
     bz = 0;
   }
   
-  if(waveValue >=645 && waveValue <=780) {
+  if(waveValue >=645 && waveValue <=780)
+  {
     rz = 1;
     gz = 0;
     bz = 0;
   }
   
-  // Convert RGB decimal value to 0-254 value
   r = rz * 255;
   b = bz * 255;
   g = gz * 255;
-
-  // Shift RGB values based on colorState  
-  if(colorState == 0){
+  
+   if(colorState == 0){
     useColor[0] = g;
     useColor[1] = r;
     useColor[2] = b;
-  }
-  if(colorState == 1){
+   }
+   if(colorState == 1){
     useColor[0] = r;
     useColor[1] = g;
     useColor[2] = b;
-  }
-  if(colorState == 2){
+   }
+   if(colorState == 2){
     useColor[0] = b;
     useColor[1] = g;
     useColor[2] = r;
-  } 
+   } 
   
 }
 
