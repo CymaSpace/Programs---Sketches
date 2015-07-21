@@ -1,14 +1,14 @@
 #include <Adafruit_NeoPixel.h>
 #include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 75
+#define CNT_LIGHTS 76
 
 // Instantiate Neopixel Strip
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 
 /* === Fixed settings === */
 
-// Set pin values
+// Hardware Variables
 int analog_pin_L = 1; // read from multiplexer using analog input 0
 int analog_pin_R = 0; // read from multiplexer using analog input 0
 int analog_pinpot = 2;// dial for speed
@@ -17,7 +17,7 @@ int stomp = 5;
 int strobe_pin = 12; // strobe is attached to digital pin 2
 int reset_pin = 13; // reset is attached to digital pin 3
 
-// Color and brightness
+// LED Variables
 int color_state = 0;
 int refresh = 10;
 int refresh_counter = 0;
@@ -86,7 +86,7 @@ void loop()
     cur_LED_vals[left_start_point] = cur_LED_vals[right_start_point];
   }
 
-  refresh_counter++;
+  // Update LED values, moving them down the line based on amplitude of all frequencies
   update_led_positions(cur_LED_vals, prev_LED_vals);
   set_pixel_colors(cur_LED_vals);          
 
@@ -136,6 +136,8 @@ void update_led_positions(int cur_LED_vals[], int prev_LED_vals[]) {
   int i;
   int use_refresh = 10;
   float pot_value = analogRead(analog_pinpot); //for use of dial
+
+  refresh_counter++;
 
   if(pot_value < 1000 && pot_value > 20) {
     use_refresh = pot_value / 50;
