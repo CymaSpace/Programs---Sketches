@@ -73,13 +73,9 @@ void loop()
   digitalWrite(reset_pin, HIGH);
   digitalWrite(reset_pin, LOW);
 
-  // Represents all of the LED freq sum values in the LED strip
-  int cur_LED_vals[CNT_LIGHTS];
-  int prev_LED_vals[CNT_LIGHTS];
-
-  // Get spectrum totals for L and R
-  cur_LED_vals[left_start_point] = read_freqs(analog_pin_L);
-  cur_LED_vals[right_start_point] = read_freqs(analog_pin_R);
+  // Get spectrum totals for L and R, store in array
+  int cur_LED_vals[left_start_point] = read_freqs(analog_pin_L);
+  int cur_LED_vals[right_start_point] = read_freqs(analog_pin_R);
 
   // If monomode is active, make L equal to R
   if (monomode == 1){
