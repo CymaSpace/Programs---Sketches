@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6
-#define CNT_LIGHTS 151
+#define CNT_LIGHTS 56
 
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
@@ -71,14 +71,14 @@ void moveled(){
   }
   
  
- 
+ /*
  //_________set the first to be strong
  for(int m=0; m<7; m++){
    for(int s=0; s<3; s++){
      leddat[leds[m][3]][s] = leds[m][s];
    }
  }
- 
+*/ 
  //________set positions with speed
    for(int n=0; n<7; n++){
      if (speedin[n] <= resolution-stoptres){
@@ -137,6 +137,7 @@ void getaudio(){
   for (int i = 0; i < 7; i++)
   {
     int maps = map(msgReadings[i]*scale[i], 110, 1000, resolution, 1);
+    //Serial.println(msgReadings[3]*scale[3]);
     maps = constrain(maps, 1, resolution);
     
     if (maps < speedin[i]){
@@ -161,6 +162,6 @@ void getaudio(){
   }
   if (momcount >= moment)
     momcount = 0;
-  Serial.print(momcount);
- Serial.println();
+  //Serial.print(momcount);
+ //Serial.println();
 }
