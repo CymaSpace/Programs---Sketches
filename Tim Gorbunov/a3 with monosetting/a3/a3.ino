@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 76
+#define CNT_LIGHTS 61
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -251,13 +251,13 @@ void get_color()
   {
     r = 0; g = 0; b = 0;
     if(colstate == 0){
-    useColor[0] = g;
-    useColor[1] = r;
+    useColor[0] = r;
+    useColor[1] = g;
     useColor[2] = b;
    }
    if(colstate == 1){
-    useColor[0] = r;
-    useColor[1] = g;
+    useColor[0] = g;
+    useColor[1] = r;
     useColor[2] = b;
    }
    if(colstate == 2){
@@ -397,13 +397,13 @@ void getRGB()
   g = gz * 255;
   
    if(colstate == 0){
-    useColor[0] = g;
-    useColor[1] = r;
+    useColor[0] = r;
+    useColor[1] = g;
     useColor[2] = b;
    }
    if(colstate == 1){
-    useColor[0] = r;
-    useColor[1] = g;
+    useColor[0] = g;
+    useColor[1] = r;
     useColor[2] = b;
    }
    if(colstate == 2){
