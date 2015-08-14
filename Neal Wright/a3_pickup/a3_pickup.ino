@@ -27,6 +27,12 @@ int left_end_point = 0;
 int left_start_point = ((CNT_LIGHTS/2)-1);
 int right_start_point = ((CNT_LIGHTS/2));
 int right_end_point = (CNT_LIGHTS-1);
+int solo_freq_band = 4; // Sets the frequency band (0-6) that mixes in a new color based on amiplitude
+float solo_freq_val = 0;
+int freq_bounds[2] = {380, 780};
+int solo_freq_bounds[2] = {50, 205};
+
+int serial_counter = 0;
 
 // Variable to test whether monomode is active
 boolean monomode = 0;
@@ -37,7 +43,8 @@ void setup()
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 
-  if (EEPROM.read(1) > 1){EEPROM.write(1,0);} // Clear EEPROM
+  // Make sure EEPROM is within the accepted range (0-1)
+  if (EEPROM.read(1) > 1){EEPROM.write(1,0);} // Clear EEPROM?
 
   // Set pin modes
   pinMode(analog_pin_L, INPUT);
@@ -61,6 +68,7 @@ void setup()
 
   // Set monomode based on the EEPROM state
   monomode = EEPROM.read(1);
+  Serial.println('test');
 }
  
 void loop() 
@@ -68,28 +76,26 @@ void loop()
   // If stomp button is pressed, change color_state
   check_color_state();
 
+  // Reset the MSGEQ7 chip
   digitalWrite(reset_pin, HIGH);
   digitalWrite(reset_pin, LOW);
-
-  int cur_sum_L = 0;
-  int cur_sum_R = 0;
 
   // Represents all of the LED freq sum values in the LED strip
   int cur_LED_vals[CNT_LIGHTS];
   int prev_LED_vals[CNT_LIGHTS];
 
   // Get spectrum totals for L and R
-  cur_sum_L = read_freq_sum(analog_pin_L);
-  cur_sum_R = read_freq_sum(analog_pin_R);
+  cur_LED_vals[left_start_point] = read_freq_sum(analog_pin_L);
+  cur_LED_vals[right_start_point] = read_freq_sum(analog_pin_R);
 
   // If monomode is active, make L equal to R
   if (monomode == 1){
-    cur_sum_L = cur_sum_R;
+    cur_LED_vals[left_start_point] = cur_LED_vals[right_start_point];
   }
 
   // Update LED values, moving them down the line based on amplitude of all frequencies
-  update_led_positions(cur_LED_vals, prev_LED_vals, cur_sum_L, cur_sum_R);
-  set_pixel_colors(cur_LED_vals);       
+  update_led_positions(cur_LED_vals, prev_LED_vals);
+  set_pixel_colors(cur_LED_vals);          
 
   strip.show();
 }
@@ -116,9 +122,13 @@ int read_freq_sum(int pin) {
 
     spectrum_values[i] = analogRead(pin);
     adjust_refresh_rate(spectrum_values[i], i);
-    
+
     spectrum_total += spectrum_values[i];
     
+    if(i == solo_freq_band) {
+      solo_freq_val = spectrum_values[i];
+    }
+
     // strobe to the next frequency
     digitalWrite(strobe_pin, HIGH); 
    
@@ -132,35 +142,31 @@ void adjust_refresh_rate(int amplitude, int freq_band) {
     tmp_refresh_adj += 23;
 }
 
-void update_led_positions(int cur_LED_vals[], int prev_LED_vals[], int cur_sum_L, int cur_sum_R) {
+void update_led_positions(int cur_LED_vals[], int prev_LED_vals[]) {
 
   int i;
   int use_refresh = 10;
   float pot_value = analogRead(analog_pinpot); //for use of dial
 
-  if(pot_value < 1000) {
-    if (pot_value > 20){
-      use_refresh = pot_value / 50;
-    } else {
-      use_refresh = 0;
-    }
+  refresh_counter++;
+
+  if(pot_value < 1000 && pot_value > 20) {
+    use_refresh = pot_value / 50;
+  } else if(pot_value < 20) {
+    use_refresh = 0;
   }
 
   // Constrain temporary refresh rate adjustment to between 0 and 200
-  if(tmp_refresh_adj < 0)
-    tmp_refresh_adj = 0;
-  if(tmp_refresh_adj > 200)
-    tmp_refresh_adj = 200;
-
-  refresh_counter++;
+  if(tmp_refresh_adj < 0) { tmp_refresh_adj = 0; }
+  if(tmp_refresh_adj > 200) { tmp_refresh_adj = 200; }
 
   if(refresh_counter >= (use_refresh - round(tmp_refresh_adj * .1))) {
-    
+
     //reset the counter
     refresh_counter = 0;
 
     // Decay the temporary refresh rate adjustment
-    tmp_refresh_adj -= 1;
+    tmp_refresh_adj-= 1;
 
     //save the history - RIGHT SIDE
     for (i = right_start_point; i <= right_end_point; i++) {
@@ -177,10 +183,6 @@ void update_led_positions(int cur_LED_vals[], int prev_LED_vals[], int cur_sum_L
     for (i = left_start_point; i >= left_end_point; i--) {
       cur_LED_vals[i] = prev_LED_vals[i];
     }//for
-
-    cur_LED_vals[left_start_point] = cur_sum_L;
-    cur_LED_vals[right_start_point] = cur_sum_R;
-    
   }//if refresh
 }
 
@@ -193,55 +195,22 @@ float get_wave_length(int num)
   float pot_range = analogRead(analog_pot_range);
   max_val = pot_range * 5;
   min_val = pot_range / 2;
-  if(num > max_val)
+  if(num>max_val)
     max_val = num;
-
+    
   return ((num - min_val) / (max_val-min_val) * (max_wave - min_wave)) + min_wave;
 
 }
 
-void get_RGB(float wave_value, int color_array[])
+void get_RGB(float waveValue, int color_array[])
 {
 
   float rz = 0, gz = 0, bz = 0;
   int r,g,b;
-  
-  // If wave value is within a certain range, set color value (0.0 - 1.0)
-  if(wave_value >380 && wave_value <=439) {
-    rz = (wave_value-440)/(440-380);
-    gz = 0;
-    bz = 1;
-  }
-  
-  if(wave_value >=440 && wave_value <=489) {
-    rz = 0;
-    gz = (wave_value-440)/(490-440);
-    bz = 1;
-  }
-  
-  if(wave_value >=490 && wave_value <=509) {
-    rz = 0;
-    gz = 1;
-    bz = (wave_value-510)/(510-490);
-  }
-  
-  if(wave_value >=510 && wave_value <=579) {
-    rz = (wave_value-510)/(580-510);
-    gz = 1;
-    bz = 0;
-  }
-  
-  if(wave_value >=580 && wave_value <=644) {
-    rz = 1;
-    gz = (wave_value-645)/(645-580);
-    bz = 0;
-  }
-  
-  if(wave_value >=645 && wave_value <=780) {
-    rz = 1;
-    gz = 0;
-    bz = 0;
-  }
+
+  bz = (waveValue - freq_bounds[0]) / (freq_bounds[1] - freq_bounds[0]);
+  rz = (solo_freq_val - solo_freq_bounds[0]) / (solo_freq_bounds[1] - solo_freq_bounds[0]);
+  gz = 0;
   
   // Convert RGB decimal value to 0-254 value
   r = rz * 255;
@@ -250,9 +219,9 @@ void get_RGB(float wave_value, int color_array[])
 
   // Shift RGB values based on color_state  
   if(color_state == 0){
-    color_array[0] = b;
-    color_array[1] = g;
-    color_array[2] = r;
+    color_array[0] = g;
+    color_array[1] = r;
+    color_array[2] = b;
   }
   if(color_state == 1){
     color_array[0] = r;
@@ -260,11 +229,10 @@ void get_RGB(float wave_value, int color_array[])
     color_array[2] = b;
   }
   if(color_state == 2){
-    color_array[0] = g;
-    color_array[1] = r;
-    color_array[2] = b;
+    color_array[0] = b;
+    color_array[1] = g;
+    color_array[2] = r;
   }
-  
 }
 void set_pixel_colors(int cur_LED_vals[]) {
 
@@ -273,14 +241,17 @@ void set_pixel_colors(int cur_LED_vals[]) {
 
   for (i = 0; i < CNT_LIGHTS; i++) {
 
-    if(cur_LED_vals[i] > 500) {
+    if(cur_LED_vals[i] >= 500) {
       get_RGB(get_wave_length(cur_LED_vals[i]), useColor);
-      strip.setPixelColor( i, useColor[0], useColor[1], useColor[2] );
     } else {
-      strip.setPixelColor( i, 0, 0, 0 );
-    }//if
-    
+      useColor[0] = 0;
+      useColor[1] = 0;
+      useColor[2] = 0;
+    } //if
+
+    strip.setPixelColor( i, useColor[0], useColor[1], useColor[2]);
   }//for
 
 }
+
 

@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 51
+#define CNT_LIGHTS 76
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
 //fixed settings 
@@ -82,7 +82,7 @@ void loop()
  
 void runTime()
 {
- 
+
   digitalWrite(resetPin, HIGH);
   digitalWrite(resetPin, LOW);
   int changeL = 0;
@@ -339,7 +339,7 @@ void getWaveLength()
   waveValue = ((num - minVal) / (maxVal-minVal) * (maxWave - minWave)) + minWave;
  // Serial.print(num);
   //Serial.println();
-  //Serial.print(waveValue);
+
   //Serial.println();
 }
 
