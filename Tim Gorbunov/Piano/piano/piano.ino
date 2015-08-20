@@ -1,16 +1,3 @@
-// FFT Test
-//
-// Compute a 1024 point Fast Fourier Transform (spectrum analysis)
-// on audio connected to the Left Line-In pin.  By changing code,
-// a synthetic sine wave can be input instead.
-//
-// The first 40 (of 512) frequency analysis bins are printed to
-// the Arduino Serial Monitor.  Viewing the raw data can help you
-// understand how the FFT works and what results to expect when
-// using the data to control LEDs, motors, or other fun things!
-//
-// This example code is in the public domain.
-
 #include <Audio.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -25,7 +12,7 @@
 
 #define PIN 6
 #define COLUMNS 40
-#define ROWS 15
+#define ROWS 14
 #define MATRIX_WIDTH 40
 #define MATRIX_HEIGHT 1
 #define TILE_WIDTH 1
@@ -53,9 +40,15 @@ AudioConnection patchCord1(audioInput, 0, myFFT, 0);
 
 AudioControlSGTL5000 audioShield;
 
-  float history[(ROWS - 1)][COLUMNS];
-
-void setup() {
+  // History array for propagation
+  float history[ROWS - 1][COLUMNS];
+  int prop_speed = 0;
+  int prop_target = 0;
+  int max_prop_speed = 10;
+  int count = 0;
+  
+void setup()
+{
 
   Serial.begin(9600);
 
@@ -76,153 +69,131 @@ void setup() {
   myFFT.windowFunction(AudioWindowHanning1024);
   //myFFT.windowFunction(NULL);
 
-//  // Create a synthetic sine wave, for testing
-//  // To use this, edit the connections above
-//  sinewave.amplitude(0.8);
-//  sinewave.frequency(1034.007);
-
-  for(int i = 0; i < (ROWS - 1); i++) {
-    history[i][0] = 0;
+  // Set all history values for -1 to show that they're empty (there is no such thing as an "empty" array index in C++)
+  for(int y = 0; y < (ROWS - 1); y++) {
+    for(int x = 0; x < COLUMNS; x++) {
+      history[y][x] = -1;
+    }
   }
-  
 
 }
 
-void loop() {
+void loop()
+{
+
+  // Set arrays for the current row and the RGB vals
   float bands[40];
+  float sum = 0;
   int color_vals[3];
 
+  // Read in FFT values
   if (myFFT.available()) {
+
+    // Set sampling ranges based on function
     for (int k=0; k<40; k++){
-      float temp1 = 0.05*pow(k-5,2);
-      bands[k] =myFFT.read(temp1, temp1+5);//note for tim after middle good work on begginging
+      float amp = 0.05 * pow((k - 5), 2);
+      bands[k] = myFFT.read(amp, amp + 5);//note for tim after middle good work on begginging
+      sum += bands[k];
     }
-    /*bands[0] =  myFFT.read(0);
-    bands[1] =  myFFT.read(1);
-    bands[2] =  myFFT.read(2, 3);
-    bands[3] =  myFFT.read(4, 5);
-    bands[4] =  myFFT.read(6, 8);
-    bands[5] =  myFFT.read(9, 11);
-    bands[6] =  myFFT.read(12, 14);
-    bands[7] =  myFFT.read(15, 18);
-    bands[8] =  myFFT.read(19, 23);
-    bands[9] =  myFFT.read(24, 28);
-    bands[10] = myFFT.read(29, 34);
-    bands[11] = myFFT.read(35, 40);
-    bands[12] = myFFT.read(41, 45);
-    bands[13] = myFFT.read(46, 50);
-    bands[14] = myFFT.read(56, 60);
-    bands[15] = myFFT.read(61, 65);
-    bands[16] = myFFT.read(66, 70);
-    bands[17] = myFFT.read(71, 75);
-    bands[18] = myFFT.read(76, 80);
-    bands[19] = myFFT.read(81, 85);
-    bands[20] = myFFT.read(86, 90);
-    bands[21] = myFFT.read(91, 95);
-    bands[22] = myFFT.read(96, 100);
-    bands[23] = myFFT.read(101, 105);
-    bands[24] = myFFT.read(106, 110);
-    bands[25] = myFFT.read(111, 115);
-    bands[26] = myFFT.read(116, 120);
-    bands[27] = myFFT.read(121, 125);
-    bands[28] = myFFT.read(126, 130);
-    bands[29] = myFFT.read(135, 140);
-    bands[30] = myFFT.read(319, 344);
-    bands[31] = myFFT.read(345, 369);
-    bands[32] = myFFT.read(370, 390);
-    bands[33] = myFFT.read(391, 415);
-    bands[34] = myFFT.read(416, 438);
-    bands[35] = myFFT.read(439, 455);
-    bands[36] = myFFT.read(456, 470);
-    bands[37] = myFFT.read(471, 490);
-    bands[38] = myFFT.read(491, 500);
-    bands[39] = myFFT.read(500, 126);
-    */
+
+    // Set all of the necessary pixels and display them
     set_pixels(bands, history, color_vals);
     matrix.show();
   }
+
+  count += 0.1;
 }
 
-void set_pixels(float bands[], float history[][COLUMNS], int color_vals[]) {
-  // So many loop variables...
-  int i, j, k, l, m;
+void set_pixels(float bands[], float history[][COLUMNS], int color_vals[])
+{
+  // Set a loop variable for x (column) and y (row)
+  int x, y;
 
-  // Loop through the columns and get the colors
-  for(i = 0; i < COLUMNS; i++) {
+  // Loop through the columns and get the colors for the bottom row (AKA row 13)
+  for(x = 0; x < COLUMNS; x++) {
 
-    // Get the color based on the amplitude
-    get_amp_color(bands[i], color_vals);
+    // Get the color based on the amp
+    get_amp_color(bands[x], color_vals);
     // Set initial row colors
-    matrix.drawPixel( i, 13 ,drawRGB24toRGB565(color_vals[0], color_vals[1], color_vals[2]));
+    matrix.drawPixel( x, 13 ,drawRGB24toRGB565(color_vals[0], color_vals[1], color_vals[2]));
 
-    // Set any populated history LED's
-    for(j = (ROWS - 2); j >= 0; j--) {
+  }
 
-      // Only show history LED's if history has been set
-      if(history[j][0] != 0) {
-
-        // Set history LED's
-        matrix.drawPixel( i, j ,drawRGB24toRGB565(color_vals[0], color_vals[1], color_vals[2]));
-        //delay(1);
+  // Loop through the rest of the columns and set the colors if the row has been populated
+  for(y = ROWS - 2; y >= 0; y--) {
+    for(x = 0; x < COLUMNS; x++) {
+      if(history[y][x] != -1) {
+        get_amp_color(history[y][x], color_vals);
+        matrix.drawPixel( x, y ,drawRGB24toRGB565(color_vals[0], color_vals[1], color_vals[2]));
       }
     }
   }
 
-  for(l = 0; l < COLUMNS; l++) {
-    // Set last row of history to current row
-    history[(ROWS - 2)][l] = bands[l];
+  // Move the rows up the history chain
+  for(y = 0; y < ROWS - 2; y++) {
+    for(x = 0; x < COLUMNS; x++) {
+      if(history[y + 1][x] != -1 && y != 12) {
+        history[y][x] = history [y + 1][x];
+      }
+    }
+  }
+
+  // Set the very next row equal to the lowest row
+  for(x = 0; x < COLUMNS; x++) {
+    history[12][x] = bands[x];
   }
   
-  for(k = (ROWS - 2); k >= 0; k--) {
-    if(history[k][0] != 0 && k != 0) {
-      for(m = 0; m < COLUMNS; m++) {
-        history[(k - 1)][m] = history[k][m];
-      }
-    }
-  }
-  matrix.drawPixel(1, 2, drawRGB24toRGB565( 255, 0, 0));
 }
 
-void get_amp_color(float amplitude, int color_vals[]) {
+void get_amp_color(float amp, int color_vals[])
+{
   float r, g, b;
-  float min = 0.05;
-  float max = 0.70;
+  float min = 0.01; // Minimum amplitude that triggers color
+  float max = 0.20; // Maximum aplitude (red)
   float steps[6];
-  float step_number = 6.0;
-  float step = (max - min) / step_number;
+  float step_number = 6.0; // Number of steps to between minimum and maximum
+  float step = (max - min) / step_number; // Calculate the step value
   int i;
+
+  r = 0;
+  g = 0;
+  b = 0;
 
   for(i = 0; i < step_number; i++) {
     steps[i] = step * i;
   }
 
-  if(amplitude > min && amplitude <= steps[1]) {
-    r = (amplitude - steps[1]) / step;
+  // For each step, giv
+  if(amp > min && amp <= steps[1]) {
+    r = (amp - steps[1]) / step;
     g = 0;
     b = 1;
-  } else if(amplitude > steps[1] && amplitude <= steps[2]) {
+  } else if(amp > steps[1] && amp <= steps[2]) {
     r = 0;
-    g = (amplitude - steps[2]) / step;
+    g = (amp - steps[2]) / step;
     b = 1;
-  } else if(amplitude > steps[2] && amplitude <= steps[3]) {
+  } else if(amp > steps[2] && amp <= steps[3]) {
     r = 0;
     g = 1;
-    b = (amplitude - steps[3]) / step;
-  } else if(amplitude > steps[3] && amplitude <= steps[4]) {
-    r = (amplitude - steps[4]) / step;
+    b = (amp - steps[3]) / step;
+  } else if(amp > steps[3] && amp <= steps[4]) {
+    r = (amp - steps[4]) / step;
     g = 1;
     b = 0;
-  } else if(amplitude > steps[4] && amplitude <= steps[5]) {
+  } else if(amp > steps[4] && amp <= steps[5]) {
     r = 1;
-    g = (amplitude - steps[5]) / step;
+    g = (amp - steps[5]) / step;
     b = 0;
-  } else if(amplitude > steps[5] && amplitude <= max) {
+  } else if(amp > steps[5] && amp <= max) {
     r = 1;
     g = 0;
     b = 0;
-  } else if(amplitude <= min) {
-    Serial.println("true");
+  } else if(amp <= min) {
     r = 0;
+    g = 0;
+    b = 0;
+  } else if(amp > max) {
+    r = 1;
     g = 0;
     b = 0;
   }
@@ -233,6 +204,7 @@ void get_amp_color(float amplitude, int color_vals[]) {
 
 }
 
+// Convert to 16 bit RGB value (565) from 3 8 bit R, G, and B values
 uint16_t drawRGB24toRGB565(uint8_t r, uint8_t g, uint8_t b)
 {
   return ((r / 8) << 11) | ((g / 4) << 5) | (b / 8);
