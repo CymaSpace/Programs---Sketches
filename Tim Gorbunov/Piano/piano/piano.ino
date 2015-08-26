@@ -7,7 +7,7 @@
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
 #ifndef PSTR
- #define PSTR // Make Arduino Due happy
+#define PSTR // Make Arduino Due happy
 #endif
 
 #define PIN 6
@@ -18,10 +18,20 @@
 #define TILE_WIDTH 1
 #define TILE_HEIGHT 15
 
+
+
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(40, 14, 1, 1, PIN,
   NEO_TILE_TOP   + NEO_TILE_LEFT   + NEO_TILE_ROWS   + NEO_TILE_PROGRESSIVE +
   NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG,
   NEO_GRB + NEO_KHZ800);
+  
+//for standby playme 
+boolean touched = true;
+float timer = 0;
+const uint16_t colors[] = {
+  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255) };
+int xtimer    = MATRIX_WIDTH;
+int pass = 0;
 
 const int myInput = AUDIO_INPUT_LINEIN;
 //const int myInput = AUDIO_INPUT_MIC;
@@ -55,7 +65,7 @@ void setup()
   matrix.begin();
   matrix.show(); // Initialize all pixels to 'off'
   matrix.setBrightness(60);
-  
+  matrix.setTextColor(colors[0]);
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
   AudioMemory(12);
@@ -103,6 +113,7 @@ void loop()
 
   count += 0.1;
 }
+
 
 void set_pixels(float bands[], float history[][COLUMNS], int color_vals[])
 {
@@ -165,30 +176,53 @@ void get_amp_color(float amp, int color_vals[])
 
   // For each step, giv
   if(amp > min && amp <= steps[1]) {
+    touched = true;
     r = (amp - steps[1]) / step;
     g = 0;
     b = 1;
   } else if(amp > steps[1] && amp <= steps[2]) {
+    touched = true;
     r = 0;
     g = (amp - steps[2]) / step;
     b = 1;
   } else if(amp > steps[2] && amp <= steps[3]) {
+    touched = true;
     r = 0;
     g = 1;
     b = (amp - steps[3]) / step;
   } else if(amp > steps[3] && amp <= steps[4]) {
+    touched = true;
     r = (amp - steps[4]) / step;
     g = 1;
     b = 0;
   } else if(amp > steps[4] && amp <= steps[5]) {
+    touched = true;
     r = 1;
     g = (amp - steps[5]) / step;
     b = 0;
   } else if(amp > steps[5] && amp <= max) {
+    touched = true;
     r = 1;
     g = 0;
     b = 0;
   } else if(amp <= min) {
+    if (touched){
+      timer = millis();
+      touched = false;
+    }else{
+      if (millis() - timer > 2000){
+        matrix.fillScreen(0);
+        matrix.setCursor(xtimer, 4);
+        //matrix.drawPixel(1, 3, 255);
+        matrix.print(F("Play Me!"));
+        if(--xtimer < -36) {
+          xtimer = matrix.width();
+          if(++pass >= 3) pass = 0;
+          matrix.setTextColor(colors[pass]);
+        }
+        matrix.show();        
+      }
+    }
     r = 0;
     g = 0;
     b = 0;
