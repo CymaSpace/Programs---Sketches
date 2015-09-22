@@ -1,0 +1,135 @@
+#include "FastLED.h"
+#include <Wire.h>
+
+#define    LIDARLite_ADDRESS   0x62          // Default I2C Address of LIDAR-Lite.
+#define    RegisterMeasure     0x00          // Register to write to initiate ranging.
+#define    MeasureValue        0x04          // Value to initiate ranging.
+#define    RegisterHighLowB    0x8f          // Register to get both High and Low bytes in 1 call.
+
+#define PIN 0
+#define NUM_LEDS 128
+#define strand 16
+
+CRGB leds[NUM_LEDS];
+
+int reading = 0;
+
+int lit = 0;
+int oldlit=0;
+
+long distance=0;
+int j=0;
+
+void setup() {
+  Wire.begin(); // join i2c bus
+  FastLED.addLeds<NEOPIXEL, PIN>(leds, NUM_LEDS);
+  pinMode(14, INPUT_PULLUP);
+  pinMode(13, OUTPUT);
+  //strip.setBrightness(25);
+  FastLED.show(); // Initialize all pixels to 'off'
+  Serial.begin(9600);
+}
+
+
+bool mode = false;
+bool clicked = true;
+
+void loop() {
+
+  if (digitalRead(14) == LOW && clicked == true) {
+    if (mode == true) {
+      mode = false;
+      digitalWrite(13, LOW);
+    }
+    else {
+      mode = true;
+      digitalWrite(13, HIGH);
+    }
+    clicked = false;
+  }
+  if (digitalRead(14) == HIGH) {
+    clicked = true;
+  }
+
+Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
+  Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)  
+  Wire.write((int)MeasureValue); // sets register pointer to  (0x00)  
+  Wire.endTransmission(); // stop transmitting
+
+  delay(20); // Wait 20ms for transmit
+
+  Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
+  Wire.write((int)RegisterHighLowB); // sets register pointer to (0x8f)
+  Wire.endTransmission(); // stop transmitting
+
+  delay(20); // Wait 20ms for transmit
+
+  Wire.requestFrom((int)LIDARLite_ADDRESS, 2); // request 2 bytes from LIDAR-Lite
+
+  if(2 <= Wire.available()) // if two bytes were received
+  {
+    reading = Wire.read(); // receive high byte (overwrites previous reading)
+    reading = reading << 8; // shift high byte to be high 8 bits
+    reading |= Wire.read(); // receive low byte as lower 8 bits
+    //Serial.println(reading); // print the reading
+    if(reading!=0) {
+      oldlit=lit;
+      lit=reading-10;
+      if(lit>63){lit=63;}
+      if(lit<0){lit=0;}
+      
+      Serial.println(lit);
+    }
+  }
+
+  if (mode == true) {
+    rainbow();
+  }
+  else {
+    cylon();
+  }
+
+}
+
+int offset = 1;
+
+void cylon() {
+  j++;
+  for (int i = 0; i < lit/4; i++) {
+    for (int n = 0; n < 8; n++) {
+      int neg = ((n % 2) * 2 - 1) * -1;
+      int odd = ((n + 1) / 2) * 32 - n % 2;
+      leds[odd + i * neg] = CHSV(0,0,0);
+    }
+  }
+  for (int i = lit/4; i < strand; i++) {
+    for (int n = 0; n < 8; n++) {
+      int neg = ((n % 2) * 2 - 1) * -1;
+      int odd = ((n + 1) / 2) * 32 - n % 2;
+      leds[odd + i * neg] = CHSV(i * j, 255, 100);
+    }
+  }
+  FastLED.show();
+}
+
+
+void rainbow() {
+  j++;
+  //j=abs((j%511)-255);
+  //Serial.println(mode);
+  //int col=abs((j%511)-255);
+  for (int i = 0; i < 64-lit; i++) {
+    leds[i] = CHSV((i*4-150), 255, 100);
+  }
+  for (int i = 64-lit; i < NUM_LEDS/2; i++) {
+    leds[i] = CHSV(0,0,0);
+  }
+  for (int i = NUM_LEDS-1; i > 64+lit; i--) {
+    leds[i] = CHSV((i*4-150), 255, 100);
+  }
+  for (int i = 65+lit; i > NUM_LEDS/2; i--) {
+    leds[i] = CHSV(0,0,0);
+  }
+  FastLED.show();
+}
+
