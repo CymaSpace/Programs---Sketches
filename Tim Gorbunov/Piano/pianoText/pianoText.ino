@@ -17,7 +17,7 @@
 #define MATRIX_HEIGHT 1
 #define TILE_WIDTH 1
 #define TILE_HEIGHT 15
-
+#define mBrightness 255//matrix brightness
 
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(40, 14, 1, 1, PIN,
@@ -64,7 +64,7 @@ void setup()
 
   matrix.begin();
   matrix.show(); // Initialize all pixels to 'off'
-  matrix.setBrightness(60);
+  matrix.setBrightness(mBrightness);
   matrix.setTextColor(drawRGB24toRGB565(0, 0, 0));
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
@@ -98,7 +98,7 @@ void loop()
 
   //for standby playme
   float amp_threshold = 0.09;
-  int timeout = 5000;
+  int timeout = 700;
 
   // Read in FFT values
   if (myFFT.available()) {
@@ -124,6 +124,7 @@ void loop()
     }
     
     if ((millis() - timer) > timeout && sum < amp_threshold){
+      matrix.setBrightness(255);
       matrix.setCursor(2, 4);
       matrix.setTextColor(drawRGB24toRGB565((fade * 255), (fade * 255), (fade * 255)));
       matrix.setTextSize(1);
@@ -133,22 +134,14 @@ void loop()
       matrix.print("Me");
       matrix.show();
       touched = false;
-      //Serial.print(fade);
-      //Serial.print(" ");
-      ////Serial.print(fade_direction);
-      //Serial.print(" ");
-      //Serial.println(fading);
       
       if(fade >= 0.98) {
-        
         fade_direction = false;
       }
       if (fade <= 0.7){
-        //Serial.println(millis()- fadeholdtime);
         if (fade_direction == false && fading == true){
           fadeholdtime = millis();
           fading = false;
-          //Serial.print("hi_------------");
         }else if (millis()- fadeholdtime >= 4000){
           fade_direction = true;
           fading = true;
@@ -161,15 +154,21 @@ void loop()
         fade -= 0.015;
       }
 
-    } else {
+    } else if (sum >=  amp_threshold){ //because it always goes here
       // Set all of the necessary pixels and display them
       set_pixels(bands, history, color_vals);
+      matrix.setBrightness(mBrightness);
+      timer = millis();
       matrix.show();
       if(!touched) {
-        timer = 0;
+        timer = millis();
         fade = 0.00;
         touched = true;
       }
+    } else{ // to finish the animation
+      set_pixels(bands, history, color_vals);
+      matrix.setBrightness(mBrightness);
+      matrix.show();
     }
   }
 
