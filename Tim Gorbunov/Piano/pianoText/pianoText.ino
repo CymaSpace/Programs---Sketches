@@ -97,7 +97,7 @@ void loop()
   int color_vals[3];
 
   //for standby playme
-  float amp_threshold = 0.09;
+  float amp_threshold = 0.10;
   int timeout = 700;
 
   // Read in FFT values
