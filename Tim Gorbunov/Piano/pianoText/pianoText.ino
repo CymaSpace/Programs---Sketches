@@ -17,21 +17,13 @@
 #define MATRIX_HEIGHT 1
 #define TILE_WIDTH 1
 #define TILE_HEIGHT 15
-
+#define mBrightness 255//matrix brightness
 
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(40, 14, 1, 1, PIN,
   NEO_TILE_TOP   + NEO_TILE_LEFT   + NEO_TILE_ROWS   + NEO_TILE_PROGRESSIVE +
   NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG,
   NEO_GRB + NEO_KHZ800);
-  
-//for standby playme 
-boolean touched = true;
-float timer = 0;
-const uint16_t colors[] = {
-  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255) };
-int xtimer    = MATRIX_WIDTH;
-int pass = 0;
 
 const int myInput = AUDIO_INPUT_LINEIN;
 //const int myInput = AUDIO_INPUT_MIC;
@@ -56,6 +48,14 @@ AudioControlSGTL5000 audioShield;
   int prop_target = 0;
   int max_prop_speed = 10;
   int count = 0;
+
+  //for standby playme
+  float timer = 0;
+  float fade = 0.00;
+  boolean fade_direction = true;
+  boolean touched = false;
+  float fadeholdtime = 0;
+  boolean fading = true;
   
 void setup()
 {
@@ -64,8 +64,8 @@ void setup()
 
   matrix.begin();
   matrix.show(); // Initialize all pixels to 'off'
-  matrix.setBrightness(60);
-  matrix.setTextColor(colors[0]);
+  matrix.setBrightness(mBrightness);
+  matrix.setTextColor(drawRGB24toRGB565(0, 0, 0));
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
   AudioMemory(12);
@@ -96,63 +96,80 @@ void loop()
   float sum = 0;
   int color_vals[3];
 
+  //for standby playme
+  float amp_threshold = 0.10;
+  int timeout = 700;
+
   // Read in FFT values
   if (myFFT.available()) {
 
     // Set sampling ranges based on function
-    //*
     for (int k=0; k<40; k++){
       if (k >=28){
-      float amp = 0.05 * pow((k - 5), 2);
-      bands[k] = myFFT.read(amp, amp + 5);//note for tim after middle good work on begginging
-      sum += bands[k];
+        float amp = 0.05 * pow((k - 5), 2);
+        bands[k] = myFFT.read(amp, amp + 5);//note for tim after middle good work on begginging
+        sum += bands[k];
+      }else {
+        float amp = 0.9 * pow((k), 0.035 * k);
+        bands[k] = myFFT.read(amp, amp + 5);//note for tim after middle good work on begginging
+        sum += bands[k];
       }
-    }//*/
-    /*
-    bands[0] =  myFFT.read(0, 2);
-    bands[1] =  myFFT.read(400, 400);
-    bands[2] =  myFFT.read(400, 400);
-    bands[3] =  myFFT.read(400, 400);
-    bands[4] =  myFFT.read(400, 400);
-    bands[5] =  myFFT.read(400, 400);
-    bands[6] =  myFFT.read(400, 600);
-    bands[7] =  myFFT.read(400, 400);
-    bands[8] =  myFFT.read(400, 400);
-    bands[9] =  myFFT.read(400, 400);
-    bands[10] =  myFFT.read(400, 400);
-    bands[11] =  myFFT.read(400, 400);
-    bands[12] =  myFFT.read(400, 400);
-    bands[13] =  myFFT.read(400, 400);
-    bands[14] =  myFFT.read(400, 400);
-    bands[15] =  myFFT.read(400, 400);
-    bands[16] =  myFFT.read(400, 400);
-    bands[17] =  myFFT.read(400, 400);
-    bands[18] =  myFFT.read(400, 400);
-    bands[19] =  myFFT.read(400, 400);
-    bands[20] =  myFFT.read(6, 7);
-    bands[21] =  myFFT.read(7, 8);
-    bands[22] =  myFFT.read(15, 19); //20
-    bands[23] =  myFFT.read(20, 29); //21
-    bands[24] =  myFFT.read(29, 40); //22
-    //bands[25] =  myFFT.read(33, 34); //
-    //bands[26] =  myFFT.read(35, 36); //23
-    //bands[27] =  myFFT.read(37, 38); //24
-    bands[28] =  myFFT.read(39, 40);
-    bands[29] =  myFFT.read(40, 45);
-    bands[30] =  myFFT.read(45, 50);
-    bands[31] =  myFFT.read(50, 55);
-    bands[32] =  myFFT.read(55, 60);
-    bands[33] =  myFFT.read(60, 65);
-    bands[34] =  myFFT.read(65, 70);
-    bands[35] =  myFFT.read(70, 75);
-    bands[36] =  myFFT.read(75, 80);
-    bands[37] =  myFFT.read(80, 86);
-    bands[38] =  myFFT.read(86, 95); 
-    bands[39] =  myFFT.read(95, 100); //done
-    */
-    // Set all of the necessary pixels and display them
-    set_pixels(bands, history, color_vals);
-    matrix.show();
+    }
+
+    /* Start standby text */
+
+    if(timer == 0) {
+      timer = millis();
+      fade = 0.00;
+    }
+    
+    if ((millis() - timer) > timeout && sum < amp_threshold){
+      matrix.setBrightness(255);
+      matrix.setCursor(2, 4);
+      matrix.setTextColor(drawRGB24toRGB565((fade * 255), (fade * 255), (fade * 255)));
+      matrix.setTextSize(1);
+      matrix.setTextWrap(false);
+      matrix.print("Play");
+      matrix.setCursor(27, 4);
+      matrix.print("Me");
+      matrix.show();
+      touched = false;
+      
+      if(fade >= 0.98) {
+        fade_direction = false;
+      }
+      if (fade <= 0.7){
+        if (fade_direction == false && fading == true){
+          fadeholdtime = millis();
+          fading = false;
+        }else if (millis()- fadeholdtime >= 4000){
+          fade_direction = true;
+          fading = true;
+        }
+      }
+      if(fade < 0.98 && fade_direction && fading) {
+        fade += 0.02;
+      }
+      if (fade > 0.02 && !fade_direction  && fading) {
+        fade -= 0.015;
+      }
+
+    } else if (sum >=  amp_threshold){ //because it always goes here
+      // Set all of the necessary pixels and display them
+      set_pixels(bands, history, color_vals);
+      matrix.setBrightness(mBrightness);
+      timer = millis();
+      matrix.show();
+      if(!touched) {
+        timer = millis();
+        fade = 0.00;
+        touched = true;
+      }
+    } else{ // to finish the animation
+      set_pixels(bands, history, color_vals);
+      matrix.setBrightness(mBrightness);
+      matrix.show();
+    }
   }
 
   count += 0.1;
@@ -220,53 +237,30 @@ void get_amp_color(float amp, int color_vals[])
 
   // For each step, giv
   if(amp > min && amp <= steps[1]) {
-    touched = true;
     r = (amp - steps[1]) / step;
     g = 0;
     b = 1;
   } else if(amp > steps[1] && amp <= steps[2]) {
-    touched = true;
     r = 0;
     g = (amp - steps[2]) / step;
     b = 1;
   } else if(amp > steps[2] && amp <= steps[3]) {
-    touched = true;
     r = 0;
     g = 1;
     b = (amp - steps[3]) / step;
   } else if(amp > steps[3] && amp <= steps[4]) {
-    touched = true;
     r = (amp - steps[4]) / step;
     g = 1;
     b = 0;
   } else if(amp > steps[4] && amp <= steps[5]) {
-    touched = true;
     r = 1;
     g = (amp - steps[5]) / step;
     b = 0;
   } else if(amp > steps[5] && amp <= max) {
-    touched = true;
     r = 1;
     g = 0;
     b = 0;
   } else if(amp <= min) {
-    if (touched){
-      timer = millis();
-      touched = false;
-    }else{
-      if (millis() - timer > 20000){
-        matrix.fillScreen(0);
-        matrix.setCursor(xtimer, 4);
-        //matrix.drawPixel(1, 3, 255);
-        matrix.print(F("Play Me!"));
-        if(--xtimer < -36) {
-          xtimer = matrix.width();
-          if(++pass >= 3) pass = 0;
-          matrix.setTextColor(colors[pass]);
-        }
-        matrix.show();        
-      }
-    }
     r = 0;
     g = 0;
     b = 0;

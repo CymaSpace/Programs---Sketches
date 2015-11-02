@@ -1,4 +1,6 @@
-
+//This sketch listens to FFT analysis from the Teensy Audio Shield and displays 
+//it on three RGB LED strips to make a simple equalizer. For Teensy 3.1, use the 
+//latest (beta) version on FastLED.
 
 #include <Audio.h>
 #include <Wire.h>
@@ -78,5 +80,6 @@ void loop() {
   }
   
 }
+
 
 
