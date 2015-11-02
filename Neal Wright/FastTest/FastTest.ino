@@ -2,43 +2,55 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 76
-#define DATA_PIN 6
-#define ANALOG_PIN_L 1
-#define ANALOG_PIN_R 0
-#define REFRESH_POT_PIN 2
-#define SENSITIVITY_POT_PIN 3
-#define STOMP_PIN 5
-#define STROBE_PIN 12
-#define RESET_PIN 13
-#define REFRESH_DIVISOR 80.
-#define SENSITIVITY_DIVISOR 100.
-#define LEFT_START_POINT ((NUM_LEDS / 2) - 1)
-#define LEFT_END_POINT 0
-#define RIGHT_START_POINT ((NUM_LEDS / 2))
-#define RIGHT_END_POINT (NUM_LEDS -1)
-#define LED_STACK_SIZE (NUM_LEDS / 2)
-#define MAX_AMPLITUDE 5000
-#define MIN_AMPLITUDE 500
-#define MAX_SENSITIVITY 3000
-#define MIN_SENSITIVITY 0
-int monomode;
-int refresh_rate;
-int refresh_counter = 0;
-int sensitivity;
+#define NUM_LEDS 76 // Number of LED's in the strip
+#define DATA_PIN 6 // Data out
+#define ANALOG_PIN_L 1 // Left audio channel
+#define ANALOG_PIN_R 0 // Right audio channel
+#define REFRESH_POT_PIN 2 // Left pot
+#define SENSITIVITY_POT_PIN 3 // Right pot
+#define STOMP_PIN 5 // The pin connected to the stomp button
+#define STROBE_PIN 12 // Strobe pin 
+#define RESET_PIN 13 // Reset Pin
+
+/* Sensitivity variables, refresh variables, and start/end points */
+#define REFRESH_DIVISOR 80. // Higher = range of refresh values is lower
+#define SENSITIVITY_DIVISOR 100. // Higher = range of sensitivity values on pot is lower
+#define LEFT_START_POINT ((NUM_LEDS / 2) - 1) // Starting LED for left side
+#define LEFT_END_POINT 0 // Generally the end of the left side is the first LED
+#define RIGHT_START_POINT ((NUM_LEDS / 2)) // Starting LED for the right side
+#define RIGHT_END_POINT (NUM_LEDS -1) // Generally the end of the right side is the last LED
+#define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
+#define MAX_AMPLITUDE 5000 // Maximum possible amplitude value
+#define MIN_AMPLITUDE 800 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
+#define MAX_SENSITIVITY 3000 // The maximum possible sensitivity value
+#define MIN_SENSITIVITY 0 // The minimum possible sensitivity value
+#define SENSITIVITY_MULTIPLIER 800 // Higher = range of sensitivity values on pot is lower
+
+int monomode; // Used to duplicate the left single for manual input
+int refresh_rate; // Refresh rate of the animation
+int refresh_counter = 0; // Looping variable for refresh loop
+int sensitivity; // Sensitivity value
+
+/* Represents the left and right LED color values.
+ * In the case of an odd number of LED's, you need to adjust these
+ * values and the values of RIGHT_START_POINT, LEFT_START_POINT, etc.
+ */
 
 int left_LED_stack[NUM_LEDS / 2] = {0};
 int right_LED_stack[NUM_LEDS / 2] = {0};
 
+// Set color value to full saturation and value. Set the hue to 0
 CHSV color(0, 255, 255);
-CRGB leds[NUM_LEDS];
+CRGB leds[NUM_LEDS]; // Represents LED strip
 
 void setup() {
   Serial.begin(9600); // print to serial monitor
-  
+
+  // Instantiate Neopixels with FastLED
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   FastLED.show();
 
+  // Clear any old values on EEPROM
   if (EEPROM.read(1) > 1){EEPROM.write(1,0);} // Clear EEPROM
 
   // Set pin modes
@@ -69,7 +81,7 @@ void loop() {
   // Set local loop variables
   int amp_sum_L = 0;
   int amp_sum_R = 0;
-  int i;
+  int i; // Loop var
   int stack_loop = 0;
 
   // Reset EQ7 chip
@@ -81,6 +93,7 @@ void loop() {
     change_color_mode();
   }
 
+  // Get the sum of the amplitudes of all 7 frequency bands
   amp_sum_L = get_freq_sum(ANALOG_PIN_L);
   amp_sum_R = get_freq_sum(ANALOG_PIN_R);
 
@@ -88,31 +101,55 @@ void loop() {
      value of L */
   if(monomode) amp_sum_L = amp_sum_R;
 
-  sensitivity = (analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * 800;
+  /*  SENSITIVITY_DIVISOR lowers the range of the possible pot values
+   *  If the value is higher than the max or lower than the min,
+   *  set it to the max or min respectively.
+   */
+  sensitivity = (analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * SENSITIVITY_MULTIPLIER;
   if(sensitivity > MAX_SENSITIVITY) sensitivity = MAX_SENSITIVITY;
   if(sensitivity < MIN_SENSITIVITY) sensitivity = MIN_SENSITIVITY;
+
+  // REFRESH_DIVISOR lowers the range of possible pot values
   refresh_rate = analogRead(REFRESH_POT_PIN) / REFRESH_DIVISOR;
 
+  // Run this code based on the refresh rate
   if(refresh_counter >= refresh_rate) {
+
+    // Start by resetting the refresh counter
     refresh_counter = 0;
-        
+
+    /*  Push the new values onto the stack of LED's for each side
+     *  This moves each LED value up the strip by 1 LED and drops the
+     *  last value in the stack. This is the code that effects the propagation
+     */
     push_stack(left_LED_stack, amp_sum_L);
     push_stack(right_LED_stack, amp_sum_R);
-    
+
+    /*  Set the LED values based on the left and right stacks
+     *  This is a reverse loop because the left side LED's travel toward
+     *  LED 0.
+     */
     for(i = LEFT_START_POINT; i >= LEFT_END_POINT; --i) {
       set_LED_color(i, left_LED_stack[stack_loop]);
       ++stack_loop;
     }
-    
+
+    // Reset and reuse stack_loop var
     stack_loop = 0;
+
+    /*  LED's on the right travel towards the last LED in the strand 
+     *  so the loop increments positively
+     */ 
     for(i = RIGHT_START_POINT; i <= RIGHT_END_POINT; ++i) {
       set_LED_color(i, right_LED_stack[stack_loop]);
       ++stack_loop;
     }
-        
+
+    // Show the new LED values
     FastLED.show();
   }
 
+  // Increase the refresh counter
   ++refresh_counter;
   
 }
@@ -154,11 +191,7 @@ int get_freq_sum(int pin) {
   return spectrum_total;
 }
 
-// Update color values for LED strip
-void update_LED_positions() {
-  // Update LED propagation here
-}
-
+// Sets led 'position' to 'value' and converts the value to an HSV value
 void set_LED_color(int position, int value) {
   if(value < MIN_AMPLITUDE) value = 0;
   float max = MAX_AMPLITUDE - sensitivity;
@@ -172,6 +205,10 @@ void set_LED_color(int position, int value) {
   leds[position] = color;
 }
 
+/*  Push a new LED color value onto the beginning of the stack.
+ *  The last LED color value is discarded. This is the primary 
+ *  function relating to the propagation behavior.
+ */
 void push_stack(int stack[], int value) {
   int i;
   for(i = (LED_STACK_SIZE - 1); i >= 1; --i) {
