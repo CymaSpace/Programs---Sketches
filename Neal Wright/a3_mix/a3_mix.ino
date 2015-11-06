@@ -29,8 +29,8 @@
 int monomode; // Used to duplicate the left single for manual input
 int refresh_rate; // Refresh rate of the animation
 int refresh_counter = 0; // Looping variable for refresh loop
-int sensitivity; // Sensitivity value
 int min_amplitude;
+int colstate = 0;
 
 /* Represents the left and right LED color values.
  * In the case of an odd number of LED's, you need to adjust these
@@ -41,7 +41,7 @@ int left_LED_stack[NUM_LEDS / 2] = {0};
 int right_LED_stack[NUM_LEDS / 2] = {0};
 
 // Set color value to full saturation and value. Set the hue to 0
-CHSV color(0, 255, 255);
+CRGB color(0, 255, 255);
 CRGB leds[NUM_LEDS]; // Represents LED strip
 
 void setup() {
@@ -91,6 +91,12 @@ void loop() {
   
   // Change color mode if stomp button is pressed
   if(stomp_pressed()) {
+    delay(100);
+    if(colstate < 2) {
+      colstate++;
+    } else if(colstate == 2) {
+      colstate=0;
+    }
   }
 
   // Get the sum of the amplitudes of all 7 frequency bands
@@ -105,10 +111,10 @@ void loop() {
    *  If the value is higher than the max or lower than the min,
    *  set it to the max or min respectively.
    */
-  sensitivity = (analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * SENSITIVITY_MULTIPLIER;
-  min_amplitude = ((analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * 200) + 420;
-  if(sensitivity > MAX_SENSITIVITY) sensitivity = MAX_SENSITIVITY;
-  if(sensitivity < MIN_SENSITIVITY) sensitivity = MIN_SENSITIVITY;
+  //sensitivity = (analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * SENSITIVITY_MULTIPLIER;
+  //min_amplitude = ((analogRead(SENSITIVITY_POT_PIN) / SENSITIVITY_DIVISOR) * 200) + 420;
+  //if(sensitivity > MAX_SENSITIVITY) sensitivity = MAX_SENSITIVITY;
+  //if(sensitivity < MIN_SENSITIVITY) sensitivity = MIN_SENSITIVITY;
 
   // REFRESH_DIVISOR lowers the range of possible pot values
   refresh_rate = analogRead(REFRESH_POT_PIN) / REFRESH_DIVISOR;
@@ -196,18 +202,8 @@ int get_freq_sum(int pin) {
 
 // Sets led 'position' to 'value' and converts the value to an HSV value
 void set_LED_color(int position, int value) {
-  if(value < min_amplitude) {
-    value = 0;
-  }
-  value -= MIN_AMPLITUDE;
-  float max = (MAX_AMPLITUDE - MIN_AMPLITUDE);
-  float ratio = ((float)value / max);
-  if(ratio == 0) {
-    color.val = 0;
-  } else {
-    color.val = 255;
-  }
-  color.hue = 255 - (ratio * 255);
+  int waveValue = getWaveLength(value);
+  getRGB(waveValue);
   leds[position] = color;
 }
 
@@ -221,5 +217,89 @@ void push_stack(int stack[], int value) {
     stack[i] = stack[i - 1];
   }
   stack[0] = value;
+}
+
+int getWaveLength(int value) {
+  float minVal = 500;
+  float maxVal = 4700;
+  float minWave = 350;
+  float maxWave = 650;
+  maxVal = analogRead(SENSITIVITY_POT_PIN) * 5;
+  minVal = analogRead(SENSITIVITY_POT_PIN) / 2;
+  if(value > maxVal)
+    maxVal = value;
+    
+  return ((value - minVal) / (maxVal-minVal) * (maxWave - minWave)) + minWave;
+ // Serial.print(num);
+  //Serial.println();
+  //Serial.print(waveValue);
+  //Serial.println();
+}
+
+void getRGB(int waveValue) {
+  float rz, gz, bz;
+  int r,g,b;
+  
+  if(waveValue >380 && waveValue <=439)
+  {
+    rz = (waveValue-440)/(440-380);
+    gz = 0;
+    bz = 1;
+  }
+  
+  if(waveValue >=440 && waveValue <=489)
+  {
+    rz = 0;
+    gz = (waveValue-440)/(490-440);
+    bz = 1;
+  }
+  
+  if(waveValue >=490 && waveValue <=509)
+  {
+    rz = 0;
+    gz = 1;
+    bz = (waveValue-510)/(510-490);
+  }
+  
+  if(waveValue >=510 && waveValue <=579)
+  {
+    rz = (waveValue-510)/(580-510);
+    gz = 1;
+    bz = 0;
+  }
+  
+  if(waveValue >=580 && waveValue <=644)
+  {
+    rz = 1;
+    gz = (waveValue-645)/(645-580);
+    bz = 0;
+  }
+  
+  if(waveValue >=645 && waveValue <=780)
+  {
+    rz = 1;
+    gz = 0;
+    bz = 0;
+  }
+  
+  r = rz * 255;
+  b = bz * 255;
+  g = gz * 255;
+  
+   if(colstate == 0){
+    color.red = g;
+    color.green = r;
+    color.blue = b;
+   }
+   if(colstate == 1){
+    color.red = r;
+    color.green = g;
+    color.blue = b;
+   }
+   if(colstate == 2){
+    color.red = b;
+    color.green = g;
+    color.blue = r;
+   }
 }
 
