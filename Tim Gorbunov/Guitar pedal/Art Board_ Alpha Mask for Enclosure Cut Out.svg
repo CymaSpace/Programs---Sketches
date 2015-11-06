@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="256px" height="162px" viewBox="0 0 256 162" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3 (11970) - http://www.bohemiancoding.com/sketch -->
+    <title>Art Board: Alpha Mask for Enclosure Cut Out</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Art-Board:-Alpha-Mask-for-Enclosure-Cut-Out" sketch:type="MSArtboardGroup" fill-opacity="0.95" fill="#000000">
+            <g id="Color-Logo-Webclip" sketch:type="MSLayerGroup">
+                <path d="M224.773093,107.569938 L256.170898,161.952532 L186.692512,161.95263 L0.170898411,161.95263 L93.4317052,0.420174308 L128.17087,60.5901729 L162.85488,0.51570615 L162.799668,0.420076166 L224.973539,0.420076166 L194.132918,53.8375983 L194.068363,53.7257865 L162.981428,107.569938 L224.773093,107.569938 L224.773093,107.569938 Z M92.8932637,121.569418 L116.208465,161.952532 L69.578062,161.952532 L92.8932637,121.569418 Z" id="Alpha-Mask" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

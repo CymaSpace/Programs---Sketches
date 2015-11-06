@@ -1,0 +1,5 @@
+AL1 wiring
+Rj10 
+Yellow - 5v
+Grn/red - data
+black - grnd

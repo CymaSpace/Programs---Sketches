@@ -75,7 +75,7 @@ void loop() {
   matrix.fillScreen(0);
   matrix.setCursor(x, 4);
   //matrix.drawPixel(1, 3, 255);
-  matrix.print(F("AudioLux Piano"));
+  matrix.print(F("Play Me!"));
   if(--x < -36) {
     x = matrix.width();
     if(++pass >= 3) pass = 0;

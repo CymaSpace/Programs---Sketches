@@ -1,0 +1,6 @@
+WS2812B Tests
+MicroChip = 0.8mA
+White = 41mA
+Red = 17mA
+Green = 15mA
+Blue = 13mA
