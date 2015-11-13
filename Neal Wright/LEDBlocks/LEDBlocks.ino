@@ -64,8 +64,8 @@ void setup()
 void loop() 
 {  
     if (stomp_pressed()){
-      toggle_LEDS();
       delay(200);
+      toggle_LEDS();
     }
 
    digitalWrite(RESET_PIN, HIGH);
