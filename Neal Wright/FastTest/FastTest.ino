@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 300
+#define NUM_LEDS 269
 #define DATA_PIN 6
 #define ANALOG_PIN_L 1
 #define ANALOG_PIN_R 0
