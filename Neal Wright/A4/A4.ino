@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 21 // Number of LED's in the strip
+#define NUM_LEDS 71 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -15,10 +15,10 @@
 /* Sensitivity variables, refresh variables, and start/end points */
 #define REFRESH_DIVISOR 80. // Higher = range of refresh values is lower
 #define SENSITIVITY_DIVISOR 100. // Higher = range of sensitivity values on pot is lower
-#define LEFT_START_POINT 0 // Starting LED for left side
-#define LEFT_END_POINT NUM_LEDS // Generally the end of the left side is the first LED
+#define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
+#define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
 #define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
-#define RIGHT_END_POINT (NUM_LEDS -1) // Generally the end of the right side is the last LED
+#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
 #define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
@@ -231,7 +231,7 @@ void set_LED_color(int position, int value) {
  */
 void push_stack(int stack[], int value) {
   int i;
-  for(i = (LED_STACK_SIZE - 1); i >= 1; --i) {
+  for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
     stack[i] = stack[i - 1];
   }
   stack[0] = value;
