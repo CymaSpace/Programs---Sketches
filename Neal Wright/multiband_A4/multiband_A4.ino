@@ -2,7 +2,9 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 21 // Number of LED's in the strip
+#define NUM_LEDS 251 // Number of LED's in the strip
+#define ROWS 25
+#define COLUMNS 10
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -18,7 +20,7 @@
 #define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
 #define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
 #define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
-#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
+#define RIGHT_END_POINT (NUM_LEDS -1) // Generally the end of the right side is the last LED
 #define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
@@ -32,20 +34,28 @@ int refresh_counter = 0; // Looping variable for refresh loop
 int sensitivity; // Sensitivity value
 int max_amplitude;
 int start_hue = 0;
+int count = 0;
+
+int start_points[COLUMNS] = {0};
+int left_end_points[COLUMNS] = {0};
+int right_end_points[COLUMNS] = {0};
+int left_amps[COLUMNS] = {0};
+int right_amps[COLUMNS] = {0};
+int left_stacks[10][13] = {0};
+int right_stacks[10][13] = {0};
 
 /* Represents the left and right LED color values.
  * In the case of an odd number of LED's, you need to adjust these
  * values and the values of RIGHT_START_POINT, LEFT_START_POINT, etc.
  */
 
-int left_LED_stack[NUM_LEDS / 2] = {0};
-int right_LED_stack[NUM_LEDS / 2] = {0};
-
 // Set color value to full saturation and value. Set the hue to 0
 CHSV color(0, 255, 255);
 CRGB leds[NUM_LEDS]; // Represents LED strip
 
 void setup() {
+
+  int i;
 
   // Instantiate Neopixels with FastLED
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
@@ -75,6 +85,26 @@ void setup() {
 
   // Set monomode based on the EEPROM state
   monomode = EEPROM.read(1);
+
+  for(i = 0; i < 10; ++i) {
+    start_points[i] = (ROWS * (i + 1)) - (ROWS / 2);
+  }
+  
+  for(i = 0; i < 10; ++i) {
+    if(i % 2 == 0) {
+      left_end_points[i] = start_points[i] + (ROWS / 2);
+      right_end_points[i] = start_points[i] - (ROWS / 2);
+    } else {
+      left_end_points[i] = start_points[i] - (ROWS / 2);
+      right_end_points[i] = start_points[i] + (ROWS / 2);
+    }
+  }
+  
+  for(i = 0; i < COLUMNS; ++i) {
+    get_freq_amp(i, ANALOG_PIN_L, left_amps);
+    get_freq_amp(i, ANALOG_PIN_R, right_amps);
+  }
+
 }
 
 void loop() {
@@ -94,14 +124,6 @@ void loop() {
     change_color_mode();
     delay(100); // Keeps the pedal from switching colors too quickly
   }
-
-  // Get the sum of the amplitudes of all 7 frequency bands
-  amp_sum_L = get_freq_sum(ANALOG_PIN_L);
-  amp_sum_R = get_freq_sum(ANALOG_PIN_R);
-
-  /* If monomode is active, make both L and R equal to the
-     value of L */
-  if(monomode) amp_sum_L = amp_sum_R;
 
   /*  SENSITIVITY_DIVISOR lowers the range of the possible pot values
    *  If the value is higher than the max or lower than the min,
@@ -123,35 +145,42 @@ void loop() {
      *  This moves each LED value up the strip by 1 LED and drops the
      *  last value in the stack. This is the code that effects the propagation
      */
-    push_stack(left_LED_stack, amp_sum_L);
-    push_stack(right_LED_stack, amp_sum_R);
-
-    /*  Set the LED values based on the left and right stacks
-     *  This is a reverse loop because the left side LED's travel toward
-     *  LED 0.
-     */
-    for(i = LEFT_START_POINT; i >= LEFT_END_POINT; --i) {
-      set_LED_color(i, left_LED_stack[stack_loop]);
-      ++stack_loop;
+    for(i = 0; i < 10; ++i) {
+      push_stack(left_stacks[i], left_amps[i]);
+      push_stack(right_stacks[i], right_amps[i]); 
     }
 
-    // Reset and reuse stack_loop var
-    stack_loop = 0;
-
-    /*  LED's on the right travel towards the last LED in the strand 
-     *  so the loop increments positively
-     */ 
-    for(i = RIGHT_START_POINT; i <= RIGHT_END_POINT; ++i) {
-      set_LED_color(i, right_LED_stack[stack_loop]);
-      ++stack_loop;
+    // TO DO set colors, remember to alternate propagation direction
+    for(count = 0; count < COLUMNS; ++count) {
+      if(count % 2 == 0) {
+        /*  Set the LED values based on the left and right stacks
+         *  This is a reverse loop because the left side LED's travel toward
+         *  LED 0.
+         */
+        stack_loop = 0;
+        for(i = start_points[count]; i >= left_end_points[count]; --i) {
+          set_LED_color(i, left_stacks[count][stack_loop]);
+          ++stack_loop;
+        }
+    
+        // Reset and reuse stack_loop var
+        stack_loop = 0;
+    
+        /*  LED's on the right travel towards the last LED in the strand 
+         *  so the loop increments positively
+         */ 
+        for(i = start_points[count]; i <= right_end_points[count]; ++i) {
+          set_LED_color(i, right_stacks[count][stack_loop]);
+          ++stack_loop;
+        }
+    
+        leds[0] = left_stacks[count][0];
+      }
     }
-
-    leds[0] = left_LED_stack[0];
-
     // Show the new LED values
     FastLED.show();
   }
-
+  
   // Increase the refresh counter
   ++refresh_counter;
   
@@ -196,6 +225,15 @@ int get_freq_sum(int pin) {
   return spectrum_total;
 }
 
+void get_freq_amp(int band, int pin, int freqs[]) {
+  digitalWrite(STROBE_PIN, LOW);
+  delayMicroseconds(30); // to allow the output to settle
+  freqs[band] = analogRead(pin);
+   
+   // strobe to the next frequency
+   digitalWrite(STROBE_PIN, HIGH); 
+}
+
 /* Sets led 'position' to 'value' and converts the value to an HSV value.
  * Compared to the A3 code, this code produces color values closer to white.
  * The A3 code always has only two colors lit at a time. For example red and 
@@ -231,7 +269,7 @@ void set_LED_color(int position, int value) {
  */
 void push_stack(int stack[], int value) {
   int i;
-  for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
+  for(i = (LED_STACK_SIZE - 1); i >= 1; --i) {
     stack[i] = stack[i - 1];
   }
   stack[0] = value;

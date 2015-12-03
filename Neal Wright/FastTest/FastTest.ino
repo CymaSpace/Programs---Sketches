@@ -3,6 +3,9 @@
 
 /* Output pin definitions */
 <<<<<<< HEAD
+#define NUM_LEDS 269
+=======
+<<<<<<< HEAD
 #define NUM_LEDS 71 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
@@ -40,6 +43,7 @@ int start_hue = 0;
  */
 =======
 #define NUM_LEDS 300
+>>>>>>> origin/master
 #define DATA_PIN 6
 #define ANALOG_PIN_L 1
 #define ANALOG_PIN_R 0

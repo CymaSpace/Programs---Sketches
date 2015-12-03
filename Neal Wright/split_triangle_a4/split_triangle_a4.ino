@@ -15,11 +15,11 @@
 /* Sensitivity variables, refresh variables, and start/end points */
 #define REFRESH_DIVISOR 80. // Higher = range of refresh values is lower
 #define SENSITIVITY_DIVISOR 100. // Higher = range of sensitivity values on pot is lower
-#define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
-#define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
+#define LEFT_START_POINT 0 // Starting LED for left side
+#define LEFT_END_POINT 20 // Generally the end of the left side is the first LED
 #define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
-#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
-#define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
+#define RIGHT_END_POINT (NUM_LEDS -1) // Generally the end of the right side is the last LED
+#define LED_STACK_SIZE 21 // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
 #define MIN_AMPLITUDE 420 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
@@ -38,14 +38,15 @@ int start_hue = 0;
  * values and the values of RIGHT_START_POINT, LEFT_START_POINT, etc.
  */
 
-int left_LED_stack[NUM_LEDS / 2] = {0};
-int right_LED_stack[NUM_LEDS / 2] = {0};
+int left_LED_stack[LED_STACK_SIZE] = {0};
 
 // Set color value to full saturation and value. Set the hue to 0
 CHSV color(0, 255, 255);
 CRGB leds[NUM_LEDS]; // Represents LED strip
 
 void setup() {
+
+  Serial.begin(9600);
 
   // Instantiate Neopixels with FastLED
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
@@ -124,7 +125,6 @@ void loop() {
      *  last value in the stack. This is the code that effects the propagation
      */
     push_stack(left_LED_stack, amp_sum_L);
-    push_stack(right_LED_stack, amp_sum_R);
 
     /*  Set the LED values based on the left and right stacks
      *  This is a reverse loop because the left side LED's travel toward
@@ -141,8 +141,8 @@ void loop() {
     /*  LED's on the right travel towards the last LED in the strand 
      *  so the loop increments positively
      */ 
-    for(i = RIGHT_START_POINT; i <= RIGHT_END_POINT; ++i) {
-      set_LED_color(i, right_LED_stack[stack_loop]);
+    for(i = LEFT_START_POINT; i <= LEFT_END_POINT; ++i) {
+      set_LED_color(i, left_LED_stack[stack_loop]);
       ++stack_loop;
     }
 
@@ -232,6 +232,7 @@ void set_LED_color(int position, int value) {
 void push_stack(int stack[], int value) {
   int i;
   for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
+    Serial.println(i);
     stack[i] = stack[i - 1];
   }
   stack[0] = value;
