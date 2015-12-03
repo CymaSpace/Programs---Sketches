@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 21 // Number of LED's in the strip
+#define NUM_LEDS 77 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -22,7 +22,7 @@
 #define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
-#define MIN_AMPLITUDE 420 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
+#define MIN_AMPLITUDE 520 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
 #define MIN_AMPLITUDE_MULTIPLIER 200
 #define SENSITIVITY_MULTIPLIER 200 // Higher = range of sensitivity values on pot is lower
 
