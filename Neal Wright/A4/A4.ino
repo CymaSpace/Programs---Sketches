@@ -22,7 +22,7 @@
 #define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
-#define MIN_AMPLITUDE 520 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
+#define MIN_AMPLITUDE 545 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
 #define MIN_AMPLITUDE_MULTIPLIER 200
 #define SENSITIVITY_MULTIPLIER 200 // Higher = range of sensitivity values on pot is lower
 
@@ -221,7 +221,7 @@ void set_LED_color(int position, int value) {
     color.val = 255;
   }
   color.saturation = 255;
-  color.hue = start_hue + (ratio * 255);
+  color.hue = start_hue + ((ratio * 255) * 2);
   leds[position] = color;
 }
 
