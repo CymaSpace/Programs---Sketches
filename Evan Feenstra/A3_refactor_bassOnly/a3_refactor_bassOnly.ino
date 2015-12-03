@@ -25,11 +25,11 @@ int tmp_refresh_adj = 0;
 int global_brightness = 255; // Sets global brightness, i.e. 64 is 1/4 brightness.
 int left_end_point = 0;
 int left_start_point = ((CNT_LIGHTS/2)-1);
-int right_start_point = ((CNT_LIGHTS/2));
+int right_start_point = 0;//((CNT_LIGHTS/2));
 int right_end_point = (CNT_LIGHTS-1);
 
 // Variable to test whether monomode is active
-boolean monomode = 0;
+boolean monomode = 1;
 
 void setup() 
 {  
@@ -109,7 +109,7 @@ int read_freq_sum(int pin) {
   int spectrum_total = 0;
 
   //get readings from chip, sum freq values
-  for (i = 0; i < 7; i++)
+  for (i = 0; i < 1; i++)
   {
     digitalWrite(strobe_pin, LOW);
     delayMicroseconds(30); // to allow the output to settle
@@ -118,6 +118,8 @@ int read_freq_sum(int pin) {
     adjust_refresh_rate(spectrum_values[i], i);
     
     spectrum_total += spectrum_values[i];
+
+    spectrum_total = spectrum_total*2;
     
     // strobe to the next frequency
     digitalWrite(strobe_pin, HIGH); 
@@ -171,14 +173,14 @@ void update_led_positions(int cur_LED_vals[], int prev_LED_vals[], int cur_sum_L
     }//for
     
     //save the history - LEFT SIDE
-    for (i = left_start_point; i >= left_end_point; i--) {
+    /*for (i = left_start_point; i >= left_end_point; i--) {
       prev_LED_vals[i] = cur_LED_vals[i+1];
     }//for
     for (i = left_start_point; i >= left_end_point; i--) {
       cur_LED_vals[i] = prev_LED_vals[i];
-    }//for
+    }//for*/
 
-    cur_LED_vals[left_start_point] = cur_sum_L;
+    //cur_LED_vals[left_start_point] = cur_sum_L;
     cur_LED_vals[right_start_point] = cur_sum_R;
     
   }//if refresh
