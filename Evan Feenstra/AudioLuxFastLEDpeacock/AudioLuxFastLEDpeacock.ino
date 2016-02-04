@@ -1,9 +1,9 @@
 #include "FastLED.h"
 #include "EEPROM.h"
 #define PIN 6
-#define CNT_LIGHTS 251
+#define CNT_LIGHTS 97
 #define ROWS 10 //# of leds in each row
-#define COLUMNS 25 //# of leds in each column
+#define COLUMNS 16 //# of leds in each column
 #define COPYS 1
 
 CRGB leds[CNT_LIGHTS];
