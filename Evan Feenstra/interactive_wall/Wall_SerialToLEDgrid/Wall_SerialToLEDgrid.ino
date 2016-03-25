@@ -50,7 +50,7 @@ void loop()
     if(currentValue > 1){
       currentValue = 0;
     }
-    
+    Serial.println(values[0]);
     // after this point values[]
     // has the most recent set of
     // all values sent in from Processing

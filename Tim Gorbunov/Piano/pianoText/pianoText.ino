@@ -17,7 +17,7 @@
 #define MATRIX_HEIGHT 1
 #define TILE_WIDTH 1
 #define TILE_HEIGHT 15
-#define mBrightness 255//matrix brightness
+#define mBrightness 128//matrix brightness
 
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(40, 14, 1, 1, PIN,
@@ -56,6 +56,7 @@ AudioControlSGTL5000 audioShield;
   boolean touched = false;
   float fadeholdtime = 0;
   boolean fading = true;
+  int lightsensor = 255;
   
 void setup()
 {
@@ -64,7 +65,7 @@ void setup()
 
   matrix.begin();
   matrix.show(); // Initialize all pixels to 'off'
-  matrix.setBrightness(mBrightness);
+  matrix.setBrightness(lightsensor);
   matrix.setTextColor(drawRGB24toRGB565(0, 0, 0));
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
@@ -97,8 +98,12 @@ void loop()
   int color_vals[3];
 
   //for standby playme
-  float amp_threshold = 0.10;
-  int timeout = 700;
+  //float amp_threshold = map(analogRead(A0), 0, 1023, 0.07, 1);
+  //Serial.println();
+  //Serial.print("HI  ");
+  //Serial.println(amp_threshold);
+  float amp_threshold = 0.8;
+  int timeout = 6000;
 
   // Read in FFT values
   if (myFFT.available()) {
@@ -115,7 +120,7 @@ void loop()
         sum += bands[k];
       }
     }
-
+    //Serial.println(sum);
     /* Start standby text */
 
     if(timer == 0) {
@@ -124,7 +129,9 @@ void loop()
     }
     
     if ((millis() - timer) > timeout && sum < amp_threshold){
-      matrix.setBrightness(255);
+      
+      //Serial.println(analogRead(A0));
+      matrix.setBrightness(lightsensor);
       matrix.setCursor(2, 4);
       matrix.setTextColor(drawRGB24toRGB565((fade * 255), (fade * 255), (fade * 255)));
       matrix.setTextSize(1);
@@ -143,6 +150,8 @@ void loop()
           fadeholdtime = millis();
           fading = false;
         }else if (millis()- fadeholdtime >= 4000){
+          lightsensor = map(analogRead(A1), 0, 600, 50, 255);
+          lightsensor = constrain(lightsensor, 50, 255);
           fade_direction = true;
           fading = true;
         }
@@ -154,10 +163,10 @@ void loop()
         fade -= 0.015;
       }
 
-    } else if (sum >=  amp_threshold){ //because it always goes here
+    } else if (sum >=  amp_threshold-0.6){ //because it always goes here
       // Set all of the necessary pixels and display them
       set_pixels(bands, history, color_vals);
-      matrix.setBrightness(mBrightness);
+      matrix.setBrightness(lightsensor);
       timer = millis();
       matrix.show();
       if(!touched) {
@@ -167,7 +176,7 @@ void loop()
       }
     } else{ // to finish the animation
       set_pixels(bands, history, color_vals);
-      matrix.setBrightness(mBrightness);
+      matrix.setBrightness(lightsensor);
       matrix.show();
     }
   }
@@ -220,7 +229,9 @@ void set_pixels(float bands[], float history[][COLUMNS], int color_vals[])
 void get_amp_color(float amp, int color_vals[])
 {
   float r, g, b;
+  //float min = map(analogRead(A0), 0, 1023, 0.01, 0.1);
   float min = 0.01; // Minimum amplitude that triggers color
+  //float max = map(analogRead(A0), 0, 1023, 0.2, 1);
   float max = 0.20; // Maximum aplitude (red)
   float steps[6];
   float step_number = 6.0; // Number of steps to between minimum and maximum
