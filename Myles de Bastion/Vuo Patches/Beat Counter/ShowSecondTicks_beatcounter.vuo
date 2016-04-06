@@ -1,0 +1,82 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CalculateCosine [type="vuo.math.cos" version="1.0.0" label="Calculate Cosine|<refresh>refresh\l|<angle>angle\l|<cosine>cosine\r" pos="450,555"];
+CalculateCosine2 [type="vuo.math.cos" version="1.0.0" label="Calculate Cosine|<refresh>refresh\l|<angle>angle\l|<cosine>cosine\r" pos="420,735"];
+CalculateSine [type="vuo.math.sin" version="1.0.0" label="Calculate Sine|<refresh>refresh\l|<angle>angle\l|<sine>sine\r" pos="450,495"];
+CalculateSine2 [type="vuo.math.sin" version="1.0.0" label="Calculate Sine|<refresh>refresh\l|<angle>angle\l|<sine>sine\r" pos="420,675"];
+Count [type="vuo.math.count.VuoReal" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="300,960" _increment="1.0" _decrement="1.0" _setCount="0.0"];
+DetectAudioBeats2 [type="vuo.audio.detectBeats" version="1.0.0" label="Detect Audio Beats|<refresh>refresh\l|<time>time\l|<tempoRange>tempoRange\l|<samples>samples\l|<nudge>nudge\l|<reset>reset\l|<beatsPerMinute>beatsPerMinute\r|<beat>beat\r|<clock>clock\r" pos="105,945" fillcolor="violet" _tempoRange="\"moderato\""];
+FetchDateTime [type="vuo.time.fetch" version="1.0.0" label="Fetch Date-Time|<refresh>refresh\l|<time>time\r" pos="180,-105" fillcolor="violet"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="450,15" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="30,-150" fillcolor="yellow" _seconds="1.0" _fired_eventThrottling="drop"];
+FormatDateTime [type="vuo.time.format" version="1.0.0" label="Format Date-Time|<refresh>refresh\l|<time>time\l|<format>format\l|<formattedTime>formattedTime\r" pos="465,-105" fillcolor="violet" _format="\"datetime-long-12\""];
+GetDateTimeValues [type="vuo.time.get" version="1.0.0" label="Get Date-Time Values|<refresh>refresh\l|<time>time\l|<year>year\r|<dayOfYear>dayOfYear\r|<month>month\r|<dayOfMonth>dayOfMonth\r|<week>week\r|<dayOfWeek>dayOfWeek\r|<hour>hour\r|<minute>minute\r|<second>second\r" pos="210,300" fillcolor="violet"];
+Make2DPoint2 [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="615,495"];
+Make2DPoint3 [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="585,675"];
+MakeColorLayer [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="630,330" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":0.40000000596046448}" _center="{\"x\":0,\"y\":0}" _rotation="0.0" _width="0.01" _height="1"];
+MakeColorLayer2 [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="630,195" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":0.40000000596046448}" _center="{\"x\":0,\"y\":0}" _rotation="0.0" _width="1" _height="0.01"];
+MakeList4 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="934,191" fillcolor="green"];
+MakeList5 [type="vuo.list.make.6.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<list>list\r" pos="904,176" fillcolor="green"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="630,45" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":0.14999619126319885}" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="1" _height="1" _sharpness="1"];
+MakeOvalLayer2 [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="855,555" _color="{\"r\":1,\"g\":0,\"b\":0,\"a\":0.60000002384185791}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+MakeOvalLayer3 [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="825,735" _color="{\"r\":1,\"g\":0.90327304601669312,\"b\":0,\"a\":0.60000002384185791}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="630,-75" _font="{\"fontName\":\"HelveticaNeue-Thin\",\"pointSize\":28,\"underline\":false,\"color\":{\"r\":1,\"g\":1,\"b\":1,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0,\"y\":-0.60000002384185791}"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="210,1080"];
+PlayAudioFile4 [type="vuo.audio.file.play" version="1.1.0" label="Play Audio File|<refresh>refresh\l|<url>url\l|<play>play\l|<pause>pause\l|<setTime>setTime\l|<decodedChannels>decodedChannels\r|<finishedPlayback>finishedPlayback\r" pos="-135,810" _url="\"Drum-beat-116-bpm.mp3\"" _setTime="\"\"" _decodedChannels_eventThrottling="enqueue" _finishedPlayback_eventThrottling="enqueue"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="975,165" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RoundDateTime [type="vuo.time.round" version="1.0.0" label="Round Date-Time|<refresh>refresh\l|<time>time\l|<unit>unit\l|<roundingMethod>roundingMethod\l|<roundedTime>roundedTime\r" pos="45,300" fillcolor="violet" _unit="\"second\"" _roundingMethod="\"down\""];
+Scale2 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="315,495" _start="0." _end="60" _scaledStart="0" _scaledEnd="360"];
+Scale3 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="285,675" _start="0." _end="4" _scaledStart="0" _scaledEnd="360"];
+ScalePoint2 [type="vuo.point.multiply.scalar.VuoPoint2d" version="1.0.0" label="Scale Point|<refresh>refresh\l|<point>point\l|<scaleFactor>scaleFactor\l|<scaledPoint>scaledPoint\r" pos="675,585" _scaleFactor="0.5"];
+ScalePoint3 [type="vuo.point.multiply.scalar.VuoPoint2d" version="1.0.0" label="Scale Point|<refresh>refresh\l|<point>point\l|<scaleFactor>scaleFactor\l|<scaledPoint>scaledPoint\r" pos="645,765" _scaleFactor="0.5"];
+SendLiveAudio3 [type="vuo.audio.send" version="1.0.0" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="60,615" fillcolor="violet" _requestedChannels_eventThrottling="enqueue"];
+ShareValue [type="vuo.data.share.VuoGenericType1" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-360,765"];
+
+CalculateCosine2:cosine -> Make2DPoint3:y;
+CalculateCosine:cosine -> Make2DPoint2:y;
+CalculateSine2:sine -> Make2DPoint3:x;
+CalculateSine:sine -> Make2DPoint2:x;
+Count:count -> Scale3:value;
+DetectAudioBeats2:beat -> Count:increment;
+FetchDateTime:time -> FormatDateTime:time;
+FetchDateTime:time -> RoundDateTime:time;
+FireOnStart2:started -> MakeColorLayer2:refresh;
+FireOnStart2:started -> MakeColorLayer:refresh;
+FireOnStart2:started -> MakeOvalLayer:refresh;
+FireOnStart2:started -> PlayAudioFile4:play;
+FirePeriodically:fired -> FetchDateTime:refresh;
+FormatDateTime:formattedTime -> MakeTextLayer:text;
+GetDateTimeValues:second -> Scale2:value;
+Make2DPoint2:point -> ScalePoint2:point;
+Make2DPoint3:point -> ScalePoint3:point;
+MakeColorLayer2:layer -> MakeList5:3;
+MakeColorLayer:layer -> MakeList5:4;
+MakeList4:list -> RenderLayersToWindow:setWindowProperties;
+MakeList5:list -> RenderLayersToWindow:layers;
+MakeOvalLayer2:layer -> MakeList5:5;
+MakeOvalLayer3:layer -> MakeList5:6;
+MakeOvalLayer:layer -> MakeList5:2;
+MakeTextLayer:layer -> MakeList5:1;
+MixAudioChannels:mixedSamples -> DetectAudioBeats2:samples;
+PlayAudioFile4:decodedChannels -> MixAudioChannels:samples;
+PlayAudioFile4:decodedChannels -> SendLiveAudio3:sendChannels;
+PlayAudioFile4:finishedPlayback -> ShareValue:refresh;
+RenderLayersToWindow:requestedFrame -> DetectAudioBeats2:time;
+RoundDateTime:roundedTime -> GetDateTimeValues:time;
+Scale2:scaledValue -> CalculateCosine:angle;
+Scale2:scaledValue -> CalculateSine:angle;
+Scale3:scaledValue -> CalculateCosine2:angle;
+Scale3:scaledValue -> CalculateSine2:angle;
+ScalePoint2:scaledPoint -> MakeOvalLayer2:center;
+ScalePoint3:scaledPoint -> MakeOvalLayer3:center;
+ShareValue:sameValue -> PlayAudioFile4:play;
+ShareValue:sameValue -> PlayAudioFile4:setTime [event=true];
+}

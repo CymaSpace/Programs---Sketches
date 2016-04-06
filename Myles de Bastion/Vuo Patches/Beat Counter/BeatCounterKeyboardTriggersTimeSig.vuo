@@ -1,0 +1,94 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CalculateCosine2 [type="vuo.math.cos" version="1.0.0" label="Calculate Cosine|<refresh>refresh\l|<angle>angle\l|<cosine>cosine\r" pos="420,735"];
+CalculateSine2 [type="vuo.math.sin" version="1.0.0" label="Calculate Sine|<refresh>refresh\l|<angle>angle\l|<sine>sine\r" pos="420,675"];
+ConvertBooleanToReal3 [type="vuo.type.boolean.real" version="1.0.0" label="Convert Boolean to Real|<refresh>refresh\l|<boolean>boolean\l|<real>real\r" pos="219,-82"];
+ConvertIntegerToRealNumber2 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="384,815"];
+Count [type="vuo.math.count.VuoReal" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="300,960" _increment="1.0" _decrement="1.0" _setCount="0.0"];
+DetectAudioBeats2 [type="vuo.audio.detectBeats" version="1.0.0" label="Detect Audio Beats|<refresh>refresh\l|<time>time\l|<tempoRange>tempoRange\l|<samples>samples\l|<nudge>nudge\l|<reset>reset\l|<beatsPerMinute>beatsPerMinute\r|<beat>beat\r|<clock>clock\r" pos="105,945" fillcolor="violet" _tempoRange="\"moderato\""];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="450,15" fillcolor="yellow" _started_eventThrottling="enqueue"];
+HoldValue2 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-191,1355" _initialValue="3"];
+HoldValue3 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-191,1451" _initialValue="4"];
+HoldValue4 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-187,1548" _initialValue="5"];
+HoldValue7 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-201,1087" _initialValue="4"];
+HoldValue8 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-200,1246" _initialValue="2"];
+Make2DPoint3 [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="646,707"];
+MakeColorLayer [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="630,330" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":0.40000000596046448}" _center="{\"x\":0,\"y\":0}" _rotation="0.0" _width="0.01" _height="1"];
+MakeColorLayer2 [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="630,195" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":0.40000000596046448}" _center="{\"x\":0,\"y\":0}" _rotation="0.0" _width="1" _height="0.01"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="416,78" _hue="0.5" _saturation="1" _lightness="0.37"];
+MakeList10 [type="vuo.list.make.2.VuoAudioSamples" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-192,676" fillcolor="violet"];
+MakeList4 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="934,191" fillcolor="green"];
+MakeList5 [type="vuo.list.make.6.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<list>list\r" pos="904,176" fillcolor="green"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="630,45" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="1" _height="1" _sharpness="1"];
+MakeOvalLayer3 [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="912,730" _color="{\"r\":1,\"g\":0.9857022762298584,\"b\":0.99620050191879272,\"a\":0.88000303506851196}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="210,1080"];
+PlayAudioFile4 [type="vuo.audio.file.play" version="1.1.0" label="Play Audio File|<refresh>refresh\l|<url>url\l|<play>play\l|<pause>pause\l|<setTime>setTime\l|<decodedChannels>decodedChannels\r|<finishedPlayback>finishedPlayback\r" pos="-158,754" _url="\"Drum-beat-116-bpm.mp3\"" _setTime="\"\"" _decodedChannels_eventThrottling="enqueue" _finishedPlayback_eventThrottling="enqueue"];
+ReceiveKeyboardButtons [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="-428,1339" fillcolor="yellow" _key="\"3\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveKeyboardButtons3 [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="-427,1443" fillcolor="yellow" _key="\"4\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveKeyboardButtons4 [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="-430,1546" fillcolor="yellow" _key="\"5\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveKeyboardButtons5 [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="-435,1210" fillcolor="yellow" _key="\"2\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-191,891" _receivedChannels_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="975,165" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Scale3 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="285,675" _start="0." _scaledStart="0" _scaledEnd="360"];
+ScalePoint3 [type="vuo.point.multiply.scalar.VuoPoint2d" version="1.0.0" label="Scale Point|<refresh>refresh\l|<point>point\l|<scaleFactor>scaleFactor\l|<scaledPoint>scaledPoint\r" pos="849,621" _scaleFactor="0.5"];
+SelectLatest2 [type="vuo.select.latest.8.VuoInteger" version="1.0.0" label="Select Latest|<refresh>refresh\l|<option1>option1\l|<option2>option2\l|<option3>option3\l|<option4>option4\l|<option5>option5\l|<option6>option6\l|<option7>option7\l|<option8>option8\l|<latest>latest\r" pos="-24,1222"];
+SendLiveAudio3 [type="vuo.audio.send" version="1.0.0" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="-146,650" fillcolor="violet" _requestedChannels_eventThrottling="enqueue"];
+ShareValue [type="vuo.data.share.VuoGenericType1" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-360,765"];
+SmoothWithInertia2 [type="vuo.motion.smooth.inertia.VuoPoint2d" version="1.1.0" label="Smooth with Inertia|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<duration>duration\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="607,914" _setPosition="{\"x\":0,\"y\":1}" _duration="0.10000000000000001"];
+SmoothWithRate2 [type="vuo.motion.smooth.rate.VuoReal" version="1.1.0" label="Smooth with Rate|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<rate>rate\l|<curve>curve\l|<easing>easing\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="238,-119" _setPosition="0." _rate="3" _curve="\"linear\"" _easing="\"middle\""];
+Switch [type="vuo.logic.switch" version="1.0.0" label="Switch|<refresh>refresh\l|<toggle>toggle\l|<turnOn>turnOn\l|<turnOff>turnOff\l|<value>value\r" pos="62,8"];
+
+CalculateCosine2:cosine -> Make2DPoint3:y;
+CalculateSine2:sine -> Make2DPoint3:x;
+ConvertBooleanToReal3:real -> SmoothWithRate2:setTarget;
+ConvertIntegerToRealNumber2:real -> Scale3:end;
+Count:count -> Scale3:value;
+DetectAudioBeats2:beat -> Count:increment;
+DetectAudioBeats2:beat -> HoldValue7:refresh;
+DetectAudioBeats2:beat -> Switch:toggle;
+FireOnStart2:started -> MakeColorLayer2:refresh;
+FireOnStart2:started -> MakeColorLayer:refresh;
+FireOnStart2:started -> MakeOvalLayer:refresh;
+FireOnStart2:started -> PlayAudioFile4:play;
+HoldValue2:heldValue -> SelectLatest2:option3;
+HoldValue3:heldValue -> SelectLatest2:option4;
+HoldValue4:heldValue -> SelectLatest2:option5;
+HoldValue7:heldValue -> SelectLatest2:option1;
+HoldValue8:heldValue -> SelectLatest2:option2;
+Make2DPoint3:point -> SmoothWithInertia2:refresh;
+Make2DPoint3:point -> SmoothWithInertia2:setTarget;
+MakeHSLColor:color -> MakeOvalLayer:color;
+MakeList10:list -> SendLiveAudio3:sendChannels;
+MakeList4:list -> RenderLayersToWindow:setWindowProperties;
+MakeList5:list -> RenderLayersToWindow:layers;
+MakeOvalLayer3:layer -> MakeList5:6;
+MakeOvalLayer:layer -> MakeList5:2;
+MixAudioChannels:mixedSamples -> DetectAudioBeats2:samples;
+PlayAudioFile4:finishedPlayback -> ShareValue:refresh;
+ReceiveKeyboardButtons3:released -> HoldValue3:refresh;
+ReceiveKeyboardButtons4:released -> HoldValue4:refresh;
+ReceiveKeyboardButtons5:released -> HoldValue8:refresh;
+ReceiveKeyboardButtons:released -> HoldValue2:refresh;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels:samples;
+RenderLayersToWindow:requestedFrame -> DetectAudioBeats2:time;
+RenderLayersToWindow:requestedFrame -> SmoothWithInertia2:time;
+RenderLayersToWindow:requestedFrame -> SmoothWithRate2:time;
+Scale3:scaledValue -> CalculateCosine2:angle;
+Scale3:scaledValue -> CalculateSine2:angle;
+ScalePoint3:scaledPoint -> MakeOvalLayer3:center;
+SelectLatest2:latest -> ConvertIntegerToRealNumber2:integer;
+ShareValue:sameValue -> PlayAudioFile4:play;
+ShareValue:sameValue -> PlayAudioFile4:setTime [event=true];
+SmoothWithInertia2:position -> ScalePoint3:point;
+SmoothWithInertia2:reachedTarget -> ScalePoint3:point;
+SmoothWithRate2:position -> MakeHSLColor:opacity;
+Switch:value -> ConvertBooleanToReal3:boolean;
+}

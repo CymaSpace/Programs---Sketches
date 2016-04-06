@@ -1,0 +1,33 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="420,-90" fillcolor="magenta" _wrapMode="\"wrap\""];
+DisplayConsoleWindow [type="vuo.console.window" version="1.0.1" label="Display Console Window|<refresh>refresh\l|<writeLine>writeLine\l|<typedLine>typedLine\r|<typedWord>typedWord\r|<typedCharacter>typedCharacter\r" pos="570,-195" fillcolor="green" _typedLine_eventThrottling="enqueue" _typedWord_eventThrottling="enqueue" _typedCharacter_eventThrottling="enqueue"];
+FetchImage [type="vuo.image.fetch" version="2.0.0" label="Fetch Image|<refresh>refresh\l|<url>url\l|<image>image\r" pos="630,-105" fillcolor="blue"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-15,-90" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="135,-195" fillcolor="yellow" _seconds="2" _fired_eventThrottling="drop"];
+ListFiles [type="vuo.file.list" version="1.0.2" label="List Files|<refresh>refresh\l|<folder>folder\l|<includeSubfolders>includeSubfolders\l|<fileType>fileType\l|<files>files\r" pos="225,-90" fillcolor="magenta" _folder="\"Misled Bayonets\"" _includeSubfolders="false" _fileType="\"image\""];
+MakeLayer [type="vuo.layer.make.realSize" version="2.0.0" label="Make Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<opacity>opacity\l|<layer>layer\r" pos="915,0" fillcolor="cyan" _center="{\"x\":0.0,\"y\":0.0}" _opacity="1.0"];
+MakeList5 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="734,161" fillcolor="green"];
+MakeList6 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="684,146" fillcolor="green"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="780,135" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+ResizeImage [type="vuo.image.resize" version="1.1.1" label="Resize Image|<refresh>refresh\l|<image>image\l|<sizingMode>sizingMode\l|<width>width\l|<height>height\l|<resizedImage>resizedImage\r" pos="780,-105" fillcolor="blue" _sizingMode="\"fill\"" _width="800" _height="600"];
+
+CycleThroughList2:item -> DisplayConsoleWindow:writeLine;
+CycleThroughList2:item -> FetchImage:url;
+FetchImage:image -> ResizeImage:image;
+FirePeriodically:fired -> CycleThroughList2:goForward;
+FirePeriodically:fired -> ListFiles:refresh;
+ListFiles:files -> CycleThroughList2:list;
+MakeLayer:layer -> MakeList6:1;
+MakeList5:list -> RenderLayersToWindow:setWindowProperties;
+MakeList6:list -> RenderLayersToWindow:layers;
+ResizeImage:resizedImage -> MakeLayer:image;
+}

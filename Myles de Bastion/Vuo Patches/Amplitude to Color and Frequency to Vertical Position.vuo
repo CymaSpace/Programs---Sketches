@@ -1,0 +1,54 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="195,270" _frequencyBins="\"255\"" _frequencyBinAveraging="\"quadratic\""];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="210,90" fillcolor="violet"];
+DisplayConsoleWindow [type="vuo.console.window" version="1.0.1" label="Display Console Window|<refresh>refresh\l|<writeLine>writeLine\l|<typedLine>typedLine\r|<typedWord>typedWord\r|<typedCharacter>typedCharacter\r" pos="750,480" _writeLine="\"\"" _typedLine_eventThrottling="enqueue" _typedWord_eventThrottling="enqueue" _typedCharacter_eventThrottling="enqueue"];
+GetFirstItemInList [type="vuo.list.get.first.VuoAudioSamples" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="330,345"];
+GetFirstItemInList6 [type="vuo.list.get.first.VuoReal" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="660,375"];
+GetFirstItemInList7 [type="vuo.list.get.first.VuoPoint2d" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="855,210"];
+GetFirstItemInList8 [type="vuo.list.get.first.VuoReal" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="420,510"];
+KeepMaximum [type="vuo.math.keep.max.VuoReal" version="1.0.0" label="Keep Maximum|<refresh>refresh\l|<value>value\l|<reset>reset\l|<max>max\r" pos="345,420"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="555,90" fillcolor="blue" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="739,326"];
+MakeList0 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="934,71" fillcolor="green"];
+MakeList2 [type="vuo.list.make.1.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="904,56" fillcolor="green"];
+MakeList3 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="794,341"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="750,75" fillcolor="blue" _rotation="0.0" _width="0.5" _height="0.5" _sharpness="1.0"];
+MergeXYLists [type="vuo.point.merge.xy" version="1.0.0" label="Merge XY Lists|<refresh>refresh\l|<x>x\l|<y>y\l|<points>points\r" pos="840,315"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="315,120" fillcolor="violet"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="30,-15" fillcolor="violet" _receivedChannels_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="975,45" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Scale [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="420,90" fillcolor="violet" _start="0" _end="1" _scaledStart="-0.55000000000000004" _scaledEnd="0.25"];
+Scale2 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="585,390" fillcolor="violet" _start="-0.5" _end="0.5" _scaledStart="-0.5" _scaledEnd="0.5"];
+Scale3 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="585,255" fillcolor="violet" _start="0" _end="0.5" _scaledStart="-0.5" _scaledEnd="0.5"];
+
+CalculateAmplitudeForFrequencies:amplitudes -> GetFirstItemInList6:list;
+CalculateAmplitudeForFrequencies:amplitudes -> GetFirstItemInList8:list;
+CalculateLoudness:loudness -> Scale:value;
+GetFirstItemInList6:firstItem -> Scale3:value;
+GetFirstItemInList7:firstItem -> MakeOvalLayer:center;
+GetFirstItemInList8:firstItem -> KeepMaximum:value;
+GetFirstItemInList:firstItem -> CalculateAmplitudeForFrequencies:samples;
+KeepMaximum:max -> Scale2:value;
+MakeHSLColor:color -> MakeOvalLayer:color;
+MakeList0:list -> RenderLayersToWindow:setWindowProperties;
+MakeList2:list -> RenderLayersToWindow:layers;
+MakeList3:list -> MergeXYLists:y;
+MakeList:list -> MergeXYLists:x;
+MakeOvalLayer:layer -> MakeList2:1;
+MergeXYLists:points -> GetFirstItemInList7:list;
+MixAudioChannels:mixedSamples -> CalculateLoudness:samples;
+ReceiveLiveAudio:receivedChannels -> GetFirstItemInList:list;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels:samples;
+RenderLayersToWindow:requestedFrame -> KeepMaximum:reset;
+Scale2:scaledValue -> MakeList3:1;
+Scale:scaledValue -> MakeHSLColor:hue;
+}
