@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 300 // Number of LED's in the strip
+#define NUM_LEDS 226 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -45,7 +45,90 @@ int right_LED_stack[NUM_LEDS / 2] = {0};
 CHSV color(0, 255, 255);
 CRGB leds[NUM_LEDS]; // Represents LED strip
 
-void setup() {
+
+
+// Check if stomp button is being pressed
+int stomp_pressed() {
+  if (digitalRead(STOMP_PIN) == HIGH){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+void change_color_mode() {
+  start_hue += 85;
+  if(start_hue >= 255) {
+    start_hue = start_hue - 255;
+  }
+}
+
+// Read in and sum amplitudes for the 7 frequency bands
+int get_freq_sum(int pin) {
+
+  int i;
+  int spectrum_values[7];
+  int spectrum_total = 0;
+
+  //get readings from chip, sum freq values
+  for (i = 0; i < 7; i++) {
+    digitalWrite(STROBE_PIN, LOW);
+    delayMicroseconds(30); // to allow the output to settle
+
+    spectrum_values[i] = analogRead(pin);
+    spectrum_total += spectrum_values[i];
+    
+    // strobe to the next frequency
+    digitalWrite(STROBE_PIN, HIGH); 
+   
+  }//for i
+
+  return spectrum_total;
+}
+
+/* Sets led 'position' to 'value' and converts the value to an HSV value.
+ * Compared to the A3 code, this code produces color values closer to white.
+ * The A3 code always has only two colors lit at a time. For example red and 
+ * green but not blue or blue and red but not green.
+ * As a result, the colors are more like pastel hues than bold hues.
+ * Another option would be to do something similar to the limited RGB values from A3.
+ */
+void set_LED_color(int position, int value) {
+  // If lower than min amplitude, set to min amplitude
+  if(value <= MIN_AMPLITUDE) {
+    value = MIN_AMPLITUDE;
+  }
+  
+  // Subtract min amplitude so lowest value is 0
+  value -= MIN_AMPLITUDE;
+  
+  float max = (max_amplitude - MIN_AMPLITUDE);
+  if(value > max) value = max;
+  float ratio = ((float)(value / max));
+  if(ratio == 0) {
+    color.val = 0;
+  } else {
+    color.val = 255;
+  }
+  color.saturation = 255;
+  color.hue = start_hue + ((ratio * 255) * 2);
+  leds[position] = color;
+}
+
+/*  Push a new LED color value onto the beginning of the stack.
+ *  The last LED color value is discarded. This is the primary 
+ *  function relating to the propagation behavior.
+ */
+void push_stack(int stack[], int value) {
+  int i;
+  for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
+    stack[i] = stack[i - 1];
+  }
+  stack[0] = value;
+}
+
+
+void setup() {r
 
   // Instantiate Neopixels with FastLED
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
@@ -155,84 +238,4 @@ void loop() {
   // Increase the refresh counter
   ++refresh_counter;
   
-}
-
-// Check if stomp button is being pressed
-int stomp_pressed() {
-  if (digitalRead(STOMP_PIN) == HIGH){
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
-void change_color_mode() {
-  start_hue += 85;
-  if(start_hue >= 255) {
-    start_hue = start_hue - 255;
-  }
-}
-
-// Read in and sum amplitudes for the 7 frequency bands
-int get_freq_sum(int pin) {
-
-  int i;
-  int spectrum_values[7];
-  int spectrum_total = 0;
-
-  //get readings from chip, sum freq values
-  for (i = 0; i < 7; i++) {
-    digitalWrite(STROBE_PIN, LOW);
-    delayMicroseconds(30); // to allow the output to settle
-
-    spectrum_values[i] = analogRead(pin);
-    spectrum_total += spectrum_values[i];
-    
-    // strobe to the next frequency
-    digitalWrite(STROBE_PIN, HIGH); 
-   
-  }//for i
-
-  return spectrum_total;
-}
-
-/* Sets led 'position' to 'value' and converts the value to an HSV value.
- * Compared to the A3 code, this code produces color values closer to white.
- * The A3 code always has only two colors lit at a time. For example red and 
- * green but not blue or blue and red but not green.
- * As a result, the colors are more like pastel hues than bold hues.
- * Another option would be to do something similar to the limited RGB values from A3.
- */
-void set_LED_color(int position, int value) {
-  // If lower than min amplitude, set to min amplitude
-  if(value <= MIN_AMPLITUDE) {
-    value = MIN_AMPLITUDE;
-  }
-  
-  // Subtract min amplitude so lowest value is 0
-  value -= MIN_AMPLITUDE;
-  
-  float max = (max_amplitude - MIN_AMPLITUDE);
-  if(value > max) value = max;
-  float ratio = ((float)(value / max));
-  if(ratio == 0) {
-    color.val = 0;
-  } else {
-    color.val = 255;
-  }
-  color.saturation = 255;
-  color.hue = start_hue + ((ratio * 255) * 2);
-  leds[position] = color;
-}
-
-/*  Push a new LED color value onto the beginning of the stack.
- *  The last LED color value is discarded. This is the primary 
- *  function relating to the propagation behavior.
- */
-void push_stack(int stack[], int value) {
-  int i;
-  for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
-    stack[i] = stack[i - 1];
-  }
-  stack[0] = value;
 }
