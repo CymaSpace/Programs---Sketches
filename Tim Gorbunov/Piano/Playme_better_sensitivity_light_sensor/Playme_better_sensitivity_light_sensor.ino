@@ -57,8 +57,6 @@ AudioControlSGTL5000 audioShield;
   float fadeholdtime = 0;
   boolean fading = true;
   int lightsensor = 255;
-  int cursorlocation = 40;
-  int cursorcount = 0;
   
 void setup()
 {
@@ -131,23 +129,16 @@ void loop()
     }
     
     if ((millis() - timer) > timeout && sum < amp_threshold){
-      if (cursorlocation > -10 && cursorcount > 50){
-        cursorlocation--;
-        cursorcount=0;
-      }else if (cursorcount > 50){
-        cursorlocation=40;
-        cursorcount=0;
-      }
-      cursorcount++;
+      
       //Serial.println(analogRead(A0));
       matrix.setBrightness(lightsensor);
-      matrix.setCursor(cursorlocation, 4);
-      matrix.setTextColor(drawRGB24toRGB565((fade * 0), (fade * 255), (fade * 0)));
+      matrix.setCursor(2, 4);
+      matrix.setTextColor(drawRGB24toRGB565((fade * 255), (fade * 255), (fade * 255)));
       matrix.setTextSize(1);
       matrix.setTextWrap(false);
-      matrix.print("Play......");
-      //matrix.setCursor(27, 4);
-      //matrix.print("Me");
+      matrix.print("Play");
+      matrix.setCursor(27, 4);
+      matrix.print("Me");
       matrix.show();
       touched = false;
       
