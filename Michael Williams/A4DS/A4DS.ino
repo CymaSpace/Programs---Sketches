@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 400 // Number of LED's in the strip
+#define NUM_LEDS_ARRAY 300 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -12,14 +12,25 @@
 #define STROBE_PIN 12 // Strobe pin 
 #define RESET_PIN 13 // Reset Pin
 
+// Assign dip switches
+#define DIP_9 2
+#define DIP_8 3
+#define DIP_7 4
+#define DIP_6 7
+#define DIP_5 8
+#define DIP_4 9
+#define DIP_3 10
+#define DIP_2 11
+#define DIP_1 A4
+
 /* Sensitivity variables, refresh variables, and start/end points */
 #define REFRESH_DIVISOR 80. // Higher = range of refresh values is lower
 #define SENSITIVITY_DIVISOR 100. // Higher = range of sensitivity values on pot is lower
-#define LEFT_START_POINT ((NUM_LEDS / 8)) // Starting LED for left side
-#define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
-#define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
-#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
-#define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
+//#define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
+//#define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
+//#define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
+//#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
+//#define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
 #define MAX_AMPLITUDE 4700 // Maximum possible amplitude value
 #define MAX_AMPLITUDE_MULTIPLIER 380
 #define MIN_AMPLITUDE 545 // Lowest possible amplitude value (Higher number causes there to be more blank LED's)
@@ -33,17 +44,58 @@ int sensitivity; // Sensitivity value
 int max_amplitude;
 int start_hue = 0;
 
+
+int checkDIP(){
+  int dipValue = 0;
+  if (digitalRead(DIP_1) == HIGH){
+    dipValue ++;
+  }
+  if (digitalRead(DIP_2) == HIGH){
+    dipValue += 2;
+  }
+  if (digitalRead(DIP_3) == HIGH){
+    dipValue += 4;
+  }
+  if (digitalRead(DIP_4) == HIGH){
+    dipValue += 8;
+  }
+  if (digitalRead(DIP_5) == HIGH){
+    dipValue += 16;
+  }
+  if (digitalRead(DIP_6) == HIGH){
+    dipValue += 32;
+  }
+  if (digitalRead(DIP_7) == HIGH){
+    dipValue += 64;
+  }
+  if (digitalRead(DIP_8) == HIGH){
+    dipValue += 128;
+  }
+  if (digitalRead(DIP_9) == HIGH){
+    dipValue += 256;
+  } 
+  return dipValue;
+}
+
+int NUM_LEDS = checkDIP();
+
+#define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
+#define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
+#define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
+#define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
+#define LED_STACK_SIZE (NUM_LEDS / 2) // How many LED's in each stack
+
+
 /* Represents the left and right LED color values.
  * In the case of an odd number of LED's, you need to adjust these
  * values and the values of RIGHT_START_POINT, LEFT_START_POINT, etc.
  */
-
-int left_LED_stack[NUM_LEDS / 2] = {0};
-int right_LED_stack[NUM_LEDS / 2] = {0};
+int left_LED_stack[NUM_LEDS_ARRAY / 2] = {0};
+int right_LED_stack[NUM_LEDS_ARRAY / 2] = {0};
 
 // Set color value to full saturation and value. Set the hue to 0
 CHSV color(0, 255, 255);
-CRGB leds[NUM_LEDS]; // Represents LED strip
+CRGB leds[NUM_LEDS_ARRAY]; // Represents LED strip
 
 void setup() {
 
@@ -124,7 +176,7 @@ void loop() {
      *  last value in the stack. This is the code that effects the propagation
      */
     push_stack(left_LED_stack, amp_sum_L);
-    //push_stack(right_LED_stack, amp_sum_R);
+    push_stack(right_LED_stack, amp_sum_R);
 
     /*  Set the LED values based on the left and right stacks
      *  This is a reverse loop because the left side LED's travel toward
@@ -141,12 +193,11 @@ void loop() {
     /*  LED's on the right travel towards the last LED in the strand 
      *  so the loop increments positively
      */ 
- 
     for(i = RIGHT_START_POINT; i <= RIGHT_END_POINT; ++i) {
       set_LED_color(i, right_LED_stack[stack_loop]);
       ++stack_loop;
     }
- 
+
     leds[0] = left_LED_stack[0];
 
     // Show the new LED values

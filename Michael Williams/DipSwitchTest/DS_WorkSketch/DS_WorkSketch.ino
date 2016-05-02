@@ -1,7 +1,4 @@
 #include "FastLED.h"
-#include "EEPROM.h"
-
-#define STOMP_PIN 5 // The pin connected to the stomp button
 
 // Assign dip switches
 #define DIP_9 2
@@ -48,47 +45,24 @@ int checkDIP(){
   return dipValue;
 }
 
-  CRGB leds[ 500 ];
+int NUM_LEDS = checkDIP(); // How many leds in your strip?
+
+// Define the array of leds
+CRGB leds[NUM_LEDS];
 
 void setup() {
-  int NUM_LEDS = 0;
-  NUM_LEDS = checkDIP(); // How many leds in your strip?
-  // Define the array of leds
   
-  
-  // Clear any old values on EEPROM
-  if (EEPROM.read(1) > 1){EEPROM.write(1,0);} // Clear EEPROM
-
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
 
 }
 
-int x = 1;
-
 void loop() {
-int g =checkDIP();
+FastLED.clear();
+  
+int g = checkDIP();
   for (int j = 0; j < g; j++){
     leds[j] = CRGB::Blue;
   }
 FastLED.show();
-
-/*
-  if (digitalRead(STOMP_PIN) == HIGH){
-    delay(200);
-    if(digitalRead(STOMP_PIN) == LOW){
-      if(digitalRead(DIP_1) == HIGH){
-        leds[x] = CRGB::Red;    
-      }else{
-        leds[x] = CRGB::Green;
-      }
-    FastLED.show();
-    x++;
-    }
-  }
-
-  if (x>NUM_LEDS){
-    x=0;
-  }
-*/
   
 }
