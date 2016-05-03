@@ -1,0 +1,63 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AlignLayerToWindow [type="vuo.layer.align.window" version="1.1.0" label="Align Layer to Window|<refresh>refresh\l|<window>window\l|<layer>layer\l|<horizontalAlignment>horizontalAlignment\l|<horizontalMargin>horizontalMargin\l|<verticalAlignment>verticalAlignment\l|<verticalMargin>verticalMargin\l|<alignedLayer>alignedLayer\r" pos="465,-45" fillcolor="cyan" _horizontalAlignment="\"right\"" _horizontalMargin="0.10000000000000001" _verticalAlignment="\"bottom\"" _verticalMargin="0.10000000000000001"];
+AppendTexts [type="vuo.text.append" version="1.1.0" label="Append Texts|<refresh>refresh\l|<texts>texts\l|<separator>separator\l|<compositeText>compositeText\r" pos="255,-330" fillcolor="blue"];
+BecameTrue [type="vuo.event.becameTrue" version="1.0.0" label="Became True|<refresh>refresh\l|<value>value\l|<becameTrue>becameTrue\r" pos="210,-120" fillcolor="lime"];
+CalculateLoudness2 [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="-75,-285" fillcolor="blue"];
+ConvertDataToText2 [type="vuo.type.data.text" version="1.0.0" label="Convert Data to Text|<refresh>refresh\l|<data>data\l|<text>text\r" pos="165,-30"];
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="495,-510" fillcolor="violet" _wrapMode="\"wrap\""];
+CycleThroughList3 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="825,-510" fillcolor="violet" _wrapMode="\"wrap\""];
+FetchData [type="vuo.data.fetch" version="1.0.0" label="Fetch Data|<refresh>refresh\l|<url>url\l|<data>data\r" pos="150,-510" fillcolor="yellow" _url="\"https:\\/\\/dl.dropbox.com\\/s\\/eznew5kyhyuuifk\\/little%20people%20lyrics.txt\""];
+FireOnStart5 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="150,-585" fillcolor="yellow" _started_eventThrottling="enqueue"];
+GetFirstItemInList [type="vuo.list.get.first.VuoAudioSamples" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="420,165"];
+IsGreaterThan2 [type="vuo.data.isGreaterThan.VuoReal" version="1.0.0" label="Is Greater Than|<refresh>refresh\l|<a>a\l|<b>b\l|<greaterThan>greaterThan\r" pos="165,-225" fillcolor="lime" _b="0.20000000000000001"];
+MakeList0 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="724,-49" fillcolor="green"];
+MakeList2 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="694,-64" fillcolor="green"];
+MakeList7 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="206,-319" fillcolor="blue" _1="\"Amplitude Reading\\n\""];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="720,-285" fillcolor="blue" _font="{\"fontName\":\"Optima-Bold\",\"pointSize\":64,\"underline\":false,\"color\":{\"r\":1,\"g\":1,\"b\":1,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0,\"y\":0}"];
+MakeTextLayer3 [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="465,-270" fillcolor="blue" _font="{\"fontName\":\"HelveticaNeue\",\"pointSize\":14,\"underline\":false,\"color\":{\"r\":0.55131393671035767,\"g\":0.55131393671035767,\"b\":0.55131393671035767,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0,\"y\":0}"];
+ReceiveLiveAudio2 [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-75,-435" fillcolor="yellow" _receivedChannels_eventThrottling="drop"];
+ReceiveMouseButtons [type="vuo.mouse.button" version="1.0.2" label="Receive Mouse Buttons|<refresh>refresh\l|<window>window\l|<button>button\l|<modifierKey>modifierKey\l|<pressed>pressed\r|<released>released\r" pos="945,-285" fillcolor="yellow" _button="\"left\"" _modifierKey="\"any\"" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+RenderLayersToWindow2 [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="765,-75" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+SmoothWithRate2 [type="vuo.motion.smooth.rate.VuoReal" version="1.1.0" label="Smooth with Rate|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<rate>rate\l|<curve>curve\l|<easing>easing\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="-105,-135" fillcolor="blue" _setPosition="0.000000" _rate="0.33000000000000002" _curve="\"quadratic\"" _easing="\"out\""];
+SplitText2 [type="vuo.text.split.VuoText" version="1.0.0" label="Split Text|<refresh>refresh\l|<text>text\l|<separator>separator\l|<includeEmptyParts>includeEmptyParts\l|<splitTexts>splitTexts\r" pos="345,-510" fillcolor="blue" _separator="\"\\n\"" _includeEmptyParts="false"];
+SplitText3 [type="vuo.text.split.VuoText" version="1.0.0" label="Split Text|<refresh>refresh\l|<text>text\l|<separator>separator\l|<includeEmptyParts>includeEmptyParts\l|<splitTexts>splitTexts\r" pos="675,-510" fillcolor="blue" _separator="\" \"" _includeEmptyParts="false"];
+SummarizeValue6 [type="vuo.data.summarize.VuoReal" version="1.0.0" label="Summarize Value|<refresh>refresh\l|<value>value\l|<summary>summary\r" pos="885,345"];
+
+AlignLayerToWindow:alignedLayer -> MakeList2:2;
+AppendTexts:compositeText -> MakeTextLayer3:text;
+BecameTrue:becameTrue -> CycleThroughList3:goForward;
+CalculateLoudness2:loudness -> SmoothWithRate2:setTarget;
+ConvertDataToText2:text -> SplitText2:text;
+CycleThroughList2:item -> SplitText3:text;
+CycleThroughList3:item -> MakeTextLayer:text;
+FetchData:data -> ConvertDataToText2:data;
+FireOnStart5:started -> AppendTexts:refresh;
+FireOnStart5:started -> FetchData:url;
+GetFirstItemInList:firstItem -> CalculateLoudness2:samples;
+IsGreaterThan2:greaterThan -> BecameTrue:value;
+MakeList0:list -> RenderLayersToWindow2:setWindowProperties;
+MakeList2:list -> RenderLayersToWindow2:layers;
+MakeList7:list -> AppendTexts:texts;
+MakeTextLayer3:layer -> AlignLayerToWindow:layer;
+MakeTextLayer:layer -> MakeList2:1;
+ReceiveLiveAudio2:receivedChannels -> GetFirstItemInList:list;
+ReceiveMouseButtons:pressed -> CycleThroughList2:goForward;
+ReceiveMouseButtons:pressed -> CycleThroughList3:goToFirst;
+RenderLayersToWindow2:requestedFrame -> SmoothWithRate2:time;
+RenderLayersToWindow2:showedWindow -> AlignLayerToWindow:window;
+RenderLayersToWindow2:showedWindow -> ReceiveMouseButtons:window;
+SmoothWithRate2:position -> IsGreaterThan2:a;
+SmoothWithRate2:position -> SummarizeValue6:value;
+SplitText2:splitTexts -> CycleThroughList2:list;
+SplitText3:splitTexts -> CycleThroughList3:list;
+SummarizeValue6:summary -> MakeList7:2;
+}

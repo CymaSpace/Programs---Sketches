@@ -1,0 +1,46 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="164,180" fillcolor="magenta" _wrapMode="\"wrap\""];
+FetchImage [type="vuo.image.fetch" version="2.0.0" label="Fetch Image|<refresh>refresh\l|<url>url\l|<image>image\r" pos="382,107" fillcolor="blue"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="540,-185" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="-4,54" fillcolor="yellow" _seconds="2" _fired_eventThrottling="drop"];
+ListFiles2 [type="vuo.file.list" version="1.0.2" label="List Files|<refresh>refresh\l|<folder>folder\l|<includeSubfolders>includeSubfolders\l|<fileType>fileType\l|<files>files\r" pos="-31,180" fillcolor="magenta" _folder="\"../../../../../../../Desktop/Misled Bayonets\"" _includeSubfolders="false" _fileType="\"image\""];
+MakeColorLayer [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="738,119" _color="{\"r\":0.89623862504959106,\"g\":1,\"b\":0.61655604839324951,\"a\":1}" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="2.0" _height="2.0"];
+MakeLayer [type="vuo.layer.make.realSize" version="2.0.0" label="Make Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<opacity>opacity\l|<layer>layer\r" pos="659,270" fillcolor="cyan" _center="{\"x\":0.0,\"y\":0.0}" _opacity="1.0"];
+MakeList4 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="756,-153"];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="527,12" _text="\"Hello World!\"" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28,\"underline\":false,\"color\":{\"r\":1,\"g\":0.15096285939216614,\"b\":0.36347228288650513,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0.0,\"y\":0.0}"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="825,-164" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+ResizeImage [type="vuo.image.resize" version="1.1.1" label="Resize Image|<refresh>refresh\l|<image>image\l|<sizingMode>sizingMode\l|<width>width\l|<height>height\l|<resizedImage>resizedImage\r" pos="533,155" fillcolor="blue" _sizingMode="\"fill\""];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<width>width\r|<height>height\r|<time>time\r|<Refresh>Refresh\r" _width_type="VuoInteger" _height_type="VuoInteger" _time_type="VuoReal" _Refresh_type="event"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<outputImage>outputImage\l|<Layer>Layer\l|<Image>Image\l" _outputImage_type="VuoImage" _Layer_type="VuoLayer" _Image_type="VuoImage"];
+
+CycleThroughList2:item -> FetchImage:url;
+FetchImage:image -> ResizeImage:image;
+FireOnStart:started -> FetchImage:refresh;
+FireOnStart:started -> MakeColorLayer:refresh;
+FireOnStart:started -> MakeLayer:refresh;
+FireOnStart:started -> MakeTextLayer:refresh;
+FireOnStart:started -> RenderLayersToImage:refresh;
+FirePeriodically:fired -> CycleThroughList2:goForward;
+FirePeriodically:fired -> ListFiles2:refresh;
+ListFiles2:files -> CycleThroughList2:list;
+MakeColorLayer:layer -> MakeList4:2;
+MakeLayer:layer -> MakeList4:3;
+MakeList4:list -> RenderLayersToImage:layers;
+MakeTextLayer:layer -> MakeList4:1;
+PublishedInputs:Refresh -> FireOnStart:refresh;
+PublishedInputs:height -> RenderLayersToImage:height;
+PublishedInputs:height -> ResizeImage:height;
+PublishedInputs:width -> RenderLayersToImage:width;
+PublishedInputs:width -> ResizeImage:width;
+RenderLayersToImage:image -> PublishedOutputs:Image;
+ResizeImage:resizedImage -> MakeLayer:image;
+}

@@ -1,0 +1,65 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+BlendImageWithFeedback [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="165,405" _feedbackTransform="{\"translation\":[-0.14000000059604645,0],\"rotation\":0,\"scale\":[1,1]}" _feedbackOpacity="1" _pixelAligned="true" _imageInForeground="true" _width="1024" _height="768" _colorDepth="\"8bpc\""];
+BlendImageWithFeedback2 [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="1020,420" _feedbackTransform="{\"translation\":[0.14000000059604645,0],\"rotation\":0,\"scale\":[1,1]}" _feedbackOpacity="1" _pixelAligned="true" _imageInForeground="true" _width="1024" _height="768" _colorDepth="\"8bpc\""];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="285,45"];
+CalculateLoudness3 [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="1155,60"];
+FireOnStart3 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="585,-210" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FitInRange2 [type="vuo.math.fit.VuoReal" version="1.0.0" label="Fit in Range|<refresh>refresh\l|<value>value\l|<tracking>tracking\l|<reset>reset\l|<fittedMin>fittedMin\l|<fittedMax>fittedMax\l|<fittedValue>fittedValue\r|<min>min\r|<max>max\r" pos="465,45" fillcolor="violet" _tracking="1" _fittedMin="-0.5" _fittedMax="0"];
+FitInRange3 [type="vuo.math.fit.VuoReal" version="1.0.0" label="Fit in Range|<refresh>refresh\l|<value>value\l|<tracking>tracking\l|<reset>reset\l|<fittedMin>fittedMin\l|<fittedMax>fittedMax\l|<fittedValue>fittedValue\r|<min>min\r|<max>max\r" pos="1335,60" fillcolor="violet" _tracking="1" _fittedMin="-0.5" _fittedMax="0"];
+GetItemFromList2 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="300,-60" _which="1"];
+GetItemFromList3 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1170,-60" _which="2"];
+HoldValue2 [type="vuo.data.hold.VuoReal" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="735,180"];
+HoldValue4 [type="vuo.data.hold.VuoReal" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-135,165"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="0,165" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeHSLColor2 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="870,180" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeLayer [type="vuo.layer.make.realSize" version="2.0.0" label="Make Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<opacity>opacity\l|<layer>layer\r" pos="1260,615" _center="{\"x\":0.0,\"y\":0.0}" _opacity="1.0"];
+MakeLayer2 [type="vuo.layer.make.realSize" version="2.0.0" label="Make Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<opacity>opacity\l|<layer>layer\r" pos="405,600" _center="{\"x\":0.0,\"y\":0.0}" _opacity="1.0"];
+MakeList11 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="1205,221"];
+MakeList15 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="590,851"];
+MakeList2 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="814,1016" fillcolor="green"];
+MakeList7 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="335,206"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="180,180" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+MakeOvalLayer2 [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="1050,195" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="555,-135" fillcolor="yellow" _receivedChannels_eventThrottling="drop"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.2.1" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="855,990" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="405,195" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"2\""];
+RenderLayersToImage2 [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="1275,210" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"2\""];
+RenderLayersToImage3 [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="660,840" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+
+BlendImageWithFeedback2:feedbackImage -> MakeLayer:image;
+BlendImageWithFeedback:feedbackImage -> MakeLayer2:image;
+CalculateLoudness3:loudness -> FitInRange3:value;
+CalculateLoudness:loudness -> FitInRange2:value;
+FitInRange2:fittedValue -> HoldValue4:newValue;
+FitInRange3:fittedValue -> HoldValue2:newValue;
+GetItemFromList2:item -> CalculateLoudness:samples;
+GetItemFromList3:item -> CalculateLoudness3:samples;
+HoldValue2:heldValue -> MakeHSLColor2:hue;
+HoldValue4:heldValue -> MakeHSLColor:hue;
+MakeHSLColor2:color -> MakeOvalLayer2:color;
+MakeHSLColor:color -> MakeOvalLayer:color;
+MakeLayer2:layer -> MakeList15:1;
+MakeLayer:layer -> MakeList15:2;
+MakeList11:list -> RenderLayersToImage2:layers;
+MakeList15:list -> RenderLayersToImage3:layers;
+MakeList2:list -> RenderImageToWindow:setWindowProperties;
+MakeList7:list -> RenderLayersToImage:layers;
+MakeOvalLayer2:layer -> MakeList11:1;
+MakeOvalLayer:layer -> MakeList7:1;
+ReceiveLiveAudio:receivedChannels -> GetItemFromList2:list;
+ReceiveLiveAudio:receivedChannels -> GetItemFromList3:list;
+RenderImageToWindow:requestedFrame -> HoldValue2:refresh;
+RenderImageToWindow:requestedFrame -> HoldValue4:refresh;
+RenderLayersToImage2:image -> BlendImageWithFeedback2:image;
+RenderLayersToImage3:image -> RenderImageToWindow:image;
+RenderLayersToImage:image -> BlendImageWithFeedback:image;
+}

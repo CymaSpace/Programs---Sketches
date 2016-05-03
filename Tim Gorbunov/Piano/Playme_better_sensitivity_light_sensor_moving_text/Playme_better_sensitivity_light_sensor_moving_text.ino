@@ -131,21 +131,22 @@ void loop()
     }
     
     if ((millis() - timer) > timeout && sum < amp_threshold){
-      if (cursorlocation > -10 && cursorcount > 50){
+      if (cursorlocation > -6000 && cursorcount > 5){
         cursorlocation--;
         cursorcount=0;
-      }else if (cursorcount > 50){
+      }else if (cursorcount > 500){
         cursorlocation=40;
         cursorcount=0;
       }
       cursorcount++;
+      matrix.fillScreen(0);
       //Serial.println(analogRead(A0));
       matrix.setBrightness(lightsensor);
       matrix.setCursor(cursorlocation, 4);
       matrix.setTextColor(drawRGB24toRGB565((fade * 0), (fade * 255), (fade * 0)));
       matrix.setTextSize(1);
       matrix.setTextWrap(false);
-      matrix.print("Play......");
+      matrix.print("transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            transcended            ");            
       //matrix.setCursor(27, 4);
       //matrix.print("Me");
       matrix.show();

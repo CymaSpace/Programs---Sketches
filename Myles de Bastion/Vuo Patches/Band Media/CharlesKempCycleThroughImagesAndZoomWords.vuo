@@ -1,0 +1,71 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ApplyMask [type="vuo.image.apply.mask" version="1.1.1" label="Apply Mask|<refresh>refresh\l|<image>image\l|<mask>mask\l|<maskedImage>maskedImage\r" pos="750,75" fillcolor="blue"];
+ConvertDataToText [type="vuo.type.data.text" version="1.0.0" label="Convert Data to Text|<refresh>refresh\l|<data>data\l|<text>text\r" pos="360,555"];
+Count [type="vuo.math.count.VuoReal" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="390,630" fillcolor="magenta" _increment="2" _decrement="1.0" _setCount="0.0"];
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="420,-90" fillcolor="magenta" _wrapMode="\"wrap\""];
+CycleThroughList3 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="420,300" fillcolor="magenta" _wrapMode="\"wrap\""];
+DisplayConsoleWindow [type="vuo.console.window" version="1.0.1" label="Display Console Window|<refresh>refresh\l|<writeLine>writeLine\l|<typedLine>typedLine\r|<typedWord>typedWord\r|<typedCharacter>typedCharacter\r" pos="570,-195" fillcolor="green" _typedLine_eventThrottling="enqueue" _typedWord_eventThrottling="enqueue" _typedCharacter_eventThrottling="enqueue"];
+FetchData [type="vuo.data.fetch" version="1.0.0" label="Fetch Data|<refresh>refresh\l|<url>url\l|<data>data\r" pos="105,195" fillcolor="magenta" _url="\"https:\\/\\/dl.dropbox.com\\/s\\/k1hopbhqzp7s8vn\\/charles_kemp_set.txt\""];
+FetchImage [type="vuo.image.fetch" version="2.0.0" label="Fetch Image|<refresh>refresh\l|<url>url\l|<image>image\r" pos="630,-105" fillcolor="blue"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-90,-75" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="135,-195" fillcolor="yellow" _seconds="30" _fired_eventThrottling="drop"];
+FirePeriodically2 [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="240,735" fillcolor="yellow" _seconds="0.050000000000000003" _fired_eventThrottling="drop"];
+ListFiles [type="vuo.file.list" version="1.0.2" label="List Files|<refresh>refresh\l|<folder>folder\l|<includeSubfolders>includeSubfolders\l|<fileType>fileType\l|<files>files\r" pos="225,-90" fillcolor="magenta" _folder="\"Charles Kemp\"" _includeSubfolders="false" _fileType="\"image\""];
+MakeFont [type="vuo.font.make" version="1.0.0" label="Make Font|<refresh>refresh\l|<fontName>fontName\l|<pointSize>pointSize\l|<underlined>underlined\l|<color>color\l|<horizontalAlignment>horizontalAlignment\l|<characterSpacing>characterSpacing\l|<lineSpacing>lineSpacing\l|<font>font\r" pos="540,504" fillcolor="blue" _fontName="\"HelveticaNeue-CondensedBlack\"" _pointSize="61.440100000000001" _underlined="false" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}" _horizontalAlignment="\"center\"" _characterSpacing="1." _lineSpacing="1."];
+MakeLayer [type="vuo.layer.make.realSize" version="2.0.0" label="Make Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<opacity>opacity\l|<layer>layer\r" pos="930,15" fillcolor="cyan" _center="{\"x\":0.0,\"y\":0.0}" _opacity="1.0"];
+MakeList5 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1244,-94" fillcolor="green"];
+MakeList6 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1194,-109" fillcolor="green"];
+MakeList7 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="755,296" fillcolor="cyan"];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="720,495" fillcolor="blue" _center="{\"x\":0,\"y\":-0.64999997615814209}"];
+ReceiveKeyboardButtons [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="120,420" fillcolor="yellow" _key="\"LeftArrow\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveKeyboardButtons2 [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="120,540" fillcolor="yellow" _key="\"RightArrow\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="825,285" fillcolor="cyan" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="1290,-120" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+ResizeImage [type="vuo.image.resize" version="1.1.1" label="Resize Image|<refresh>refresh\l|<image>image\l|<sizingMode>sizingMode\l|<width>width\l|<height>height\l|<resizedImage>resizedImage\r" pos="780,-105" fillcolor="blue" _sizingMode="\"fit\"" _width="700" _height="420"];
+SplitText2 [type="vuo.text.split.VuoText" version="1.0.0" label="Split Text|<refresh>refresh\l|<text>text\l|<separator>separator\l|<includeEmptyParts>includeEmptyParts\l|<splitTexts>splitTexts\r" pos="105,300" fillcolor="blue" _separator="\"\\n\"" _includeEmptyParts="false"];
+
+ConvertDataToText:text -> SplitText2:text;
+CycleThroughList2:item -> DisplayConsoleWindow:writeLine;
+CycleThroughList2:item -> FetchImage:url;
+CycleThroughList3:item -> MakeTextLayer:text;
+FetchData:data -> ConvertDataToText:data;
+FetchImage:image -> ResizeImage:image;
+FireOnStart:started -> FetchData:refresh;
+FireOnStart:started -> ListFiles:refresh;
+FirePeriodically2:fired -> Count:increment;
+FirePeriodically2:fired -> MakeFont:refresh;
+FirePeriodically:fired -> Count:refresh;
+FirePeriodically:fired -> Count:setCount;
+FirePeriodically:fired -> CycleThroughList2:goForward;
+FirePeriodically:fired -> CycleThroughList3:goForward;
+FirePeriodically:fired -> FetchData:refresh;
+FirePeriodically:fired -> ListFiles:refresh;
+FirePeriodically:fired -> MakeTextLayer:refresh;
+FirePeriodically:fired -> ResizeImage:refresh;
+ListFiles:files -> CycleThroughList2:list;
+MakeFont:font -> MakeTextLayer:font;
+MakeLayer:layer -> MakeList6:1;
+MakeList5:list -> RenderLayersToWindow:setWindowProperties;
+MakeList6:list -> RenderLayersToWindow:layers;
+MakeList7:list -> RenderLayersToImage:layers;
+MakeTextLayer:layer -> MakeList6:2;
+MakeTextLayer:layer -> MakeList7:1;
+ReceiveKeyboardButtons2:released -> Count:setCount;
+ReceiveKeyboardButtons2:released -> CycleThroughList2:goBackward;
+ReceiveKeyboardButtons2:released -> CycleThroughList3:goForward;
+ReceiveKeyboardButtons:released -> Count:setCount;
+ReceiveKeyboardButtons:released -> CycleThroughList2:goForward;
+ReceiveKeyboardButtons:released -> CycleThroughList3:goBackward;
+RenderLayersToImage:image -> ApplyMask:mask;
+ResizeImage:resizedImage -> MakeLayer:image;
+SplitText2:splitTexts -> CycleThroughList3:list;
+}

@@ -1,0 +1,55 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="540,30" fillcolor="yellow" _frequencyBins="\"3\"" _frequencyBinAveraging="\"quadratic\""];
+CompareNumbers [type="vuo.math.compareNumbers.VuoReal" version="1.0.0" label="Compare Numbers|<refresh>refresh\l|<a>a\l|<comparison>comparison\l|<b>b\l|<result>result\r" pos="300,105" _comparison="\"\>\""];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="45,-30" _started_eventThrottling="enqueue"];
+GetFirstItemInList [type="vuo.list.get.first.VuoAudioSamples" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="540,300"];
+GetItemFromList6 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="120,315" _which="2"];
+GetItemFromList7 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="120,210" _which="1"];
+GetItemFromList8 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="120,420" _which="2"];
+HoldList2 [type="vuo.data.hold.list.VuoReal" version="1.0.0" label="Hold List|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="870,105"];
+MakeList27 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="824,116"];
+MakeList33 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="809,476" fillcolor="green"];
+MakeList38 [type="vuo.list.make.4.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<list>list\r" pos="759,461" fillcolor="green"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="690,300" _color="{\"r\":1,\"g\":0.042923629283905029,\"b\":0.92962539196014404,\"a\":1}" _center="{\"x\":-0.30000001192092896,\"y\":0}" _rotation="0.0" _width="0.10000000000000001" _height="0.10000000000000001" _sharpness="1.0"];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="390,420" fillcolor="blue" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28}" _center="{\"x\":0,\"y\":-0.30000001192092896}"];
+MakeTextLayer2 [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="390,210" fillcolor="blue" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28,\"underline\":false,\"color\":{\"r\":1,\"g\":1,\"b\":1,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0.0,\"y\":0.0}"];
+MakeTextLayer3 [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="390,315" fillcolor="blue" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28}" _center="{\"x\":0,\"y\":-0.15000000596046448}"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="255,30" fillcolor="yellow" _receivedChannels_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="855,450" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+SummarizeValue10 [type="vuo.data.summarize.VuoReal" version="1.0.0" label="Summarize Value|<refresh>refresh\l|<value>value\l|<summary>summary\r" pos="525,435"];
+SummarizeValue11 [type="vuo.data.summarize.VuoReal" version="1.0.0" label="Summarize Value|<refresh>refresh\l|<value>value\l|<summary>summary\r" pos="525,345"];
+SummarizeValue12 [type="vuo.data.summarize.VuoReal" version="1.0.0" label="Summarize Value|<refresh>refresh\l|<value>value\l|<summary>summary\r" pos="525,525"];
+
+CalculateAmplitudeForFrequencies:amplitudes -> HoldList2:newValue;
+GetFirstItemInList:firstItem -> CalculateAmplitudeForFrequencies:samples;
+GetItemFromList6:item -> CompareNumbers:b;
+GetItemFromList6:item -> SummarizeValue10:value;
+GetItemFromList7:item -> CompareNumbers:a;
+GetItemFromList7:item -> SummarizeValue11:value;
+GetItemFromList8:item -> SummarizeValue12:value;
+HoldList2:heldValue -> GetItemFromList6:list;
+HoldList2:heldValue -> GetItemFromList7:list;
+HoldList2:heldValue -> GetItemFromList8:list;
+MakeList27:list -> HoldList2:initialValue;
+MakeList33:list -> RenderLayersToWindow:setWindowProperties;
+MakeList38:list -> RenderLayersToWindow:layers;
+MakeOvalLayer:layer -> MakeList38:1;
+MakeTextLayer2:layer -> MakeList38:2;
+MakeTextLayer3:layer -> MakeList38:3;
+MakeTextLayer:layer -> MakeList38:4;
+ReceiveLiveAudio:receivedChannels -> GetFirstItemInList:list;
+RenderLayersToWindow:requestedFrame -> HoldList2:refresh;
+RenderLayersToWindow:showedWindow -> MakeOvalLayer:refresh;
+SummarizeValue10:summary -> MakeTextLayer3:text;
+SummarizeValue11:summary -> MakeTextLayer2:text;
+SummarizeValue12:summary -> MakeTextLayer:text;
+}

@@ -1,0 +1,54 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ConfigureSerialDevice [type="vuo.serial.configure" version="1.0.0" label="Configure Serial Device|<refresh>refresh\l|<device>device\l|<baudRate>baudRate\l|<dataBits>dataBits\l|<parity>parity\l|<stopBits>stopBits\l" pos="345,45" fillcolor="tangerine" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}" _baudRate="115200" _dataBits="8" _parity="\"none\"" _stopBits="1"];
+ConvertTextToData [type="vuo.type.text.data" version="1.0.0" label="Convert Text to Data|<refresh>refresh\l|<text>text\l|<data>data\r" pos="916,730"];
+ConvertTextToData3 [type="vuo.type.text.data" version="1.0.0" label="Convert Text to Data|<refresh>refresh\l|<text>text\l|<data>data\r" pos="924,782"];
+CutList2 [type="vuo.list.cut.VuoText" version="1.0.0" label="Cut List|<refresh>refresh\l|<list>list\l|<startPosition>startPosition\l|<itemCount>itemCount\l|<partialList>partialList\r" pos="514,677" _startPosition="1" _itemCount="3"];
+CycleThroughList13 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="572,548" _wrapMode="\"wrap\""];
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="735,90" _wrapMode="\"wrap\""];
+CycleThroughList6 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="549,423" _wrapMode="\"wrap\""];
+DisplayConsoleWindow2 [type="vuo.console.window" version="1.0.1" label="Display Console Window|<refresh>refresh\l|<writeLine>writeLine\l|<typedLine>typedLine\r|<typedWord>typedWord\r|<typedCharacter>typedCharacter\r" pos="741,350" _typedLine_eventThrottling="enqueue" _typedWord_eventThrottling="enqueue" _typedCharacter_eventThrottling="enqueue"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="30,45" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="555,-30" fillcolor="yellow" _seconds="0.10000000000000001" _fired_eventThrottling="drop"];
+GetFirstItemInList [type="vuo.list.get.first.VuoText" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="934,522"];
+MakeList17 [type="vuo.list.make.13.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<7>7\l|<8>8\l|<9>9\l|<10>10\l|<11>11\l|<12>12\l|<13>13\l|<list>list\r" pos="659,101" _1="\"\>\"" _2="\"\>\"" _3="\"0\"" _4="\"0\"" _5="\"2\"" _6="\"\<\"" _7="\"\<\"" _8="\"255\"" _9="\"0\"" _10="\"0\"" _11="\"255\"" _12="\"0\"" _13="\"0\""];
+MakeList38 [type="vuo.list.make.4.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<list>list\r" pos="479,434" _1="\"255,0,0,255,0,0,\"" _2="\"0,255,0\"" _3="\"0,0,0\"" _4="\"\>\>010\<\<0,0,0,0,0,0,\""];
+MakeList43 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="502,559" _1="\"\>\>002\<\<\"" _2="\"\>\>004\<\<\""];
+MakeList47 [type="vuo.list.make.1.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="460,688"];
+MakeRGBColor [type="vuo.color.make.rgb" version="2.0.0" label="Make RGB Color|<refresh>refresh\l|<red>red\l|<green>green\l|<blue>blue\l|<opacity>opacity\l|<color>color\r" pos="174,646" _red="1" _green="0.0" _blue="0.0" _opacity="1.0"];
+ReceiveKeyboardButtons [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="105,210" _key="\"RightArrow\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveKeyboardButtons2 [type="vuo.keyboard.button" version="1.0.1" label="Receive Keyboard Buttons|<refresh>refresh\l|<window>window\l|<key>key\l|<modifierKey>modifierKey\l|<repeatWhenHeld>repeatWhenHeld\l|<pressed>pressed\r|<released>released\r" pos="190,359" _key="\"Space\"" _modifierKey="\"any\"" _repeatWhenHeld="false" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+SendSerialData2 [type="vuo.serial.send" version="1.0.0" label="Send Serial Data|<refresh>refresh\l|<device>device\l|<sendData>sendData\l" pos="919,552" fillcolor="green" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}"];
+SendSerialData3 [type="vuo.serial.send" version="1.0.0" label="Send Serial Data|<refresh>refresh\l|<device>device\l|<sendData>sendData\l" pos="825,657" fillcolor="green" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}"];
+ShareValue2 [type="vuo.data.share.VuoText" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="420,285" _value="\"\>\>003\<\<255002550025500\""];
+ShareValue4 [type="vuo.data.share.VuoText" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="420,210" _value="\"\>\>002\<\<2550025500\""];
+SplitTextStream [type="vuo.text.split.stream.VuoText" version="1.0.0" label="Split Text Stream|<refresh>refresh\l|<text>text\l|<separator>separator\l|<includeEmptyParts>includeEmptyParts\l|<splitText>splitText\r" pos="331,754" _separator="\" \"" _includeEmptyParts="false" _splitText_eventThrottling="enqueue"];
+SummarizeValue11 [type="vuo.data.summarize.VuoColor" version="1.0.0" label="Summarize Value|<refresh>refresh\l|<value>value\l|<summary>summary\r" pos="447,867"];
+
+ConvertTextToData3:data -> SendSerialData3:sendData;
+ConvertTextToData:data -> SendSerialData2:sendData;
+CutList2:partialList -> GetFirstItemInList:list;
+CycleThroughList13:item -> ConvertTextToData3:text;
+CycleThroughList6:item -> ConvertTextToData:text;
+FireOnStart:started -> ConfigureSerialDevice:refresh;
+FirePeriodically:fired -> CycleThroughList2:goForward;
+GetFirstItemInList:firstItem -> DisplayConsoleWindow2:writeLine;
+MakeList17:list -> CycleThroughList2:list;
+MakeList38:list -> CycleThroughList6:list;
+MakeList43:list -> CycleThroughList13:list;
+MakeList47:list -> CutList2:list;
+MakeRGBColor:color -> SummarizeValue11:value;
+ReceiveKeyboardButtons2:released -> CycleThroughList13:goForward;
+ReceiveKeyboardButtons2:released -> MakeRGBColor:refresh;
+ReceiveKeyboardButtons:released -> CycleThroughList6:goForward;
+SplitTextStream:splitText -> MakeList47:1;
+SummarizeValue11:summary -> SplitTextStream:text;
+}

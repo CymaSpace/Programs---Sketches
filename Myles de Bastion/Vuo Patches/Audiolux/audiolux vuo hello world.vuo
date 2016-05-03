@@ -1,0 +1,24 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ConfigureSerialDevice [type="vuo.serial.configure" version="1.0.0" label="Configure Serial Device|<refresh>refresh\l|<device>device\l|<baudRate>baudRate\l|<dataBits>dataBits\l|<parity>parity\l|<stopBits>stopBits\l" pos="360,45" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}" _baudRate="115200" _dataBits="8" _parity="\"none\"" _stopBits="1"];
+ConvertTextToData [type="vuo.type.text.data" version="1.0.0" label="Convert Text to Data|<refresh>refresh\l|<text>text\l|<data>data\r" pos="405,375"];
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="735,90" _wrapMode="\"wrap\""];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="30,45" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="555,-30" _seconds="0.10000000000000001" _fired_eventThrottling="drop"];
+MakeList17 [type="vuo.list.make.13.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<7>7\l|<8>8\l|<9>9\l|<10>10\l|<11>11\l|<12>12\l|<13>13\l|<list>list\r" pos="659,101" _1="\"\>\"" _2="\"\>\"" _3="\"0\"" _4="\"0\"" _5="\"2\"" _6="\"\<\"" _7="\"\<\"" _8="\"255\"" _9="\"0\"" _10="\"0\"" _11="\"255\"" _12="\"0\"" _13="\"0\""];
+SendSerialData [type="vuo.serial.send" version="1.0.0" label="Send Serial Data|<refresh>refresh\l|<device>device\l|<sendData>sendData\l" pos="750,375" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}"];
+
+ConvertTextToData:data -> SendSerialData:sendData;
+CycleThroughList2:item -> ConvertTextToData:text;
+FireOnStart:started -> ConfigureSerialDevice:refresh;
+FirePeriodically:fired -> CycleThroughList2:goForward;
+MakeList17:list -> CycleThroughList2:list;
+}

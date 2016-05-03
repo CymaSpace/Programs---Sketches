@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 300 // Number of LED's in the strip
+#define NUM_LEDS 400 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -15,7 +15,7 @@
 /* Sensitivity variables, refresh variables, and start/end points */
 #define REFRESH_DIVISOR 80. // Higher = range of refresh values is lower
 #define SENSITIVITY_DIVISOR 100. // Higher = range of sensitivity values on pot is lower
-#define LEFT_START_POINT ((NUM_LEDS / 2)) // Starting LED for left side
+#define LEFT_START_POINT ((NUM_LEDS / 8)) // Starting LED for left side
 #define LEFT_END_POINT 1 // Generally the end of the left side is the first LED
 #define RIGHT_START_POINT ((NUM_LEDS / 2) + 1) // Starting LED for the right side
 #define RIGHT_END_POINT (NUM_LEDS - 1) // Generally the end of the right side is the last LED
@@ -124,7 +124,7 @@ void loop() {
      *  last value in the stack. This is the code that effects the propagation
      */
     push_stack(left_LED_stack, amp_sum_L);
-    push_stack(right_LED_stack, amp_sum_R);
+    //push_stack(right_LED_stack, amp_sum_R);
 
     /*  Set the LED values based on the left and right stacks
      *  This is a reverse loop because the left side LED's travel toward
@@ -141,11 +141,12 @@ void loop() {
     /*  LED's on the right travel towards the last LED in the strand 
      *  so the loop increments positively
      */ 
+ 
     for(i = RIGHT_START_POINT; i <= RIGHT_END_POINT; ++i) {
       set_LED_color(i, right_LED_stack[stack_loop]);
       ++stack_loop;
     }
-
+ 
     leds[0] = left_LED_stack[0];
 
     // Show the new LED values

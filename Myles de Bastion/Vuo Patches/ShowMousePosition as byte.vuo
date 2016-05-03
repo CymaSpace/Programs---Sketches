@@ -1,0 +1,43 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AppendTexts [type="vuo.text.append" version="1.1.0" label="Append Texts|<refresh>refresh\l|<texts>texts\l|<separator>separator\l|<compositeText>compositeText\r" pos="450,180"];
+Convert2DPointToReal3 [type="vuo.type.point2d.real.x" version="1.0.1" label="Convert 2D Point to Real|<refresh>refresh\l|<xy>xy\l|<x>x\r" pos="189,320"];
+Convert2DPointToReal4 [type="vuo.type.point2d.real.y" version="1.0.1" label="Convert 2D Point to Real|<refresh>refresh\l|<xy>xy\l|<y>y\r" pos="189,455"];
+ConvertTextToData [type="vuo.type.text.data" version="1.0.0" label="Convert Text to Data|<refresh>refresh\l|<text>text\l|<data>data\r" pos="577,547"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="462,42" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FitInRange2 [type="vuo.math.fit.VuoPoint2d" version="1.0.0" label="Fit in Range|<refresh>refresh\l|<value>value\l|<tracking>tracking\l|<reset>reset\l|<fittedMin>fittedMin\l|<fittedMax>fittedMax\l|<fittedValue>fittedValue\r|<min>min\r|<max>max\r" pos="-26,375" _tracking="1.0" _fittedMin="{\"x\":0,\"y\":0}" _fittedMax="{\"x\":255,\"y\":255}"];
+FormatNumber [type="vuo.text.format.number" version="1.1.0" label="Format Number|<refresh>refresh\l|<value>value\l|<format>format\l|<minimumIntegerDigits>minimumIntegerDigits\l|<minimumDecimalPlaces>minimumDecimalPlaces\l|<decimalPlaces>decimalPlaces\l|<showThousandSeparator>showThousandSeparator\l|<text>text\r" pos="160,211" _format="\"decimal\"" _minimumIntegerDigits="1" _minimumDecimalPlaces="0" _decimalPlaces="0" _showThousandSeparator="true"];
+FormatNumber2 [type="vuo.text.format.number" version="1.1.0" label="Format Number|<refresh>refresh\l|<value>value\l|<format>format\l|<minimumIntegerDigits>minimumIntegerDigits\l|<minimumDecimalPlaces>minimumDecimalPlaces\l|<decimalPlaces>decimalPlaces\l|<showThousandSeparator>showThousandSeparator\l|<text>text\r" pos="200,367" _format="\"decimal\"" _minimumIntegerDigits="1" _minimumDecimalPlaces="0" _decimalPlaces="0" _showThousandSeparator="true"];
+MakeList11 [type="vuo.list.make.5.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<list>list\r" pos="401,191" _1="\"Move the mouse to see its current location in Vuo Coordinates.\\n\\n\"" _2="\"X: \"" _4="\"\\nY: \""];
+MakeList12 [type="vuo.list.make.1.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="754,221" fillcolor="green"];
+MakeList5 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="784,236" fillcolor="green"];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="600,210" _font="{\"fontName\":\"HelveticaNeue\",\"pointSize\":28.000000,\"underline\":false,\"color\":{\"r\":1.000000,\"g\":1.000000,\"b\":1.000000,\"a\":1.000000},\"alignment\":\"left\",\"characterSpacing\":1.000000,\"lineSpacing\":1.000000}" _center="{\"x\":0.000000,\"y\":0.000000}"];
+ReceiveMouseMoves [type="vuo.mouse.move" version="1.0.3" label="Receive Mouse Moves|<refresh>refresh\l|<window>window\l|<modifierKey>modifierKey\l|<movedTo>movedTo\r" pos="-165,210" _modifierKey="\"any\"" _movedTo_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="825,210" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+SendSerialData [type="vuo.serial.send" version="1.0.0" label="Send Serial Data|<refresh>refresh\l|<device>device\l|<sendData>sendData\l" pos="507,364" _device="{\"matchType\":\"path\",\"name\":\"FTDI FT232R USB UART (AJ02WHNS)\",\"path\":\"\\/dev\\/cu.usbserial-AJ02WHNS\"}"];
+
+AppendTexts:compositeText -> MakeTextLayer:text;
+Convert2DPointToReal3:x -> FormatNumber:value;
+Convert2DPointToReal4:y -> FormatNumber2:value;
+ConvertTextToData:data -> SendSerialData:sendData;
+FireOnStart2:started -> AppendTexts:refresh;
+FitInRange2:fittedValue -> Convert2DPointToReal3:xy;
+FitInRange2:fittedValue -> Convert2DPointToReal4:xy;
+FormatNumber2:text -> MakeList11:5;
+FormatNumber:text -> ConvertTextToData:text;
+FormatNumber:text -> MakeList11:3;
+MakeList11:list -> AppendTexts:texts;
+MakeList12:list -> RenderLayersToWindow:layers;
+MakeList5:list -> RenderLayersToWindow:setWindowProperties;
+MakeTextLayer:layer -> MakeList12:1;
+ReceiveMouseMoves:movedTo -> FitInRange2:value;
+RenderLayersToWindow:showedWindow -> ReceiveMouseMoves:window;
+}

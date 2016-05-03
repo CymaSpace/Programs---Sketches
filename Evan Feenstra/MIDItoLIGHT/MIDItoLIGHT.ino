@@ -1,7 +1,7 @@
 #include "FastLED.h"
 
 #define NUM_LEDS 251 // Number of LED's in the strip
-#define DATA_PIN 13
+#define DATA_PIN 6
 #define ROWS 25
 #define COLUMNS 10
 

@@ -1,0 +1,43 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="195,270" _frequencyBins="\"255\"" _frequencyBinAveraging="\"quadratic\""];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="210,90" fillcolor="violet"];
+GetFirstItemInList [type="vuo.list.get.first.VuoAudioSamples" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="330,345"];
+GetFirstItemInList5 [type="vuo.list.get.first.VuoReal" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="660,435"];
+GetFirstItemInList6 [type="vuo.list.get.first.VuoReal" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="660,375"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="555,90" fillcolor="blue" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList0 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="934,71" fillcolor="green"];
+MakeList2 [type="vuo.list.make.1.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="904,56" fillcolor="green"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="750,75" fillcolor="blue" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _sharpness="1.0"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="315,120" fillcolor="violet"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="195,90" fillcolor="violet" _receivedChannels_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="975,45" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Scale [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="420,90" fillcolor="violet" _start="0" _end="1" _scaledStart="-0.55000000000000004" _scaledEnd="0.25"];
+Scale2 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="540,390" fillcolor="violet" _start="0" _end="0.5" _scaledStart="-0.5" _scaledEnd="0.5"];
+Scale3 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="540,255" fillcolor="violet" _start="0" _end="0.5" _scaledStart="-0.5" _scaledEnd="0.5"];
+
+CalculateAmplitudeForFrequencies:amplitudes -> GetFirstItemInList5:list;
+CalculateAmplitudeForFrequencies:amplitudes -> GetFirstItemInList6:list;
+CalculateLoudness:loudness -> Scale:value;
+GetFirstItemInList5:firstItem -> Scale2:value;
+GetFirstItemInList6:firstItem -> Scale3:value;
+GetFirstItemInList:firstItem -> CalculateAmplitudeForFrequencies:samples;
+MakeHSLColor:color -> MakeOvalLayer:color;
+MakeList0:list -> RenderLayersToWindow:setWindowProperties;
+MakeList2:list -> RenderLayersToWindow:layers;
+MakeOvalLayer:layer -> MakeList2:1;
+MixAudioChannels:mixedSamples -> CalculateLoudness:samples;
+ReceiveLiveAudio:receivedChannels -> GetFirstItemInList:list;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels:samples;
+Scale2:scaledValue -> MakeOvalLayer:height;
+Scale3:scaledValue -> MakeOvalLayer:width;
+Scale:scaledValue -> MakeHSLColor:hue;
+}
