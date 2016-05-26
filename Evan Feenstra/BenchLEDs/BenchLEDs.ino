@@ -235,7 +235,7 @@ void set_LED_color(int position, int value) {
 void push_stack(int stack[], int value) {
   int i;
   for(i = (LED_STACK_SIZE - 1); i >= 0; --i) {
-    stack[i] = stack[i - 1];
+    stack[i] = value;
   }
   stack[0] = value;
 }
