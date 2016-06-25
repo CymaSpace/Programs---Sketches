@@ -2,7 +2,7 @@
 #include "EEPROM.h"
 
 /* Output pin definitions */
-#define NUM_LEDS 226 // Number of LED's in the strip
+#define NUM_LEDS 76 // Number of LED's in the strip
 #define DATA_PIN 6 // Data out
 #define ANALOG_PIN_L 1 // Left audio channel
 #define ANALOG_PIN_R 0 // Right audio channel
@@ -128,7 +128,7 @@ void push_stack(int stack[], int value) {
 }
 
 
-void setup() {r
+void setup() {
 
   // Instantiate Neopixels with FastLED
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);

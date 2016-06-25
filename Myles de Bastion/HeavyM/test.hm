@@ -1,0 +1,184 @@
+<!DOCTYPE sauvegarde>
+<Sequences>
+ <sequence name="name" id="0" nbbeat="2">
+  <shaders>
+   <shader singleValue="0" name="Black and White" state="0" leftValue="20" mode="0" type="0" rightValue="80"/>
+   <shader singleValue="100" name="Blue" state="0" leftValue="20" mode="0" type="1" rightValue="80"/>
+   <shader singleValue="0" name="Blur" state="0" leftValue="20" mode="0" type="2" rightValue="80"/>
+   <shader singleValue="0" name="Contrate" state="0" leftValue="20" mode="0" type="3" rightValue="80"/>
+   <shader singleValue="0" name="Convergence" state="0" leftValue="20" mode="0" type="4" rightValue="80"/>
+   <shader singleValue="0" name="Cut Slider" state="0" leftValue="20" mode="0" type="5" rightValue="80"/>
+   <shader singleValue="0" name="Glow" state="0" leftValue="20" mode="0" type="6" rightValue="80"/>
+   <shader singleValue="100" name="Green" state="0" leftValue="20" mode="0" type="7" rightValue="80"/>
+   <shader singleValue="0" name="Noise" state="0" leftValue="20" mode="0" type="8" rightValue="80"/>
+   <shader singleValue="0" name="Old Tv" state="0" leftValue="20" mode="0" type="9" rightValue="80"/>
+   <shader singleValue="100" name="Red" state="0" leftValue="20" mode="0" type="10" rightValue="80"/>
+   <shader singleValue="0" name="Shaker" state="0" leftValue="20" mode="0" type="11" rightValue="80"/>
+   <shader singleValue="0" name="Strobe" state="0" leftValue="20" mode="0" type="12" rightValue="80"/>
+   <shader singleValue="0" name="Swell" state="0" leftValue="20" mode="0" type="13" rightValue="80"/>
+   <shader singleValue="0" name="Twist" state="0" leftValue="20" mode="0" type="14" rightValue="80"/>
+  </shaders>
+  <groups>
+   <group id="0">
+    <faces>
+     <face type="1" id="0">
+      <point x="447.323" y="30.3927"/>
+      <point x="479.323" y="42.4924"/>
+      <point x="491.412" y="52.4568"/>
+      <point x="504.212" y="97.2967"/>
+      <point x="482.98" y="159.625"/>
+      <point x="442.752" y="207.719"/>
+      <point x="424.161" y="200.093"/>
+      <point x="404.656" y="181.079"/>
+      <point x="391.145" y="150.678"/>
+      <point x="383.323" y="107.261"/>
+      <point x="388.301" y="65.2682"/>
+      <point x="410.345" y="37.5102"/>
+     </face>
+     <face type="1" id="1">
+      <point x="446.906" y="208.916"/>
+      <point x="450.461" y="244.504"/>
+      <point x="486.825" y="250.812"/>
+      <point x="508.239" y="255.18"/>
+      <point x="496.199" y="303.546"/>
+      <point x="463.795" y="284.539"/>
+      <point x="431.795" y="310.34"/>
+      <point x="426.462" y="321.906"/>
+      <point x="420.239" y="317.457"/>
+      <point x="398.399" y="287.632"/>
+      <point x="387.351" y="283.649"/>
+      <point x="368.826" y="291.407"/>
+      <point x="348.587" y="320.629"/>
+      <point x="327.795" y="399.308"/>
+      <point x="331.119" y="348.558"/>
+      <point x="333.017" y="313.614"/>
+      <point x="336.044" y="281.941"/>
+      <point x="342.586" y="250.553"/>
+      <point x="324.737" y="235.891"/>
+      <point x="354.532" y="229.557"/>
+      <point x="379.35" y="219.592"/>
+      <point x="391.795" y="198.24"/>
+      <point x="393.075" y="160.091"/>
+      <point x="414.906" y="198.24"/>
+      <point x="427.848" y="206.781"/>
+     </face>
+     <face type="3" id="2">
+      <point x="381.509" y="361.117"/>
+      <point x="415.731" y="320.661"/>
+      <point x="385.065" y="287.323"/>
+      <point x="350.843" y="327.779"/>
+     </face>
+     <face type="3" id="3">
+      <point x="462.906" y="362.485"/>
+      <point x="497.128" y="323.809"/>
+      <point x="466.462" y="292.25"/>
+      <point x="432.239" y="330.926"/>
+     </face>
+     <face type="1" id="4">
+      <point x="345.075" y="252.052"/>
+      <point x="343.904" y="256.884"/>
+      <point x="343.223" y="260.744"/>
+      <point x="343.412" y="262.286"/>
+      <point x="340.473" y="270.305"/>
+      <point x="339.857" y="280.435"/>
+      <point x="335.708" y="289.925"/>
+      <point x="328.005" y="326.699"/>
+      <point x="324.449" y="349.83"/>
+      <point x="316.153" y="380.672"/>
+      <point x="310.227" y="403.804"/>
+      <point x="320.301" y="411.515"/>
+      <point x="327.412" y="423.97"/>
+      <point x="338.079" y="431.681"/>
+      <point x="355.264" y="443.543"/>
+      <point x="371.264" y="451.847"/>
+      <point x="362.968" y="461.337"/>
+      <point x="360.597" y="474.978"/>
+      <point x="340.449" y="469.64"/>
+      <point x="319.116" y="461.337"/>
+      <point x="306.079" y="455.406"/>
+      <point x="286.523" y="443.543"/>
+      <point x="274.671" y="433.46"/>
+      <point x="272.301" y="416.26"/>
+      <point x="272.894" y="396.093"/>
+      <point x="275.857" y="375.334"/>
+      <point x="281.783" y="354.575"/>
+      <point x="286.523" y="340.933"/>
+      <point x="287.708" y="317.209"/>
+      <point x="288.894" y="292.891"/>
+      <point x="296.005" y="268.573"/>
+      <point x="303.116" y="257.897"/>
+      <point x="313.19" y="244.848"/>
+      <point x="320.301" y="243.069"/>
+      <point x="329.783" y="243.662"/>
+      <point x="334.693" y="246.712"/>
+      <point x="338.6" y="248.095"/>
+     </face>
+     <face type="1" id="5">
+      <point x="419.069" y="199.647"/>
+      <point x="475.958" y="264.721"/>
+     </face>
+    </faces>
+    <borderPlain activated="0">
+     <color mode="0">
+      <colorSimple red="217" blue="255" green="112"/>
+      <colorLeft red="255" blue="81" green="78"/>
+      <colorRight red="255" blue="35" green="215"/>
+     </color>
+     <width singleValue="1" leftValue="1" mode="0" rightValue="10"/>
+    </borderPlain>
+    <borderLine direction="0" activated="1">
+     <color mode="0">
+      <colorSimple red="255" blue="255" green="255"/>
+      <colorLeft red="255" blue="81" green="78"/>
+      <colorRight red="255" blue="35" green="215"/>
+     </color>
+     <width singleValue="6" leftValue="1" mode="0" rightValue="10"/>
+     <speed singleValue="82" leftValue="20" mode="0" rightValue="80"/>
+    </borderLine>
+    <borderRepeat nbRepeat="1" activated="0">
+     <color mode="0">
+      <colorSimple red="255" blue="255" green="255"/>
+      <colorLeft red="255" blue="81" green="78"/>
+      <colorRight red="255" blue="35" green="215"/>
+     </color>
+     <width singleValue="1" leftValue="2" mode="0" rightValue="4"/>
+     <depth singleValue="80" leftValue="20" mode="0" rightValue="80"/>
+    </borderRepeat>
+    <fillingPlain activated="1" mode="0">
+     <colorSingle mode="0">
+      <colorSimple red="255" blue="238" green="0"/>
+      <colorLeft red="255" blue="81" green="78"/>
+      <colorRight red="255" blue="35" green="215"/>
+     </colorSingle>
+     <colorGradient directionX="3000" directionY="0">
+      <colorGrad1 red="255" blue="80" green="78"/>
+      <colorGrad2 red="249" blue="35" green="212"/>
+     </colorGradient>
+     <colorRandom nbColor="2">
+      <color red="255" blue="0" green="255"/>
+      <color red="250" blue="173" green="19"/>
+     </colorRandom>
+    </fillingPlain>
+    <fillingSpecial directionX="0" directionY="3000" activated="0" mode="1">
+     <variation singleValue="100" leftValue="20" mode="0" rightValue="80"/>
+     <speed singleValue="31" leftValue="20" mode="0" rightValue="80"/>
+    </fillingSpecial>
+    <fillingSnake size="1" direction="0" activated="0" speed="2">
+     <shapesID size="0"/>
+    </fillingSnake>
+    <move direction="0" rotX="0" rotY="0" rotZ="0" activated="0">
+     <speed singleValue="50" leftValue="20" mode="0" rightValue="80"/>
+    </move>
+    <structure activated="0" mode="0">
+     <color mode="0">
+      <colorSimple red="255" blue="255" green="255"/>
+      <colorLeft red="255" blue="81" green="78"/>
+      <colorRight red="255" blue="35" green="215"/>
+     </color>
+     <width singleValue="1" leftValue="1" mode="0" rightValue="6"/>
+     <speed singleValue="50" leftValue="20" mode="0" rightValue="80"/>
+    </structure>
+   </group>
+  </groups>
+ </sequence>
+</Sequences>

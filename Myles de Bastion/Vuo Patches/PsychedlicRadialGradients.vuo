@@ -1,0 +1,34 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ArrangeLayersInGrid [type="vuo.layer.arrange.grid" version="1.0.0" label="Arrange Layers in Grid|<refresh>refresh\l|<layers>layers\l|<scaleToFit>scaleToFit\l|<center>center\l|<width>width\l|<columns>columns\l|<height>height\l|<rows>rows\l|<griddedLayer>griddedLayer\r" pos="586,42" _scaleToFit="false" _center="[{\"x\":0,\"y\":0}]" _width="1.800000" _columns="10" _height="1.250000" _rows="10"];
+BuildList3 [type="vuo.list.build.VuoColor" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="291,41" fillcolor="violet" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="95,-45" fillcolor="yellow" _started_eventThrottling="enqueue"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="321,296" _saturation="1.000000" _lightness="0.5" _opacity="1"];
+MakeList2 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="516,53"];
+MakeList7 [type="vuo.list.make.1.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="783,53" fillcolor="green"];
+MakeList9 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="813,68" fillcolor="green"];
+MakeRadialGradientLayer [type="vuo.layer.make.gradient.radial" version="1.1.0" label="Make Radial Gradient Layer|<refresh>refresh\l|<name>name\l|<colors>colors\l|<gradientCenter>gradientCenter\l|<gradientRadius>gradientRadius\l|<gradientNoiseAmount>gradientNoiseAmount\l|<layerCenter>layerCenter\l|<layerRotation>layerRotation\l|<layerWidth>layerWidth\l|<layerHeight>layerHeight\l|<layer>layer\r" pos="493,438" _gradientCenter="{\"x\":0,\"y\":0}" _gradientRadius="1" _gradientNoiseAmount="0.2" _layerCenter="{\"x\":0.0,\"y\":0.0}" _layerRotation="0.0" _layerWidth="2.0" _layerHeight="2.0"];
+MakeRandomValue [type="vuo.noise.random.VuoReal" version="1.0.0" label="Make Random Value|<refresh>refresh\l|<minimum>minimum\l|<maximum>maximum\l|<value>value\r" pos="111,295" _minimum="0.000000" _maximum="1.000000"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="854,42" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Round [type="vuo.math.round" version="2.0.0" label="Round|<refresh>refresh\l|<real>real\l|<rounded>rounded\r" pos="61,80"];
+
+BuildList3:buildItem -> MakeRandomValue:refresh;
+BuildList3:builtList -> MakeRadialGradientLayer:colors;
+FireOnStart2:started -> BuildList3:fire;
+MakeHSLColor:color -> BuildList3:builtItem;
+MakeList2:list -> ArrangeLayersInGrid:layers;
+MakeList7:list -> RenderLayersToWindow:layers;
+MakeList9:list -> RenderLayersToWindow:setWindowProperties;
+MakeRadialGradientLayer:layer -> MakeList7:1;
+MakeRandomValue:value -> MakeHSLColor:hue;
+RenderLayersToWindow:requestedFrame -> Round:real;
+Round:rounded -> BuildList3:fire;
+}

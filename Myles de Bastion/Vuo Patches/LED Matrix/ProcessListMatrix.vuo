@@ -1,0 +1,92 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [MartinusMagneson](https://vuo.org/user/3272)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AppendLists3 [type="vuo.list.append.VuoLayer" version="1.0.0" label="Append Lists|<refresh>refresh\l|<list1>list1\l|<list2>list2\l|<combinedList>combinedList\r" pos="312,747" fillcolor="blue"];
+Calculate [type="vuo.math.calculate" version="1.0.0" label="Calculate|<refresh>refresh\l|<expression>expression\l|<values>values\l|<result>result\r" pos="-450,785" fillcolor="blue" _expression="{\"expressions\":[\"x\\/rez\"],\"inputVariables\":[\"rez\",\"x\"],\"outputVariables\":[\"result\"]}"];
+Calculate3 [type="vuo.math.calculate" version="1.0.0" label="Calculate|<refresh>refresh\l|<expression>expression\l|<values>values\l|<result>result\r" pos="-449,852" fillcolor="blue" _expression="{\"expressions\":[\"x\\/rez\"],\"inputVariables\":[\"rez\",\"x\"],\"outputVariables\":[\"result\"]}"];
+Convert3DPointTo2DPoint [type="vuo.type.point3d.point2d.xy" version="1.0.1" label="Convert 3D Point to 2D Point|<refresh>refresh\l|<xyz>xyz\l|<xy>xy\r" pos="1334,373"];
+ConvertFrameToImage [type="vuo.type.videoframe.image" version="1.0.0" label="Convert Frame to Image|<refresh>refresh\l|<frame>frame\l|<image>image\r" pos="-204,1083"];
+ConvertFrameToImage3 [type="vuo.type.videoframe.image" version="1.0.0" label="Convert Frame to Image|<refresh>refresh\l|<frame>frame\l|<image>image\r" pos="-630,943"];
+ConvertFrameToImage5 [type="vuo.type.videoframe.image" version="1.0.0" label="Convert Frame to Image|<refresh>refresh\l|<frame>frame\l|<image>image\r" pos="-274,1257"];
+ConvertIntegerToRealNumber2 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="-535,847"];
+ConvertIntegerToRealNumber3 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="-534,748"];
+CropImage2 [type="vuo.image.crop" version="1.1.1" label="Crop Image|<refresh>refresh\l|<image>image\l|<center>center\l|<width>width\l|<height>height\l|<croppedImage>croppedImage\r" pos="-303,973" fillcolor="blue"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-921,963" fillcolor="yellow" _started_eventThrottling="enqueue"];
+GetImageSize [type="vuo.image.get.size" version="1.0.0" label="Get Image Size|<refresh>refresh\l|<image>image\l|<width>width\r|<height>height\r" pos="-729,833" fillcolor="blue"];
+HoldValue3 [type="vuo.data.hold.VuoLayer" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="236,960" fillcolor="blue"];
+MakeDictionary3 [type="vuo.dictionary.make.VuoText.VuoReal" version="1.0.0" label="Make Dictionary|<refresh>refresh\l|<keys>keys\l|<values>values\l|<dictionary>dictionary\r" pos="-670,835" fillcolor="blue"];
+MakeDictionary4 [type="vuo.dictionary.make.VuoText.VuoReal" version="1.0.0" label="Make Dictionary|<refresh>refresh\l|<keys>keys\l|<values>values\l|<dictionary>dictionary\r" pos="-669,902" fillcolor="blue"];
+MakeList21 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-504,811" fillcolor="blue"];
+MakeList22 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-670,835" fillcolor="blue" _1="\"rez\"" _2="\"x\""];
+MakeList24 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-503,878" fillcolor="blue"];
+MakeList25 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-669,902" fillcolor="blue" _1="\"rez\"" _2="\"x\""];
+MakeList26 [type="vuo.list.make.1.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="266,773" fillcolor="blue"];
+MakeList5 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="393,864" fillcolor="lime"];
+MakeOvalLayer3 [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="71,974" fillcolor="green" _rotation="0.0" _sharpness="0.90000000000000002"];
+MakeParametricGrid2 [type="vuo.point.make.parametric.grid" version="1.0.1" label="Make Parametric Grid|<refresh>refresh\l|<time>time\l|<xExpression>xExpression\l|<yExpression>yExpression\l|<zExpression>zExpression\l|<rows>rows\l|<columns>columns\l|<uMin>uMin\l|<uMax>uMax\l|<vMin>vMin\l|<vMax>vMax\l|<points>points\r" pos="-224,747" fillcolor="magenta" _time="0.000000" _xExpression="\"u\"" _yExpression="\"v\"" _zExpression="\"0\"" _uMin="0.90000000000000002" _uMax="-0.90000000000000002" _vMin="-0.65000000000000002" _vMax="0.65000000000000002"];
+MakeScaledLayer4 [type="vuo.layer.make" version="2.0.0" label="Make Scaled Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<rotation>rotation\l|<width>width\l|<opacity>opacity\l|<layer>layer\r" pos="319,1109" fillcolor="green" _center="{\"x\":-0.80000001192092896,\"y\":-0.60000002384185791}" _rotation="0.0" _width="0.25" _opacity="1.0"];
+PlayMovie [type="vuo.video.play" version="2.0.2" label="Play Movie|<refresh>refresh\l|<url>url\l|<play>play\l|<pause>pause\l|<loop>loop\l|<playbackRate>playbackRate\l|<setTime>setTime\l|<optimization>optimization\l|<decodedVideo>decodedVideo\r|<decodedAudio>decodedAudio\r" pos="-722,1122" fillcolor="orange" _url="\"redtail320.mov\"" _loop="\"loop\"" _playbackRate="1" _setTime="\"\"" _optimization="\"auto\"" _decodedVideo_eventThrottling="drop" _decodedAudio_eventThrottling="enqueue"];
+ProcessList3 [type="vuo.list.process.VuoPoint3d.VuoLayer" version="1.0.1" label="Process List|<refresh>refresh\l|<fire>fire\l|<processedItem>processedItem\l|<processedList>processedList\r|<processItem>processItem\r" pos="-5,746" fillcolor="violet" _processedList_eventThrottling="drop" _processItem_eventThrottling="enqueue"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="439,838" fillcolor="lime" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Round4 [type="vuo.math.round" version="2.0.0" label="Round|<refresh>refresh\l|<real>real\l|<rounded>rounded\r" pos="-510,868"];
+Round5 [type="vuo.math.round" version="2.0.0" label="Round|<refresh>refresh\l|<real>real\l|<rounded>rounded\r" pos="132,831"];
+SampleColorFromImage2 [type="vuo.image.sample.color" version="1.0.1" label="Sample Color from Image|<refresh>refresh\l|<image>image\l|<center>center\l|<width>width\l|<color>color\r" pos="-159,972" fillcolor="blue"];
+ShareValue6 [type="vuo.data.share.VuoReal" version="1.0.0" label="DownRez|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-724,757" fillcolor="cyan" _value="4"];
+ShareValue9 [type="vuo.data.share.VuoPoint2d" version="1.0.0" label="Center|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-406,1064" fillcolor="blue"];
+Size2 [type="vuo.data.share.VuoReal" version="1.0.0" label="LED Size|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-610,983" fillcolor="cyan" _value="0.014999999999999999"];
+
+AppendLists3:combinedList -> RenderLayersToWindow:layers;
+Calculate3:result -> Round5:real;
+Calculate:result -> Round4:real;
+Convert3DPointTo2DPoint:xy -> ShareValue9:value;
+ConvertFrameToImage3:image -> GetImageSize:image;
+ConvertFrameToImage5:image -> MakeScaledLayer4:image;
+ConvertFrameToImage:image -> CropImage2:image;
+ConvertIntegerToRealNumber2:real -> MakeList24:2;
+ConvertIntegerToRealNumber3:real -> MakeList21:2;
+CropImage2:croppedImage -> SampleColorFromImage2:image;
+FireOnStart2:started -> MakeParametricGrid2:refresh;
+FireOnStart2:started -> PlayMovie:play;
+FireOnStart2:started -> ShareValue6:refresh;
+FireOnStart2:started -> Size2:refresh;
+GetImageSize:height -> ConvertIntegerToRealNumber2:integer;
+GetImageSize:width -> ConvertIntegerToRealNumber3:integer;
+HoldValue3:heldValue -> ProcessList3:processedItem;
+MakeDictionary3:dictionary -> Calculate:values;
+MakeDictionary4:dictionary -> Calculate3:values;
+MakeList21:list -> MakeDictionary3:values;
+MakeList22:list -> MakeDictionary3:keys;
+MakeList24:list -> MakeDictionary4:values;
+MakeList25:list -> MakeDictionary4:keys;
+MakeList26:list -> AppendLists3:list2;
+MakeList5:list -> RenderLayersToWindow:setWindowProperties;
+MakeOvalLayer3:layer -> HoldValue3:newValue;
+MakeParametricGrid2:points -> ProcessList3:fire;
+MakeScaledLayer4:layer -> MakeList26:1;
+PlayMovie:decodedVideo -> ConvertFrameToImage3:frame;
+PlayMovie:decodedVideo -> ConvertFrameToImage5:frame;
+PlayMovie:decodedVideo -> ConvertFrameToImage:frame;
+ProcessList3:processItem -> Convert3DPointTo2DPoint:xyz;
+ProcessList3:processItem -> HoldValue3:refresh;
+ProcessList3:processedList -> AppendLists3:list1;
+Round4:rounded -> MakeParametricGrid2:columns;
+Round5:rounded -> MakeParametricGrid2:rows;
+SampleColorFromImage2:color -> MakeOvalLayer3:color;
+ShareValue6:sameValue -> MakeList21:1;
+ShareValue6:sameValue -> MakeList24:1;
+ShareValue9:sameValue -> CropImage2:center;
+ShareValue9:sameValue -> MakeOvalLayer3:center;
+ShareValue9:sameValue -> SampleColorFromImage2:center;
+Size2:sameValue -> CropImage2:height;
+Size2:sameValue -> CropImage2:width;
+Size2:sameValue -> MakeOvalLayer3:height;
+Size2:sameValue -> MakeOvalLayer3:width;
+Size2:sameValue -> SampleColorFromImage2:width;
+}

@@ -1,0 +1,119 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [MartinusMagneson](https://vuo.org/user/3272)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AppendLists3 [type="vuo.list.append.VuoLayer" version="1.0.0" label="Append Lists|<refresh>refresh\l|<list1>list1\l|<list2>list2\l|<combinedList>combinedList\r" pos="15,660" fillcolor="yellow"];
+BuildList3 [type="vuo.list.build.VuoLayer" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="-240,660" fillcolor="yellow" _fire="64" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+BuildList7 [type="vuo.list.build.VuoReal" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="-1425,870" fillcolor="lime" _fire="64" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+Changed2 [type="vuo.event.changed.VuoReal" version="1.1.0" label="Changed|<refresh>refresh\l|<value>value\l|<changed>changed\r" pos="-1020,645"];
+Changed3 [type="vuo.event.changed.VuoReal" version="1.1.0" label="Changed|<refresh>refresh\l|<value>value\l|<changed>changed\r" pos="-1020,720"];
+Changed4 [type="vuo.event.changed.VuoReal" version="1.1.0" label="Changed|<refresh>refresh\l|<value>value\l|<changed>changed\r" pos="-420,585" fillcolor="blue"];
+ConvertIntegerToRealNumber [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="-1260,405"];
+ConvertIntegerToRealNumber3 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="-1275,555"];
+ConvertIntegerToRealNumber8 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="-390,570"];
+CountItemsInList10 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="420,480"];
+CountItemsInList6 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="180,540"];
+CountItemsInList7 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="180,555"];
+CountItemsInList8 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="420,600"];
+CountItemsInList9 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="420,495"];
+Divide [type="vuo.math.divide.VuoReal" version="2.0.0" label="Item width|<refresh>refresh\l|<a>a\l|<b>b\l|<quotient>quotient\r" pos="-1245,690"];
+Divide2 [type="vuo.math.divide.VuoReal" version="2.0.0" label="Item height|<refresh>refresh\l|<a>a\l|<b>b\l|<quotient>quotient\r" pos="-1245,765"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-240,405" _started_eventThrottling="enqueue"];
+GetItemFromList2 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="-1215,870" fillcolor="lime"];
+GetWindowDimensions [type="vuo.window.get.dimensions" version="1.0.0" label="Get Window Dimensions|<refresh>refresh\l|<window>window\l|<width>width\r|<height>height\r|<pixelsWide>pixelsWide\r|<pixelsHigh>pixelsHigh\r|<aspectRatio>aspectRatio\r|<top>top\r|<right>right\r|<bottom>bottom\r|<left>left\r" pos="-1635,45"];
+GetX2 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get X|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="-1200,435" fillcolor="tangerine"];
+GetY2 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Y|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="-1200,525" fillcolor="tangerine"];
+HoldValue2 [type="vuo.data.hold.VuoReal" version="2.0.0" label="Hold Width|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-840,675"];
+HoldValue3 [type="vuo.data.hold.VuoReal" version="2.0.0" label="Hold Height|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-840,750"];
+HoldValue5 [type="vuo.data.hold.VuoColor" version="2.0.0" label="Hold Color|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-825,825" fillcolor="lime"];
+Make2DPoint2 [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="-1020,510" fillcolor="tangerine"];
+MakeColorLayer [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="-570,675" fillcolor="magenta" _rotation="0.0"];
+MakeColorLayer2 [type="vuo.layer.make.color" version="1.1.0" label="Make Color Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<layer>layer\r" pos="-240,465" _color="{\"r\":1,\"g\":0.999969482421875,\"b\":0.9999847412109375,\"a\":0}" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="2.0" _height="2.0"];
+MakeHSLColor2 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="-1035,870" fillcolor="lime" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="209,686"];
+MakeList22 [type="vuo.list.make.2.VuoInteger" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-601,161" fillcolor="blue"];
+MakeList6 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-31,671" fillcolor="yellow"];
+MakePointsAlongCurve10 [type="vuo.point.make.curve.VuoReal" version="1.0.0" label="Make X axis|<refresh>refresh\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<curve>curve\l|<easing>easing\l|<numberOfPoints>numberOfPoints\l|<points>points\r" pos="-840,105" fillcolor="blue" _curve="\"linear\"" _easing="\"in\""];
+MakePointsAlongCurve11 [type="vuo.point.make.curve.VuoReal" version="1.0.0" label="Make Y axis|<refresh>refresh\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<curve>curve\l|<easing>easing\l|<numberOfPoints>numberOfPoints\l|<points>points\r" pos="-840,225" fillcolor="blue" _curve="\"linear\"" _easing="\"in\""];
+Multiply7 [type="vuo.math.multiply.VuoInteger" version="2.0.0" label="Total points|<refresh>refresh\l|<values>values\l|<product>product\r" pos="-555,150" fillcolor="blue"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="255,660" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+ShareValue6 [type="vuo.data.share.VuoReal" version="1.0.0" label="Share Value|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-1395,990" fillcolor="lime" _value="0.10000000000000001"];
+SpreadListItemGroups4 [type="vuo.list.spread.group.VuoReal" version="1.0.0" label="Spread List Item Groups|<refresh>refresh\l|<list>list\l|<copies>copies\l|<itemsPerGroup>itemsPerGroup\l|<outputList>outputList\r" pos="-285,105" fillcolor="blue"];
+SpreadListItems4 [type="vuo.list.spread.VuoReal" version="1.0.0" label="Spread List Items|<refresh>refresh\l|<list>list\l|<copies>copies\l|<outputList>outputList\r" pos="-285,225" fillcolor="blue"];
+XAmount3 [type="vuo.data.share.VuoInteger" version="1.0.0" label="X-amount|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-1545,225" _value="8"];
+YAmount3 [type="vuo.data.share.VuoInteger" version="1.0.0" label="Y-amount|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="-1545,285" _value="8"];
+
+AppendLists3:combinedList -> RenderLayersToWindow:layers;
+BuildList3:buildItem -> GetItemFromList2:which;
+BuildList3:buildItem -> GetX2:which;
+BuildList3:buildItem -> GetY2:which;
+BuildList3:buildItem -> HoldValue5:refresh;
+BuildList3:buildItem -> MakeHSLColor2:refresh;
+BuildList3:builtList -> AppendLists3:list2;
+BuildList7:buildItem -> ShareValue6:refresh;
+BuildList7:builtList -> GetItemFromList2:list;
+Changed2:changed -> HoldValue2:refresh;
+Changed3:changed -> HoldValue3:refresh;
+ConvertIntegerToRealNumber3:real -> Divide2:b;
+ConvertIntegerToRealNumber8:real -> Changed4:value;
+ConvertIntegerToRealNumber:real -> Divide:b;
+CountItemsInList10:itemCount -> SpreadListItemGroups4:copies;
+CountItemsInList6:itemCount -> MakeList22:1;
+CountItemsInList7:itemCount -> MakeList22:2;
+CountItemsInList8:itemCount -> SpreadListItems4:copies;
+CountItemsInList9:itemCount -> SpreadListItemGroups4:itemsPerGroup;
+Divide2:quotient -> Changed3:value;
+Divide2:quotient -> HoldValue3:initialValue;
+Divide2:quotient -> HoldValue3:newValue;
+Divide:quotient -> Changed2:value;
+Divide:quotient -> HoldValue2:initialValue;
+Divide:quotient -> HoldValue2:newValue;
+FireOnStart:started -> HoldValue2:refresh;
+FireOnStart:started -> HoldValue3:refresh;
+FireOnStart:started -> MakeColorLayer2:refresh;
+GetItemFromList2:item -> MakeHSLColor2:hue;
+GetWindowDimensions:bottom -> MakePointsAlongCurve11:startPosition;
+GetWindowDimensions:height -> Divide2:a;
+GetWindowDimensions:left -> MakePointsAlongCurve10:startPosition;
+GetWindowDimensions:right -> MakePointsAlongCurve10:endPosition;
+GetWindowDimensions:top -> MakePointsAlongCurve11:endPosition;
+GetWindowDimensions:width -> Divide:a;
+GetX2:item -> Make2DPoint2:x;
+GetY2:item -> Make2DPoint2:y;
+HoldValue2:heldValue -> MakeColorLayer:width;
+HoldValue3:heldValue -> MakeColorLayer:height;
+HoldValue5:heldValue -> MakeColorLayer:color;
+Make2DPoint2:point -> MakeColorLayer:center;
+MakeColorLayer2:layer -> MakeList6:1;
+MakeColorLayer:layer -> BuildList3:builtItem;
+MakeHSLColor2:color -> HoldValue5:newValue;
+MakeList22:list -> Multiply7:values;
+MakeList6:list -> AppendLists3:list1;
+MakeList:list -> RenderLayersToWindow:setWindowProperties;
+MakePointsAlongCurve10:points -> CountItemsInList6:list;
+MakePointsAlongCurve10:points -> CountItemsInList8:list;
+MakePointsAlongCurve10:points -> CountItemsInList9:list;
+MakePointsAlongCurve10:points -> SpreadListItemGroups4:list;
+MakePointsAlongCurve11:points -> CountItemsInList10:list;
+MakePointsAlongCurve11:points -> CountItemsInList7:list;
+MakePointsAlongCurve11:points -> SpreadListItems4:list;
+Multiply7:product -> ConvertIntegerToRealNumber8:integer;
+RenderLayersToWindow:requestedFrame -> BuildList3:fire [event=true];
+RenderLayersToWindow:requestedFrame -> BuildList7:fire [event=true];
+RenderLayersToWindow:requestedFrame -> XAmount3:refresh;
+RenderLayersToWindow:requestedFrame -> YAmount3:refresh;
+RenderLayersToWindow:showedWindow -> GetWindowDimensions:window;
+ShareValue6:sameValue -> BuildList7:builtItem;
+SpreadListItemGroups4:outputList -> GetX2:list;
+SpreadListItems4:outputList -> GetY2:list;
+XAmount3:sameValue -> ConvertIntegerToRealNumber:integer;
+XAmount3:sameValue -> MakePointsAlongCurve10:numberOfPoints;
+YAmount3:sameValue -> ConvertIntegerToRealNumber3:integer;
+YAmount3:sameValue -> MakePointsAlongCurve11:numberOfPoints;
+}

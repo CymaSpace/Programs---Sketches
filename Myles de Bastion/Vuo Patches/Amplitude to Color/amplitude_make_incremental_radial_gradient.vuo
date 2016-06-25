@@ -1,0 +1,44 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+BuildList2 [type="vuo.list.build.VuoColor" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="132,180" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="174,-87" fillcolor="magenta"];
+Count [type="vuo.math.count.VuoReal" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="-176,436" _decrement="1.0" _setCount="0.0"];
+FireOnDisplayRefresh [type="vuo.event.fireOnDisplayRefresh" version="1.0.0" label="Fire on Display Refresh|<refresh>refresh\l|<requestedFrame>requestedFrame\r" pos="-75,-18" fillcolor="yellow" _requestedFrame_eventThrottling="drop"];
+GetWindowDimensions [type="vuo.window.get.dimensions" version="1.0.0" label="Get Window Dimensions|<refresh>refresh\l|<window>window\l|<width>width\r|<height>height\r|<pixelsWide>pixelsWide\r|<pixelsHigh>pixelsHigh\r|<aspectRatio>aspectRatio\r|<top>top\r|<right>right\r|<bottom>bottom\r|<left>left\r" pos="784,40"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="51,408" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeHSLColor2 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="559,-91" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList4 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="448,333" fillcolor="green"];
+MakeList5 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="498,348" fillcolor="green"];
+MakeRadialGradientLayer [type="vuo.layer.make.gradient.radial" version="1.1.0" label="Make Radial Gradient Layer|<refresh>refresh\l|<name>name\l|<colors>colors\l|<gradientCenter>gradientCenter\l|<gradientRadius>gradientRadius\l|<gradientNoiseAmount>gradientNoiseAmount\l|<layerCenter>layerCenter\l|<layerRotation>layerRotation\l|<layerWidth>layerWidth\l|<layerHeight>layerHeight\l|<layer>layer\r" pos="451,54" fillcolor="blue" _gradientCenter="{\"x\":0,\"y\":0}" _gradientRadius="1" _gradientNoiseAmount="0.2" _layerCenter="{\"x\":0.0,\"y\":0.0}" _layerRotation="0.0"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="226,12"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.0" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-127,-130" fillcolor="yellow" _receivedChannels_eventThrottling="drop"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="544,322" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Round3 [type="vuo.math.round" version="2.0.0" label="Round|<refresh>refresh\l|<real>real\l|<rounded>rounded\r" pos="231,290"];
+Scale [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="408,-98" _start="0" _end="1" _scaledStart="-0.5" _scaledEnd="0.25"];
+
+BuildList2:builtList -> MakeRadialGradientLayer:colors;
+CalculateLoudness:loudness -> Count:increment;
+CalculateLoudness:loudness -> Scale:value;
+Count:count -> MakeHSLColor:hue;
+FireOnDisplayRefresh:requestedFrame -> MakeRadialGradientLayer:refresh;
+GetWindowDimensions:height -> MakeRadialGradientLayer:layerHeight;
+GetWindowDimensions:width -> MakeRadialGradientLayer:layerWidth;
+MakeHSLColor:color -> BuildList2:builtItem;
+MakeList4:list -> RenderLayersToWindow:layers;
+MakeList5:list -> RenderLayersToWindow:setWindowProperties;
+MakeRadialGradientLayer:layer -> MakeList4:1;
+MixAudioChannels:mixedSamples -> CalculateLoudness:samples;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels:samples;
+RenderLayersToWindow:requestedFrame -> BuildList2:refresh;
+RenderLayersToWindow:requestedFrame -> Round3:real;
+Round3:rounded -> BuildList2:fire;
+Scale:scaledValue -> MakeHSLColor2:hue;
+}
