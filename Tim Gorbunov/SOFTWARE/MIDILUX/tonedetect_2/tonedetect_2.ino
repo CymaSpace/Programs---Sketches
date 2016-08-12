@@ -20,7 +20,7 @@ int LEDS_ENABLED = 1;                  // Control if the LED's should display th
 // Useful for turning the LED display on and off with commands from the serial port.
 const int FFT_SIZE = 256;              // Size of the FFT.  Realistically can only be at most 256
 // without running out of memory for buffers and other state.
-const int AUDIO_INPUT_PIN = 16;        // Input ADC pin for audio data.
+const int AUDIO_INPUT_PIN = A2;        // Input ADC pin for audio data.
 const int ANALOG_READ_RESOLUTION = 10; // Bits of resolution for the ADC.
 const int ANALOG_READ_AVERAGING = 16;  // Number of samples to average with each ADC reading.
 const int POWER_LED_PIN = 13;          // Output pin for power LED (pin 13 to use Teensy 3.0's onboard LED).

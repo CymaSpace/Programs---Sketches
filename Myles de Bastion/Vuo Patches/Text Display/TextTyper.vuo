@@ -1,0 +1,27 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AppendTexts [type="vuo.text.append" version="1.1.0" label="Append Texts|<refresh>refresh\l|<texts>texts\l|<separator>separator\l|<compositeText>compositeText\r" pos="394,-159" fillcolor="magenta"];
+Enqueue2 [type="vuo.list.enqueue.VuoText" version="1.0.0" label="Enqueue|<refresh>refresh\l|<maxItemCount>maxItemCount\l|<addItem>addItem\l|<clearList>clearList\l|<list>list\r" pos="208,-78" fillcolor="blue" _maxItemCount="1000"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-383,19" _started_eventThrottling="enqueue"];
+MakeList [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="431,96" fillcolor="green"];
+MakeList2 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="481,111" fillcolor="green"];
+MakeTextLayer2 [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="573,-78" fillcolor="green" _font="{\"fontName\":\"HelveticaNeue-Bold\",\"pointSize\":36,\"underline\":false,\"color\":{\"r\":0.41331422328948975,\"g\":1,\"b\":0.34233391284942627,\"a\":1},\"alignment\":\"left\",\"characterSpacing\":1,\"lineSpacing\":1}" _center="{\"x\":0,\"y\":0}"];
+ReceiveKeyboardTyping [type="vuo.keyboard.type" version="1.0.1" label="Receive Keyboard Typing|<refresh>refresh\l|<window>window\l|<typedLine>typedLine\r|<typedWord>typedWord\r|<typedCharacter>typedCharacter\r" pos="-42,-75" _typedLine_eventThrottling="enqueue" _typedWord_eventThrottling="enqueue" _typedCharacter_eventThrottling="enqueue"];
+RenderLayersToWindow [type="vuo.layer.render.window" version="2.3.0" label="Render Layers to Window|<refresh>refresh\l|<layers>layers\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r|<renderedLayers>renderedLayers\r" pos="527,85" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+
+AppendTexts:compositeText -> MakeTextLayer2:text;
+Enqueue2:list -> AppendTexts:texts;
+FireOnStart:started -> ReceiveKeyboardTyping:refresh;
+MakeList2:list -> RenderLayersToWindow:setWindowProperties;
+MakeList:list -> RenderLayersToWindow:layers;
+MakeTextLayer2:layer -> MakeList:2;
+ReceiveKeyboardTyping:typedCharacter -> Enqueue2:addItem;
+}
