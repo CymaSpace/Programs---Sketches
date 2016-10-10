@@ -1,0 +1,49 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AdjustImageColors [type="vuo.image.color.adjust" version="1.2.0" label="Adjust Image Colors|<refresh>refresh\l|<image>image\l|<saturation>saturation\l|<hueShift>hueShift\l|<contrast>contrast\l|<brightness>brightness\l|<exposure>exposure\l|<gamma>gamma\l|<adjustedImage>adjustedImage\r" pos="762,84" fillcolor="cyan" _saturation="-1" _hueShift="0" _contrast="1" _brightness="0.40000000000000002" _exposure="0" _gamma="1"];
+ApplyMask [type="vuo.image.apply.mask" version="1.1.1" label="Apply Mask|<refresh>refresh\l|<image>image\l|<mask>mask\l|<maskedImage>maskedImage\r" pos="588,74" fillcolor="violet"];
+ConvertFrameToImage2 [type="vuo.type.videoframe.image" version="1.0.0" label="Convert Frame to Image|<refresh>refresh\l|<frame>frame\l|<image>image\r" pos="714,451"];
+CycleThroughList2 [type="vuo.list.cycle.VuoText" version="1.0.2" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r" pos="510,498" fillcolor="blue" _wrapMode="\"wrap\""];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="34,82" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FirePeriodically [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="-13,190" fillcolor="yellow" _seconds="0.20000000000000001" _fired_eventThrottling="drop"];
+ListFiles [type="vuo.file.list" version="1.0.2" label="List Files|<refresh>refresh\l|<folder>folder\l|<includeSubfolders>includeSubfolders\l|<fileType>fileType\l|<files>files\r" pos="291,460" fillcolor="blue" _folder="\"\"" _includeSubfolders="false" _fileType="\"movie\""];
+MakeList5 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="704,296" fillcolor="lime"];
+MakeList7 [type="vuo.list.make.2.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="308,336" fillcolor="violet"];
+MakeOvalLayer [type="vuo.layer.make.oval" version="1.0.0" label="Make Oval Layer|<refresh>refresh\l|<name>name\l|<color>color\l|<center>center\l|<rotation>rotation\l|<width>width\l|<height>height\l|<sharpness>sharpness\l|<layer>layer\r" pos="100,311" fillcolor="tangerine" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="1" _height="1" _sharpness="1.0"];
+PlayMovie [type="vuo.video.play" version="2.0.2" label="Play Movie|<refresh>refresh\l|<url>url\l|<play>play\l|<pause>pause\l|<loop>loop\l|<playbackRate>playbackRate\l|<setTime>setTime\l|<optimization>optimization\l|<decodedVideo>decodedVideo\r|<decodedAudio>decodedAudio\r" pos="337,74" fillcolor="tangerine" _loop="\"loop\"" _playbackRate="1" _setTime="\"\"" _optimization="\"auto\"" _decodedVideo_eventThrottling="drop" _decodedAudio_eventThrottling="enqueue"];
+ReceiveMouseButtons [type="vuo.mouse.button" version="1.0.2" label="Receive Mouse Buttons|<refresh>refresh\l|<window>window\l|<button>button\l|<modifierKey>modifierKey\l|<pressed>pressed\r|<released>released\r" pos="133,553" fillcolor="orange" _button="\"left\"" _modifierKey="\"any\"" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+ReceiveMouseButtons2 [type="vuo.mouse.button" version="1.0.2" label="Receive Mouse Buttons|<refresh>refresh\l|<window>window\l|<button>button\l|<modifierKey>modifierKey\l|<pressed>pressed\r|<released>released\r" pos="134,658" fillcolor="orange" _button="\"right\"" _modifierKey="\"any\"" _pressed_eventThrottling="enqueue" _released_eventThrottling="enqueue"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.2.1" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="750,270" fillcolor="lime" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderLayersToImage2 [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="378,325" fillcolor="violet" _width="1280" _height="720" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<width>width\r|<height>height\r|<time>time\r" _width_type="VuoInteger" _height_type="VuoInteger" _time_type="VuoReal"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<outputImage>outputImage\l" _outputImage_type="VuoImage"];
+
+AdjustImageColors:adjustedImage -> PublishedOutputs:outputImage;
+AdjustImageColors:adjustedImage -> RenderImageToWindow:image;
+ApplyMask:maskedImage -> AdjustImageColors:image;
+ConvertFrameToImage2:image -> ApplyMask:image;
+CycleThroughList2:item -> PlayMovie:url;
+FireOnStart:started -> ListFiles:refresh;
+FireOnStart:started -> MakeOvalLayer:refresh;
+FireOnStart:started -> PlayMovie:play;
+FirePeriodically:fired -> MakeOvalLayer:refresh;
+FirePeriodically:fired -> PlayMovie:refresh;
+FirePeriodically:fired -> RenderImageToWindow:refresh;
+FirePeriodically:fired -> RenderLayersToImage2:refresh;
+ListFiles:files -> CycleThroughList2:list;
+MakeList5:list -> RenderImageToWindow:setWindowProperties;
+MakeList7:list -> RenderLayersToImage2:layers;
+MakeOvalLayer:layer -> MakeList7:1;
+PlayMovie:decodedVideo -> ConvertFrameToImage2:frame;
+ReceiveMouseButtons2:released -> CycleThroughList2:goBackward;
+ReceiveMouseButtons:released -> CycleThroughList2:goForward;
+RenderLayersToImage2:image -> ApplyMask:mask;
+}
