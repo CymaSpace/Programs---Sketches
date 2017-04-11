@@ -10,18 +10,14 @@
 #define PSTR // Make Arduino Due happy
 #endif
 
-#define PIN 6
-#define COLUMNS 24
+#define PIN 21
+#define COLUMNS 38
 #define ROWS 12
-#define MATRIX_WIDTH 8
-#define MATRIX_HEIGHT 1
-#define TILE_WIDTH 1
-#define TILE_HEIGHT 15
-#define mBrightness 128//matrix brightness
+#define mBrightness 128 //matrix brightness
 
-
+// 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(COLUMNS, ROWS, PIN,
-  NEO_MATRIX_BOTTOM  + NEO_MATRIX_RIGHT + 
+  NEO_MATRIX_TOP  + NEO_MATRIX_LEFT + 
   NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG,
   NEO_GRB            + NEO_KHZ800);
 
@@ -56,7 +52,7 @@ AudioControlSGTL5000 audioShield;
   boolean touched = false;
   float fadeholdtime = 0;
   boolean fading = true;
-  int lightsensor = 255;
+  int lightsensor = 100;
   
 void setup()
 {
@@ -107,22 +103,9 @@ void loop()
 
   // Read in FFT values
   if (myFFT.available()) {
-    int band_modifier = int(COLUMNS / 10);
-    float mid_modifier = band_modifier * 0.01;
-    float bass_modifier = band_modifier * 0.03;
-    // Set sampling ranges based on function
-    for (int k=0; k<COLUMNS; k++){
-      if (k >=int(COLUMNS * 0.5)){
-        float amp = (mid_modifier * pow((k - mid_modifier), 2));
-        bands[k] = myFFT.read(amp, (amp + mid_modifier));//note for tim after middle good work on begginging
-        sum += bands[k];
-      }else {
-        float amp = 0.9 * pow((k), (0.035 * k));
-        bands[k] = myFFT.read(amp, bass_modifier);//note for tim after middle good work on begginging
-        sum += bands[k];
-      }
-    }
-    //Serial.println(sum);
+
+    sum = get_FFT_vals(bands, sum);
+    
     /* Start standby text */
 
     if(timer == 0) {
@@ -132,15 +115,8 @@ void loop()
 
     if ((millis() - timer) > timeout && sum < amp_threshold){
       
-      //Serial.println(analogRead(A0));
       matrix.setBrightness(lightsensor);
-      matrix.setCursor(2, 4);
-      matrix.setTextColor(drawRGB24toRGB565((fade * 255), (fade * 255), (fade * 255)));
-      matrix.setTextSize(1);
-      matrix.setTextWrap(false);
-      matrix.print("Play");
-      matrix.setCursor(27, 4);
-      matrix.print("Me");
+      turn_off_pixels();
       matrix.show();
       touched = false;
       
@@ -165,7 +141,7 @@ void loop()
         fade -= 0.015;
       }
 
-    } else if (sum >=  amp_threshold-0.6){ //because it always goes here
+    } else if (sum >= amp_threshold-0.6){ // Animation has been reactivated
       // Set all of the necessary pixels and display them
       set_pixels(bands, history, color_vals);
       matrix.setBrightness(lightsensor);
@@ -176,7 +152,7 @@ void loop()
         fade = 0.00;
         touched = true;
       }
-    } else{ // to finish the animation
+    } else { // to finish the animation
       set_pixels(bands, history, color_vals);
       matrix.setBrightness(lightsensor);
       matrix.show();
@@ -186,6 +162,40 @@ void loop()
   count += 0.1;
 }
 
+// Read FFT data from audio input
+float get_FFT_vals(float bands[], float sum) {
+  
+  // myFFT.read takes start and end FFT audio data bins 
+  // (usually 512 total bins, 0-511)
+  for (int k=0; k<COLUMNS; k++){
+
+    // Data bins collected different depending on frequency
+    // This 
+    if(k >= int(COLUMNS * 0.6)) {
+      float start = 0.07 * pow((k - 5), 2);
+      float end = start + (COLUMNS / 8.2);
+      bands[k] = myFFT.read(start, end);
+    } else {
+      float start = 0.9 * pow(k, 0.035 * k);
+      float end = start  + (COLUMNS / 8.2);
+      Serial.println("<=");
+      Serial.println(start);
+      Serial.println(end);
+      Serial.println("---");
+      bands[k] = myFFT.read(start, end);
+    }
+    sum += bands[k];
+  }
+  return sum;
+}
+
+void turn_off_pixels() {
+  for(int c = 0; c < COLUMNS; c++) {
+    for(int r = 0; r < ROWS; r++) {
+      matrix.drawPixel(c, r, 0);
+    }
+  }
+}
 
 void set_pixels(float bands[], float history[][COLUMNS], int color_vals[])
 {
@@ -207,8 +217,6 @@ void set_pixels(float bands[], float history[][COLUMNS], int color_vals[])
     for(x = 0; x < COLUMNS; x++) {
       if(history[y][x] != -1) {
         get_amp_color(history[y][x], color_vals);
-        String output = "Drawn to: (" + String(x) + ", " + String(y) + ")";
-        Serial.println(output);
         matrix.drawPixel( x, y ,drawRGB24toRGB565(color_vals[0], color_vals[1], color_vals[2]));
       }
     }
