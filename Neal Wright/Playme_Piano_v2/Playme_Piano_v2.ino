@@ -94,10 +94,6 @@ void loop()
   int color_vals[3];
 
   //for standby playme
-  //float amp_threshold = map(analogRead(A0), 0, 1023, 0.07, 1);
-  //Serial.println();
-  //Serial.print("HI  ");
-  //Serial.println(amp_threshold);
   float amp_threshold = 0.8;
   int timeout = 6000;
 
@@ -170,7 +166,6 @@ float get_FFT_vals(float bands[], float sum) {
   for (int k=0; k<COLUMNS; k++){
 
     // Data bins collected different depending on frequency
-    // This 
     if(k >= int(COLUMNS * 0.6)) {
       float start = 0.07 * pow((k - 5), 2);
       float end = start + (COLUMNS / 8.2);
@@ -178,10 +173,6 @@ float get_FFT_vals(float bands[], float sum) {
     } else {
       float start = 0.9 * pow(k, 0.035 * k);
       float end = start  + (COLUMNS / 8.2);
-      Serial.println("<=");
-      Serial.println(start);
-      Serial.println(end);
-      Serial.println("---");
       bands[k] = myFFT.read(start, end);
     }
     sum += bands[k];
