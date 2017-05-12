@@ -1,0 +1,127 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [smokris](https://vuo.org/user/9)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+Average [type="vuo.math.average" version="1.0.0" label="Average|<refresh>refresh\l|<values>values\l|<averageValue>averageValue\r" pos="847,182"];
+BecameTrue [type="vuo.event.becameTrue" version="1.0.0" label="Became True|<refresh>refresh\l|<value>value\l|<becameTrue>becameTrue\r" pos="1790,-230"];
+BlendImageWithFeedback [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="1040,572" _feedbackOpacity="0.33000000000000002" _pixelAligned="false" _imageInForeground="true" _width="1024" _height="768" _colorDepth="\"8bpc\""];
+Calculate [type="vuo.math.calculate" version="1.0.0" label="Calculate|<refresh>refresh\l|<expression>expression\l|<values>values\l|<result>result\r" pos="997,112" _expression="{\"expressions\":[\"(r - avg)*2\"],\"inputVariables\":[\"avg\",\"r\"],\"outputVariables\":[\"result\"]}"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="614,-106" _frequencyBins="\"1023\"" _frequencyBinAveraging="\"logarithmic\""];
+CalculateAmplitudeForFrequencies2 [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="787,773" _frequencyBins="\"3\"" _frequencyBinAveraging="\"logarithmic\""];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="580,74"];
+CalculateLoudness2 [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="580,149"];
+CompareNumbers [type="vuo.math.compareNumbers.VuoReal" version="1.0.0" label="Compare Numbers|<refresh>refresh\l|<a>a\l|<comparison>comparison\l|<b>b\l|<result>result\r" pos="1569,-264" _comparison="\"=\""];
+ConvertIntegerToRealNumber3 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="1953,152"];
+ConvertIntegerToRealNumber4 [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="1875,111"];
+ConvertRealTo3DPoint [type="vuo.type.real.point3d.xyz" version="1.0.0" label="Convert Real to 3D Point|<refresh>refresh\l|<x>x\l|<point3d>point3d\r" pos="945,345"];
+ConvertRealTo3DPoint10 [type="vuo.type.real.point3d.xyz" version="1.0.0" label="Convert Real to 3D Point|<refresh>refresh\l|<x>x\l|<point3d>point3d\r" pos="1405,499"];
+ConvertRealTo3DPoint2 [type="vuo.type.real.point3d.x" version="1.0.1" label="Convert Real to 3D Point|<refresh>refresh\l|<x>x\l|<point3d>point3d\r" pos="1125,270"];
+Copy3DObject [type="vuo.scene.copy.trs" version="2.0.2" label="Copy 3D Object|<refresh>refresh\l|<object>object\l|<translations>translations\l|<rotations>rotations\l|<scales>scales\l|<copies>copies\r" pos="543,277"];
+Count4 [type="vuo.math.count.VuoInteger" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="258,564" _increment="1" _decrement="1" _setCount="0"];
+CountItemsInList7 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="1364,-22"];
+CycleThroughList2 [type="vuo.list.cycle.VuoReal" version="1.1.0" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r|<position>position\r" pos="1370,-156" _wrapMode="\"wrap\""];
+FindMaximum [type="vuo.math.max.VuoReal" version="2.0.0" label="Find Maximum|<refresh>refresh\l|<values>values\l|<max>max\r" pos="1399,-273"];
+FirePeriodically3 [type="vuo.time.firePeriodically" version="1.0.2" label="Fire Periodically|<refresh>refresh\l|<seconds>seconds\l|<fired>fired\r" pos="1134,-237" _seconds="0.001" _fired_eventThrottling="drop"];
+GetItemFromList2 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="415,74" _which="1"];
+GetItemFromList3 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="415,149" _which="2"];
+GetItemFromList5 [type="vuo.list.get.VuoReal" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="1085,771" _which="1"];
+HoldValue5 [type="vuo.data.hold.VuoInteger" version="2.0.0" label="Hold Value|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="1657,-110"];
+Make3DPoint [type="vuo.point.make.VuoPoint3d" version="2.0.0" label="Make 3D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<z>z\l|<point>point\r" pos="1168,211" _x="0.05995592474937439" _z="0.0"];
+Make3DTransform [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="1398,147" _rotation="{\"x\":0,\"y\":0,\"z\":0}"];
+Make3DTransform2 [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="1329,353" _rotation="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeDictionary2 [type="vuo.dictionary.make.VuoText.VuoReal" version="1.0.0" label="Make Dictionary|<refresh>refresh\l|<keys>keys\l|<values>values\l|<dictionary>dictionary\r" pos="761,159"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="1318,722" _saturation="1" _lightness="0.56999999999999995" _opacity="1"];
+MakeList [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="497,333" _1="{\"x\":1,\"y\":1,\"z\":1}"];
+MakeList14 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="1247,601" fillcolor="blue"];
+MakeList16 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="801,193"];
+MakeList19 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="942,138"];
+MakeList2 [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="416,318" _1="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeList20 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="761,159" _1="\"avg\"" _2="\"r\""];
+MakeList3 [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="336,303" _1="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeList4 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="735,618" fillcolor="blue"];
+MakeRandomPointsObject2 [type="vuo.scene.make.random.points.VuoShader" version="1.0.0" label="Make Random Points Object|<refresh>refresh\l|<transform>transform\l|<material>material\l|<distribution>distribution\l|<count>count\l|<pointSize>pointSize\l|<seed>seed\l|<object>object\r" pos="407,557" _distribution="\"sphere-volume\"" _count="20" _pointSize="0.01" _seed="4326"];
+MakeSphere2 [type="vuo.scene.make.sphere.VuoShader" version="1.0.0" label="Make Sphere|<refresh>refresh\l|<transform>transform\l|<material>material\l|<rows>rows\l|<columns>columns\l|<object>object\r" pos="1497,395" _rows="32" _columns="32"];
+ReceiveLiveAudio2 [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="60,165" _receivedChannels_eventThrottling="drop"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.2.1" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1288,575" fillcolor="blue" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="805,607" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+Ripple3DObject2 [type="vuo.scene.ripple" version="1.0.1" label="Ripple 3D Object|<refresh>refresh\l|<object>object\l|<angle>angle\l|<amplitude>amplitude\l|<wavelength>wavelength\l|<phase>phase\l|<dispersion>dispersion\l|<displacement>displacement\l|<rippledObject>rippledObject\r" pos="1760,330" _amplitude="0" _wavelength="0.00080097999999999996" _phase="0.17000000000000001" _dispersion="\"linear\"" _displacement="\"transverse\""];
+Scale [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="1820,-60" _start="1" _scaledStart="-0.75" _scaledEnd="0.75"];
+Scale3 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="888,320" _start="0.25" _end="0.80000000000000004" _scaledStart="0." _scaledEnd="1"];
+Scale4 [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<scaledValue>scaledValue\r" pos="1163,913" _start="-1" _end="1." _scaledStart="1" _scaledEnd="0.5"];
+ShadeEdgesWithColor [type="vuo.shader.make.edge.color" version="1.0.0" label="Shade Edges with Color|<refresh>refresh\l|<color>color\l|<width>width\l|<sharpness>sharpness\l|<interiorOpacity>interiorOpacity\l|<shader>shader\r" pos="1508,724" _width="0.41999999999999998" _sharpness="0.51000000000000001" _interiorOpacity="0.070000000000000007"];
+ShareList2 [type="vuo.data.share.list.VuoAudioSamples" version="1.0.0" label="Share List|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="255,165"];
+SmoothWithDuration2 [type="vuo.motion.smooth.duration.VuoReal" version="1.1.0" label="Smooth with Duration|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<duration>duration\l|<curve>curve\l|<easing>easing\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="1075,319" _setPosition="0." _duration="0.25" _curve="\"cubic\"" _easing="\"out\""];
+SmoothWithInertia4 [type="vuo.motion.smooth.inertia.VuoReal" version="1.1.0" label="Smooth with Inertia|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<duration>duration\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="1662,133" _setPosition="0." _duration="0.14999999999999999"];
+SmoothWithInertia6 [type="vuo.motion.smooth.inertia.VuoReal" version="1.1.0" label="Smooth with Inertia|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<duration>duration\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="1295,898" _setPosition="0." _duration="0.20000000000000001"];
+
+Average:averageValue -> ConvertRealTo3DPoint:x;
+Average:averageValue -> MakeList19:2;
+Average:averageValue -> Scale3:value;
+BecameTrue:becameTrue -> HoldValue5:refresh;
+BlendImageWithFeedback:feedbackImage -> RenderImageToWindow:image;
+Calculate:result -> ConvertRealTo3DPoint2:x;
+CalculateAmplitudeForFrequencies2:amplitudes -> GetItemFromList5:list;
+CalculateAmplitudeForFrequencies:amplitudes -> CountItemsInList7:list;
+CalculateAmplitudeForFrequencies:amplitudes -> CycleThroughList2:list;
+CalculateAmplitudeForFrequencies:amplitudes -> FindMaximum:values;
+CalculateLoudness2:loudness -> MakeList16:2;
+CalculateLoudness2:loudness -> MakeList19:1;
+CalculateLoudness:loudness -> MakeList16:1;
+CalculateLoudness:loudness -> Ripple3DObject2:angle;
+CompareNumbers:result -> BecameTrue:value;
+ConvertIntegerToRealNumber3:real -> Scale:end;
+ConvertIntegerToRealNumber4:real -> Scale:value;
+ConvertRealTo3DPoint10:point3d -> Make3DTransform2:scale;
+ConvertRealTo3DPoint2:point3d -> Make3DTransform:translation;
+ConvertRealTo3DPoint:point3d -> Make3DTransform:scale;
+Copy3DObject:copies -> MakeList4:1;
+CountItemsInList7:itemCount -> ConvertIntegerToRealNumber3:integer;
+CycleThroughList2:item -> CompareNumbers:b;
+CycleThroughList2:position -> HoldValue5:newValue;
+FindMaximum:max -> CompareNumbers:a;
+FirePeriodically3:fired -> CycleThroughList2:goForward;
+GetItemFromList2:item -> CalculateAmplitudeForFrequencies2:samples;
+GetItemFromList2:item -> CalculateAmplitudeForFrequencies:samples;
+GetItemFromList2:item -> CalculateLoudness:samples;
+GetItemFromList3:item -> CalculateLoudness2:samples;
+HoldValue5:heldValue -> ConvertIntegerToRealNumber4:integer;
+Make3DPoint:point -> Make3DTransform2:translation;
+Make3DTransform2:transform -> MakeSphere2:transform;
+Make3DTransform:transform -> Count4:increment [event=true];
+Make3DTransform:transform -> MakeRandomPointsObject2:transform;
+MakeDictionary2:dictionary -> Calculate:values;
+MakeHSLColor:color -> ShadeEdgesWithColor:color;
+MakeList14:list -> RenderImageToWindow:setWindowProperties;
+MakeList16:list -> Average:values;
+MakeList19:list -> MakeDictionary2:values;
+MakeList20:list -> MakeDictionary2:keys;
+MakeList2:list -> Copy3DObject:rotations;
+MakeList3:list -> Copy3DObject:translations;
+MakeList4:list -> RenderSceneToImage:objects;
+MakeList:list -> Copy3DObject:scales;
+MakeSphere2:object -> Ripple3DObject2:object;
+ReceiveLiveAudio2:receivedChannels -> ShareList2:value;
+RenderImageToWindow:requestedFrame -> Make3DPoint:refresh;
+RenderImageToWindow:requestedFrame -> ShadeEdgesWithColor:refresh;
+RenderImageToWindow:requestedFrame -> SmoothWithDuration2:time;
+RenderImageToWindow:requestedFrame -> SmoothWithInertia4:time;
+RenderImageToWindow:requestedFrame -> SmoothWithInertia6:time;
+RenderSceneToImage:image -> BlendImageWithFeedback:image;
+Ripple3DObject2:rippledObject -> MakeList4:2;
+Scale3:scaledValue -> SmoothWithDuration2:setTarget;
+Scale4:scaledValue -> SmoothWithInertia6:setTarget;
+Scale:scaledValue -> Scale4:value;
+Scale:scaledValue -> SmoothWithInertia4:setTarget;
+ShadeEdgesWithColor:shader -> MakeSphere2:material;
+ShareList2:sameValue -> GetItemFromList2:list;
+ShareList2:sameValue -> GetItemFromList3:list;
+SmoothWithDuration2:position -> ConvertRealTo3DPoint10:x;
+SmoothWithInertia4:position -> Make3DPoint:y;
+SmoothWithInertia6:position -> MakeHSLColor:hue;
+}

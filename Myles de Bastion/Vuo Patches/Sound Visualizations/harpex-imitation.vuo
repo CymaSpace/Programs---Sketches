@@ -1,0 +1,59 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [smokris](https://vuo.org/user/9)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+Average [type="vuo.math.average" version="1.0.0" label="Average|<refresh>refresh\l|<values>values\l|<averageValue>averageValue\r" pos="825,210"];
+BlendImageWithFeedback [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="1035,480" _feedbackOpacity="0.7" _pixelAligned="false" _imageInForeground="true" _width="1024" _height="768" _colorDepth="\"8bpc\""];
+Calculate [type="vuo.math.calculate" version="1.0.0" label="Calculate|<refresh>refresh\l|<expression>expression\l|<values>values\l|<result>result\r" pos="1005,150" _expression="{\"expressions\":[\"(r - avg)*2\"],\"inputVariables\":[\"avg\",\"r\"],\"outputVariables\":[\"result\"]}"];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="585,90"];
+CalculateLoudness2 [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="585,165"];
+ConvertRealTo3DPoint [type="vuo.type.real.point3d.xyz" version="1.0.0" label="Convert Real to 3D Point|<refresh>refresh\l|<x>x\l|<point3d>point3d\r" pos="945,345"];
+ConvertRealTo3DPoint2 [type="vuo.type.real.point3d.x" version="1.0.1" label="Convert Real to 3D Point|<refresh>refresh\l|<x>x\l|<point3d>point3d\r" pos="1125,270"];
+Count4 [type="vuo.math.count.VuoInteger" version="1.0.0" label="Count|<refresh>refresh\l|<increment>increment\l|<decrement>decrement\l|<setCount>setCount\l|<count>count\r" pos="315,555" _increment="1" _decrement="1" _setCount="0"];
+GetItemFromList2 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="420,90" _which="1"];
+GetItemFromList3 [type="vuo.list.get.VuoAudioSamples" version="1.0.0" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="420,165" _which="2"];
+Make3DTransform [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="1215,180" _rotation="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeDictionary2 [type="vuo.dictionary.make.VuoText.VuoReal" version="1.0.0" label="Make Dictionary|<refresh>refresh\l|<keys>keys\l|<values>values\l|<dictionary>dictionary\r" pos="769,197"];
+MakeList14 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="1234,506" fillcolor="blue"];
+MakeList15 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="740,491" fillcolor="blue"];
+MakeList16 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="779,221"];
+MakeList19 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="950,176"];
+MakeList20 [type="vuo.list.make.2.VuoText" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="769,197" _1="\"avg\"" _2="\"r\""];
+MakeRandomPointsObject2 [type="vuo.scene.make.random.points.VuoShader" version="1.0.0" label="Make Random Points Object|<refresh>refresh\l|<transform>transform\l|<material>material\l|<distribution>distribution\l|<count>count\l|<pointSize>pointSize\l|<seed>seed\l|<object>object\r" pos="510,480" _distribution="\"sphere-volume\"" _count="256" _pointSize="0.0050000000000000001"];
+ReceiveLiveAudio2 [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="60,165" _receivedChannels_eventThrottling="drop"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.2.1" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1275,480" fillcolor="blue" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="810,480" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+ShareList2 [type="vuo.data.share.list.VuoAudioSamples" version="1.0.0" label="Share List|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="255,165"];
+
+Average:averageValue -> ConvertRealTo3DPoint:x;
+Average:averageValue -> MakeList19:2;
+BlendImageWithFeedback:feedbackImage -> RenderImageToWindow:image;
+Calculate:result -> ConvertRealTo3DPoint2:x;
+CalculateLoudness2:loudness -> MakeList16:2;
+CalculateLoudness2:loudness -> MakeList19:1;
+CalculateLoudness:loudness -> MakeList16:1;
+ConvertRealTo3DPoint2:point3d -> Make3DTransform:translation;
+ConvertRealTo3DPoint:point3d -> Make3DTransform:scale;
+Count4:count -> MakeRandomPointsObject2:seed;
+GetItemFromList2:item -> CalculateLoudness:samples;
+GetItemFromList3:item -> CalculateLoudness2:samples;
+Make3DTransform:transform -> Count4:increment [event=true];
+Make3DTransform:transform -> MakeRandomPointsObject2:transform;
+MakeDictionary2:dictionary -> Calculate:values;
+MakeList14:list -> RenderImageToWindow:setWindowProperties;
+MakeList15:list -> RenderSceneToImage:objects;
+MakeList16:list -> Average:values;
+MakeList19:list -> MakeDictionary2:values;
+MakeList20:list -> MakeDictionary2:keys;
+MakeRandomPointsObject2:object -> MakeList15:1;
+ReceiveLiveAudio2:receivedChannels -> ShareList2:value;
+RenderSceneToImage:image -> BlendImageWithFeedback:image;
+ShareList2:sameValue -> GetItemFromList2:list;
+ShareList2:sameValue -> GetItemFromList3:list;
+}

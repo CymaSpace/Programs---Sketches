@@ -1,0 +1,99 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2016 [ariam](https://vuo.org/user/739454)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+BlendImageWithFeedback [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="2081,441" _feedbackTransform="\"identity\"" _feedbackOpacity="0.40000000000000002" _pixelAligned="true" _imageInForeground="false" _width="200" _height="200" _colorDepth="\"8bpc\""];
+BlendImageWithFeedback2 [type="vuo.image.feedback" version="1.0.0" label="Blend Image with Feedback|<refresh>refresh\l|<image>image\l|<imageTransform>imageTransform\l|<feedbackTransform>feedbackTransform\l|<feedbackOpacity>feedbackOpacity\l|<pixelAligned>pixelAligned\l|<imageInForeground>imageInForeground\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<feedbackImage>feedbackImage\r" pos="1831,442" _imageTransform="\"identity\"" _feedbackTransform="{\"translation\":[0.039999999105930328,0],\"rotation\":0,\"scale\":[1,1]}" _feedbackOpacity="1" _pixelAligned="true" _imageInForeground="false" _width="200" _height="200" _colorDepth="\"8bpc\""];
+BlurImage3 [type="vuo.image.blur" version="1.2.1" label="Smooth Terrain|<refresh>refresh\l|<image>image\l|<radius>radius\l|<expandBounds>expandBounds\l|<blurredImage>blurredImage\r" pos="1630,529" _radius="0" _expandBounds="true"];
+BuildList2 [type="vuo.list.build.VuoColor" version="1.0.1" label="Build List Colors|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="1221,-44" fillcolor="lime" _fire="6" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+BuildList6 [type="vuo.list.build.VuoSceneObject" version="1.0.1" label="Build List Ponits|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="1126,253" fillcolor="magenta" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="286,253" fillcolor="magenta" _frequencyBins="\"127\"" _frequencyBinAveraging="\"none\""];
+ConvertIntegerToRealNumber [type="vuo.type.integer.real" version="1.0.0" label="Convert Integer to Real Number|<refresh>refresh\l|<integer>integer\l|<real>real\r" pos="911,-242"];
+CountItemsInList [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="1225,363"];
+CountItemsInList6 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="717,131"];
+CycleThroughList2 [type="vuo.list.cycle.VuoReal" version="1.1.0" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r|<position>position\r" pos="659,395" _wrapMode="\"wrap\""];
+CycleThroughList4 [type="vuo.list.cycle.VuoReal" version="1.1.0" label="Cycle through List|<refresh>refresh\l|<list>list\l|<goForward>goForward\l|<goBackward>goBackward\l|<goToFirst>goToFirst\l|<wrapMode>wrapMode\l|<item>item\r|<position>position\r" pos="654,536" _wrapMode="\"wrap\""];
+Displace3DObjectWithImage [type="vuo.scene.displace.image" version="1.0.0" label="Displace 3D Object with Image|<refresh>refresh\l|<object>object\l|<image>image\l|<channel>channel\l|<distance>distance\l|<deformedObject>deformedObject\r" pos="1688,106" fillcolor="orange" _channel="\"luminance\"" _distance="0.25"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-29,173" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FlipImageVertically [type="vuo.image.flip.vertical" version="1.1.1" label="Flip Image Vertically|<refresh>refresh\l|<image>image\l|<flippedImage>flippedImage\r" pos="1527,425"];
+GetScreenValues [type="vuo.screen.get" version="1.1.0" label="Get Screen Values|<refresh>refresh\l|<screen>screen\l|<name>name\r|<topLeft>topLeft\r|<width>width\r|<height>height\r|<dpiHorizontal>dpiHorizontal\r|<dpiVertical>dpiVertical\r" pos="-45,18" fillcolor="green" _screen="{\"type\":\"active\"}"];
+Make2DPoint3 [type="vuo.point.make.VuoPoint2d" version="2.0.0" label="Make 2D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<point>point\r" pos="842,381" _x="-0.90000000000000002"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="1268,416"];
+Make3DSquare2 [type="vuo.scene.make.square.VuoShader" version="1.0.0" label="Make 3D Square|<refresh>refresh\l|<transform>transform\l|<material>material\l|<rows>rows\l|<columns>columns\l|<object>object\r" pos="1474,107" fillcolor="cyan" _transform="{\"translation\":[0,0,0],\"eulerRotation\":[0,1.0471975803375244,1.5707963705062866],\"scale\":[1,1,1]}" _rows="200" _columns="200"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="1060,543" _hue="0.0" _saturation="0" _opacity="1.0"];
+MakeHSLColor2 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="1041,-28" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="854,547" _2="0.050000000000000003"];
+MakeList19 [type="vuo.list.make.1.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="614,280" fillcolor="tangerine" _1="1"];
+MakeList3 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="1984,118"];
+MakeList34 [type="vuo.list.make.1.VuoPoint2d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="1025,435"];
+MakeList6 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="2262,133" fillcolor="blue"];
+MakeList7 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="842,-17" _2="-0.25"];
+MakePointMesh4 [type="vuo.mesh.make.points.VuoPoint2d" version="2.1.0" label="Make Point Mesh|<refresh>refresh\l|<positions>positions\l|<pointSize>pointSize\l|<mesh>mesh\r" pos="1087,424" _pointSize="0.10000000000000001"];
+MakePointsAlongCurve4 [type="vuo.point.make.curve.VuoReal" version="1.0.0" label="Make Points along Curve|<refresh>refresh\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<curve>curve\l|<easing>easing\l|<numberOfPoints>numberOfPoints\l|<points>points\r" pos="683,108" fillcolor="violet" _startPosition="-0.96999999999999997" _endPosition="0.96999999999999997" _curve="\"linear\"" _easing="\"in+out\""];
+MapImageColors [type="vuo.image.color.map" version="1.0.0" label="Map Image Colors|<refresh>refresh\l|<image>image\l|<colors>colors\l|<filterOpacity>filterOpacity\l|<mappedImage>mappedImage\r" pos="1474,-59" _filterOpacity="1"];
+MixAudioChannels2 [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="329,489"];
+Multiply [type="vuo.math.multiply.VuoReal" version="2.0.0" label="Multiply|<refresh>refresh\l|<values>values\l|<product>product\r" pos="888,-28"];
+Multiply2 [type="vuo.math.multiply.VuoReal" version="2.0.0" label="Multiply|<refresh>refresh\l|<values>values\l|<product>product\r" pos="900,536"];
+MultiplyLists2 [type="vuo.math.multiply.list.2.VuoReal" version="1.0.0" label="Multiply Lists|<refresh>refresh\l|<list1>list1\l|<list2>list2\l|<productList>productList\r" pos="660,254" fillcolor="tangerine"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-74,252" fillcolor="yellow" _receivedChannels_eventThrottling="drop"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.2.1" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="2303,107" fillcolor="blue" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="2053,107" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage2 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="1478,253" _width="200" _height="200" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RotateImage [type="vuo.image.rotate" version="1.0.1" label="Rotate Image|<refresh>refresh\l|<image>image\l|<rotation>rotation\l|<expandBounds>expandBounds\l|<rotatedImage>rotatedImage\r" pos="1830,286" fillcolor="lime" _rotation="180" _expandBounds="false"];
+ShadeWithUnlitColor2 [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="1248,542"];
+ShadeWithUnlitImage [type="vuo.shader.make.image.unlit" version="3.0.0" label="Shade with Unlit Image|<refresh>refresh\l|<image>image\l|<opacity>opacity\l|<shader>shader\r" pos="1667,-55" _opacity="1.0"];
+
+BlendImageWithFeedback2:feedbackImage -> BlendImageWithFeedback:image;
+BlendImageWithFeedback:feedbackImage -> RotateImage:image;
+BlurImage3:blurredImage -> BlendImageWithFeedback2:image;
+BuildList2:buildItem -> ConvertIntegerToRealNumber:integer [style=invis];
+BuildList2:builtList -> MapImageColors:colors;
+BuildList6:buildItem -> CycleThroughList2:goForward [style=invis];
+BuildList6:buildItem -> CycleThroughList4:goForward [style=invis];
+BuildList6:builtList -> RenderSceneToImage2:objects;
+CalculateAmplitudeForFrequencies:amplitudes -> CountItemsInList6:list;
+CalculateAmplitudeForFrequencies:amplitudes -> MultiplyLists2:list1;
+ConvertIntegerToRealNumber:real -> MakeList7:1;
+CountItemsInList6:itemCount -> MakePointsAlongCurve4:numberOfPoints;
+CountItemsInList:itemCount -> BuildList6:fire;
+CycleThroughList2:item -> Make2DPoint3:y;
+CycleThroughList4:item -> MakeList:1;
+Displace3DObjectWithImage:deformedObject -> MakeList3:1;
+FireOnStart:started -> BuildList2:fire [style=invis];
+FireOnStart:started -> GetScreenValues:refresh [style=invis];
+FlipImageVertically:flippedImage -> BlurImage3:image;
+GetScreenValues:height -> RenderSceneToImage:height [style=invis];
+GetScreenValues:width -> RenderSceneToImage:width [style=invis];
+Make2DPoint3:point -> MakeList34:1;
+Make3DObject:object -> BuildList6:builtItem;
+Make3DSquare2:object -> Displace3DObjectWithImage:object;
+MakeHSLColor2:color -> BuildList2:builtItem;
+MakeHSLColor:color -> ShadeWithUnlitColor2:color;
+MakeList19:list -> MultiplyLists2:list2;
+MakeList34:list -> MakePointMesh4:positions;
+MakeList3:list -> RenderSceneToImage:objects;
+MakeList6:list -> RenderImageToWindow:setWindowProperties;
+MakeList7:list -> Multiply:values;
+MakeList:list -> Multiply2:values;
+MakePointMesh4:mesh -> Make3DObject:mesh;
+MakePointsAlongCurve4:points -> CycleThroughList2:list [style=invis];
+MapImageColors:mappedImage -> ShadeWithUnlitImage:image;
+MixAudioChannels2:mixedSamples -> CalculateAmplitudeForFrequencies:samples;
+Multiply2:product -> MakeHSLColor:lightness;
+Multiply:product -> MakeHSLColor2:hue;
+MultiplyLists2:productList -> CountItemsInList:list;
+MultiplyLists2:productList -> CycleThroughList4:list [style=invis];
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels2:samples;
+RenderSceneToImage2:image -> FlipImageVertically:image;
+RenderSceneToImage:image -> RenderImageToWindow:image;
+RotateImage:rotatedImage -> Displace3DObjectWithImage:image;
+RotateImage:rotatedImage -> MapImageColors:image;
+ShadeWithUnlitColor2:shader -> Make3DObject:shader;
+ShadeWithUnlitImage:shader -> Make3DSquare2:material;
+}

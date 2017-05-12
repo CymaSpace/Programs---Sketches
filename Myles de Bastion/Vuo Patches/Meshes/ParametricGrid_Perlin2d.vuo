@@ -1,0 +1,24 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2015 [jstrecker](https://vuo.org/user/22)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+Make3DObject2 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="540,225"];
+MakeList6 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="604,146"];
+MakeList9 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="574,116"];
+MakeParametricGridPoints [type="vuo.point.make.parametric.grid" version="1.0.1" label="Make Parametric Grid Points|<refresh>refresh\l|<time>time\l|<xExpression>xExpression\l|<yExpression>yExpression\l|<zExpression>zExpression\l|<rows>rows\l|<columns>columns\l|<uMin>uMin\l|<uMax>uMax\l|<vMin>vMin\l|<vMax>vMax\l|<points>points\r" pos="75,225" _xExpression="\"u + perlin2d(u, time)\"" _yExpression="\"v\"" _zExpression="\"0\"" _rows="16" _columns="16" _uMin="-0.5" _uMax="0.5" _vMin="-0.29999999999999999" _vMax="0.29999999999999999"];
+MakePointMesh2 [type="vuo.mesh.make.points.VuoPoint3d" version="2.1.0" label="Make Point Mesh|<refresh>refresh\l|<positions>positions\l|<pointSize>pointSize\l|<mesh>mesh\r" pos="345,225" _pointSize="0.01"];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.2.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="645,105" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+
+Make3DObject2:object -> MakeList9:1;
+MakeList6:list -> RenderSceneToWindow:setWindowProperties;
+MakeList9:list -> RenderSceneToWindow:objects;
+MakeParametricGridPoints:points -> MakePointMesh2:positions;
+MakePointMesh2:mesh -> Make3DObject2:mesh;
+RenderSceneToWindow:requestedFrame -> MakeParametricGridPoints:time;
+}

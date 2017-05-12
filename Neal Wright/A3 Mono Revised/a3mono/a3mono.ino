@@ -4,7 +4,7 @@
 #define CNT_LIGHTS 56
 
 // Instantiate Neopixel Strip
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRB + NEO_KHZ800); 
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(CNT_LIGHTS, PIN, NEO_GRBW + NEO_KHZ800); 
 
 /* === Fixed settings === */
 

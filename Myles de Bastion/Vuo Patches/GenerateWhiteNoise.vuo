@@ -1,0 +1,70 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AdjustLoudness2 [type="vuo.audio.loudness" version="2.0.0" label="Adjust Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\l|<adjustedSamples>adjustedSamples\r" pos="512,-132" _loudness="0.10000000000000001"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="105,330" fillcolor="violet" _frequencyBins="\"2047\"" _frequencyBinAveraging="\"none\""];
+CalculateAmplitudeForFrequencies2 [type="vuo.audio.analyze.fft" version="1.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="105,525" fillcolor="violet" _frequencyBins="\"2047\"" _frequencyBinAveraging="\"none\""];
+ConvertRealListToAudio [type="vuo.type.audio.list.real" version="1.0.0" label="Convert Real List to Audio|<refresh>refresh\l|<reals>reals\l|<samples>samples\r" pos="220,-120"];
+CountItemsInList2 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="420,480"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="780,600" fillcolor="yellow" _started_eventThrottling="enqueue"];
+GetFirstItemInList [type="vuo.list.get.first.VuoAudioSamples" version="1.0.0" label="Get First Item in List|<refresh>refresh\l|<list>list\l|<firstItem>firstItem\r" pos="204,440"];
+HoldList5 [type="vuo.data.hold.list.VuoReal" version="1.0.0" label="Hold List|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="435,315"];
+HoldList6 [type="vuo.data.hold.list.VuoReal" version="1.0.0" label="Hold List|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="435,510"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="1200,375" _transform="{\"translation\":[0,0,0],\"eulerRotation\":[0,0,0],\"scale\":[1,0.0001500000071246177,1]}"];
+Make3DObject2 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="1200,570" _transform="{\"translation\":[0,0,0],\"eulerRotation\":[0,0,0],\"scale\":[1,-0.0001500000071246177,1]}"];
+MakeLineStripMesh2 [type="vuo.mesh.make.lineStrips.VuoPoint2d" version="2.1.0" label="Make Line Strip Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="1005,300" _lineWidth="0.002000"];
+MakeLineStripMesh3 [type="vuo.mesh.make.lineStrips.VuoPoint2d" version="2.1.0" label="Make Line Strip Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="1005,495" _lineWidth="0.002000"];
+MakeList15 [type="vuo.list.make.0.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="394,326"];
+MakeList17 [type="vuo.list.make.0.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="394,521"];
+MakeList2 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1354,386" fillcolor="green"];
+MakeList4 [type="vuo.list.make.1.VuoAudioSamples" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="450,-121"];
+MakeList5 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="1384,416" fillcolor="green"];
+MakePointsAlongCurve2 [type="vuo.point.make.curve.VuoReal" version="1.0.0" label="Make Points along Curve|<refresh>refresh\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<curve>curve\l|<easing>easing\l|<numberOfPoints>numberOfPoints\l|<points>points\r" pos="585,375" _startPosition="-1.000000" _endPosition="1.000000" _curve="\"exponential\"" _easing="\"out\""];
+MakeRandomList [type="vuo.noise.random.list.VuoReal" version="1.0.0" label="Make Random List|<refresh>refresh\l|<minimum>minimum\l|<maximum>maximum\l|<count>count\l|<list>list\r" pos="23,-121" _minimum="0" _maximum="20000" _count="20000"];
+MergeXYLists [type="vuo.point.merge.xy" version="1.0.0" label="Merge XY Lists|<refresh>refresh\l|<x>x\l|<y>y\l|<points>points\r" pos="810,300"];
+MergeXYLists2 [type="vuo.point.merge.xy" version="1.0.0" label="Merge XY Lists|<refresh>refresh\l|<x>x\l|<y>y\l|<points>points\r" pos="810,495"];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.2.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1425,375" fillcolor="green" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+SendLiveAudio3 [type="vuo.audio.send" version="1.0.1" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="668,95" fillcolor="green" _requestedChannels_eventThrottling="enqueue"];
+ShadeWithUnlitColor [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="990,375" _color="{\"r\":0.659998,\"g\":0.659998,\"b\":0.659998,\"a\":1.000000}"];
+ShadeWithUnlitColor2 [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="990,570" _color="{\"r\":1.000000,\"g\":0.466438,\"b\":0.475029,\"a\":1.000000}"];
+
+AdjustLoudness2:adjustedSamples -> GetFirstItemInList:list;
+AdjustLoudness2:adjustedSamples -> SendLiveAudio3:sendChannels;
+CalculateAmplitudeForFrequencies2:amplitudes -> HoldList6:newValue;
+CalculateAmplitudeForFrequencies:amplitudes -> HoldList5:newValue;
+ConvertRealListToAudio:samples -> MakeList4:1;
+CountItemsInList2:itemCount -> MakePointsAlongCurve2:numberOfPoints;
+FireOnStart:started -> ShadeWithUnlitColor2:refresh;
+FireOnStart:started -> ShadeWithUnlitColor:refresh;
+GetFirstItemInList:firstItem -> CalculateAmplitudeForFrequencies:samples;
+HoldList5:heldValue -> CountItemsInList2:list;
+HoldList5:heldValue -> MergeXYLists:y;
+HoldList6:heldValue -> MergeXYLists2:y;
+Make3DObject2:object -> MakeList2:2;
+Make3DObject:object -> MakeList2:1;
+MakeLineStripMesh2:mesh -> Make3DObject:mesh;
+MakeLineStripMesh3:mesh -> Make3DObject2:mesh;
+MakeList15:list -> HoldList5:initialValue;
+MakeList17:list -> HoldList6:initialValue;
+MakeList2:list -> RenderSceneToWindow:objects;
+MakeList4:list -> AdjustLoudness2:samples;
+MakeList5:list -> RenderSceneToWindow:setWindowProperties;
+MakePointsAlongCurve2:points -> MergeXYLists2:x;
+MakePointsAlongCurve2:points -> MergeXYLists:x;
+MakeRandomList:list -> ConvertRealListToAudio:reals;
+MergeXYLists2:points -> MakeLineStripMesh3:positions;
+MergeXYLists:points -> MakeLineStripMesh2:positions;
+RenderSceneToWindow:requestedFrame -> HoldList5:refresh [style=invis];
+RenderSceneToWindow:requestedFrame -> HoldList6:refresh [style=invis];
+SendLiveAudio3:requestedChannels -> ConvertRealListToAudio:refresh;
+SendLiveAudio3:requestedChannels -> MakeRandomList:refresh;
+ShadeWithUnlitColor2:shader -> Make3DObject2:shader;
+ShadeWithUnlitColor:shader -> Make3DObject:shader;
+}

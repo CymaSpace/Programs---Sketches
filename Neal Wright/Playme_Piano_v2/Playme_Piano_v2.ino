@@ -11,8 +11,8 @@
 #endif
 
 #define PIN 21
-#define COLUMNS 38
-#define ROWS 12
+#define COLUMNS 25
+#define ROWS 6
 #define mBrightness 128 //matrix brightness
 
 // 
@@ -21,8 +21,8 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(COLUMNS, ROWS, PIN,
   NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG,
   NEO_GRB            + NEO_KHZ800);
 
-const int myInput = AUDIO_INPUT_LINEIN;
-//const int myInput = AUDIO_INPUT_MIC;
+//const int myInput = AUDIO_INPUT_LINEIN;
+const int myInput = AUDIO_INPUT_MIC;
 
 // Create the Audio components.  These should be created in the
 // order data flows, inputs/sources -> processing -> outputs
@@ -71,6 +71,7 @@ void setup()
   audioShield.enable();
   audioShield.inputSelect(myInput);
   audioShield.lineInLevel(50);
+  audioShield.micGain(30);
   audioShield.volume(0.5);
 
   // Configure the window algorithm to use
