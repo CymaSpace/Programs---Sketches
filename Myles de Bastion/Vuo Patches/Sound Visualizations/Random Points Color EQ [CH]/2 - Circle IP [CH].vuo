@@ -1,0 +1,48 @@
+/**
+ * @file
+ * Demonstrates creating an animated noise image, and controlling its center and scale.
+ *
+ * @copyright Copyright © 2012–2015 Kosada Incorporated.
+ * This code may be modified and distributed under the terms of the MIT License.
+ * For more information, see http://vuo.org/license.
+ */
+
+digraph G
+{
+AddNoiseTo3DObject [type="vuo.scene.noise" version="1.0.1" label="Add Noise to 3D Object|<refresh>refresh\l|<object>object\l|<time>time\l|<amount>amount\l|<scale>scale\l|<noisedObject>noisedObject\r" pos="660,570" _scale="0.10000000000000001"];
+AdjustLoudness [type="vuo.audio.loudness" version="2.0.0" label="Adjust Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\l|<adjustedSamples>adjustedSamples\r" pos="-480,900"];
+AllowFirstEvent [type="vuo.event.allowFirst" version="1.0.0" label="Allow First Event|<refresh>refresh\l|<event>event\l|<reset>reset\l|<firstEvent>firstEvent\r" pos="-690,375"];
+CalculateLoudness [type="vuo.audio.analyze.loudness" version="2.0.0" label="Calculate Loudness|<refresh>refresh\l|<samples>samples\l|<loudness>loudness\r" pos="-165,900" fillcolor="blue"];
+ChangeSpeed [type="vuo.time.changeSpeed" version="1.0.0" label="Change Speed|<refresh>refresh\l|<time>time\l|<speed>speed\l|<reset>reset\l|<changedTime>changedTime\r" pos="405,585"];
+Make3DPoint [type="vuo.point.make.VuoPoint3d" version="2.0.0" label="Make 3D Point|<refresh>refresh\l|<x>x\l|<y>y\l|<z>z\l|<point>point\r" pos="390,855"];
+MakeList6 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="876,581"];
+MakeRandomPointsObject [type="vuo.scene.make.random.points.VuoGenericType1" version="1.0.0" label="Make Random Points Object|<refresh>refresh\l|<transform>transform\l|<material>material\l|<distribution>distribution\l|<count>count\l|<pointSize>pointSize\l|<seed>seed\l|<object>object\r" pos="330,420" _transform="{\"translation\":[0,0,0],\"eulerRotation\":[0,0,0],\"scale\":[2,0.0099999997764825821,2]}" _distribution="\"sphere-surface\"" _count="500" _pointSize="0.01" _seed="1"];
+MixAudioChannels2 [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="-60,1005"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-720,900" fillcolor="blue" _receivedChannels_eventThrottling="drop"];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="945,570" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+SmoothWithDuration2 [type="vuo.motion.smooth.duration.VuoReal" version="1.1.0" label="Smooth with Duration|<refresh>refresh\l|<time>time\l|<setPosition>setPosition\l|<setTarget>setTarget\l|<duration>duration\l|<curve>curve\l|<easing>easing\l|<position>position\r|<reachedTarget>reachedTarget\r" pos="60,870" fillcolor="blue" _setPosition="0." _duration="0.10000000000000001" _curve="\"linear\"" _easing="\"in\""];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<height>height\r|<width>width\r|<time>time\r|<Sensitivity>Sensitivity\r" _height_type="VuoInteger" _height_suggestedMin="1" _height_suggestedMax="4096" _height_suggestedStep="256" _width_type="VuoInteger" _width_suggestedMin="1" _width_suggestedMax="4096" _width_suggestedStep="256" _time_type="VuoReal" _Sensitivity_type="VuoReal" _Sensitivity_suggestedMin="0" _Sensitivity_suggestedMax="2" _Sensitivity="1"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<outputImage>outputImage\l" _outputImage_type="VuoImage"];
+
+AddNoiseTo3DObject:noisedObject -> MakeList6:1;
+AdjustLoudness:adjustedSamples -> MixAudioChannels2:samples;
+AllowFirstEvent:firstEvent -> MakeRandomPointsObject:refresh;
+CalculateLoudness:loudness -> SmoothWithDuration2:setTarget;
+ChangeSpeed:changedTime -> AddNoiseTo3DObject:time;
+Make3DPoint:point -> AddNoiseTo3DObject:amount;
+MakeList6:list -> RenderSceneToImage:objects;
+MakeRandomPointsObject:object -> AddNoiseTo3DObject:object;
+MixAudioChannels2:mixedSamples -> CalculateLoudness:samples;
+PublishedInputs:Sensitivity -> AdjustLoudness:loudness;
+PublishedInputs:height -> RenderSceneToImage:height;
+PublishedInputs:time -> AllowFirstEvent:event;
+PublishedInputs:time -> ChangeSpeed:time;
+PublishedInputs:time -> SmoothWithDuration2:time;
+PublishedInputs:width -> RenderSceneToImage:width;
+ReceiveLiveAudio:receivedChannels -> AdjustLoudness:samples;
+RenderSceneToImage:image -> PublishedOutputs:outputImage;
+SmoothWithDuration2:position -> ChangeSpeed:speed;
+SmoothWithDuration2:position -> Make3DPoint:x;
+SmoothWithDuration2:position -> Make3DPoint:y;
+SmoothWithDuration2:position -> Make3DPoint:z;
+}
