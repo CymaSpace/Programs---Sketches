@@ -1,0 +1,69 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AddLists2 [type="vuo.math.add.list.2.VuoPoint3d" version="1.0.0" label="Add Lists|<refresh>refresh\l|<list1>list1\l|<list2>list2\l|<summedList>summedList\r" pos="829,148"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft2" version="2.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="471,54" _frequencyBins="\"8191\"" _frequencyBinAveraging="\"quadratic\""];
+ConvertRealListTo3DPointList6 [type="vuo.type.list.real.point3d.z" version="1.0.1" label="Convert Real List to 3D Point List|<refresh>refresh\l|<z>z\l|<point3d>point3d\r" pos="839,280"];
+ConvertRealTo3DPoint [type="vuo.type.real.point3d.y" version="1.0.1" label="Convert Real to 3D Point|<refresh>refresh\l|<y>y\l|<point3d>point3d\r" pos="346,584"];
+CopyListItems2 [type="vuo.list.spread.VuoReal" version="1.0.0" label="Copy List Items|<refresh>refresh\l|<list>list\l|<copies>copies\l|<outputList>outputList\r" pos="716,-58"];
+CountItemsInList [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="303,245"];
+Curve5 [type="vuo.motion.curve.VuoReal" version="2.0.0" label="Curve|<refresh>refresh\l|<time>time\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<duration>duration\l|<curve>curve\l|<easing>easing\l|<loop>loop\l|<phase>phase\l|<value>value\r" pos="367,-349" fillcolor="orange" _startPosition="20" _endPosition="20000" _duration="3" _curve="\"linear\"" _easing="\"in\"" _loop="\"mirror\"" _phase="0"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-129,51" fillcolor="yellow" _started_eventThrottling="enqueue"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="428,-456" _started_eventThrottling="enqueue"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="374,298"];
+Make3DTransform [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="114,449" _translation="{\"x\":0.000000,\"y\":-0.200000,\"z\":0.000000}" _scale="{\"x\":0.5,\"y\":0.5,\"z\":0.5}"];
+MakeAudioWave2 [type="vuo.audio.wave2" version="2.0.0" label="Make Audio Wave|<refresh>refresh\l|<calculateSamples>calculateSamples\l|<wave>wave\l|<frequency>frequency\l|<setPhase>setPhase\l|<samples>samples\r" pos="515,-297" _wave="\"sine\"" _setPhase="0.0"];
+MakeDraggableCamera [type="vuo.scene.make.camera.drag" version="1.0.1" label="Make Draggable Camera|<refresh>refresh\l|<name>name\l|<modifierKey>modifierKey\l|<window>window\l|<fieldOfView>fieldOfView\l|<distanceMin>distanceMin\l|<distanceMax>distanceMax\l|<reset>reset\l|<updatedCamera>updatedCamera\r" pos="625,617" _name="\"camera\"" _modifierKey="\"any\"" _fieldOfView="90.0" _distanceMin="0.1" _distanceMax="10.0" _updatedCamera_eventThrottling="drop"];
+MakeList0 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="590,480" fillcolor="green"];
+MakeList12 [type="vuo.list.make.2.VuoAudioSamples" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="787,-331" fillcolor="violet"];
+MakeList6 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="560,435" fillcolor="green"];
+MakeParametricGrid [type="vuo.point.make.parametric.grid" version="1.0.1" label="Make Parametric Grid Points|<refresh>refresh\l|<time>time\l|<xExpression>xExpression\l|<yExpression>yExpression\l|<zExpression>zExpression\l|<rows>rows\l|<columns>columns\l|<uMin>uMin\l|<uMax>uMax\l|<vMin>vMin\l|<vMax>vMax\l|<points>points\r" pos="204,75" fillcolor="violet" _time="0.000000" _xExpression="\"1 * sin(u) * cos(v)\"" _yExpression="\"1 * cos(u) * cos(v)\"" _zExpression="\"1 * sin(v)\"" _uMin="0" _uMax="360" _vMin="0" _vMax="360"];
+MakePointVertices2 [type="vuo.mesh.make.points.VuoPoint3d" version="2.1.0" label="Make Point Mesh|<refresh>refresh\l|<positions>positions\l|<pointSize>pointSize\l|<mesh>mesh\r" pos="475,194" _pointSize="0.0070000000000000001"];
+NumberOfPointsPerRingInSphere [type="vuo.data.share.VuoInteger" version="1.0.0" label="Number of points per ring in sphere|<refresh>refresh\l|<value>value\l|<sameValue>sameValue\r" pos="81,-104" _value="24"];
+PlayAudioFile [type="vuo.audio.file.play" version="1.2.0" label="Play Audio File|<refresh>refresh\l|<url>url\l|<play>play\l|<pause>pause\l|<loop>loop\l|<setTime>setTime\l|<decodedChannels>decodedChannels\r|<finishedPlayback>finishedPlayback\r" pos="586,-442" _url="\"..\\/..\\/..\\/..\\/..\\/..\\/Music\\/Amazon MP3\\/Joe Satriani\\/Crystal Planet\\/01 - Up In The Sky.mp3\"" _loop="\"none\"" _setTime="\"\"" _decodedChannels_eventThrottling="enqueue" _finishedPlayback_eventThrottling="enqueue"];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.3.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<multisampling>multisampling\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="631,424" fillcolor="green" _cameraName="\"\"" _multisampling="\"4\"" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+ScaleList2 [type="vuo.math.scale.list.VuoReal" version="1.0.0" label="Scale List|<refresh>refresh\l|<scale>scale\l|<list>list\l|<scaledList>scaledList\r" pos="860,-32" _scale="0.10000000000000001"];
+SendLiveAudio2 [type="vuo.audio.send" version="1.0.1" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="833,-357" fillcolor="violet" _requestedChannels_eventThrottling="enqueue"];
+ShadeWithUnlitColor [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="103,326" _color="{\"r\":0.50000762939453125,\"g\":0,\"b\":0.50000762939453125,\"a\":1}"];
+
+AddLists2:summedList -> MakePointVertices2:positions;
+CalculateAmplitudeForFrequencies:amplitudes -> CopyListItems2:list;
+CalculateAmplitudeForFrequencies:amplitudes -> CountItemsInList:list;
+ConvertRealListTo3DPointList6:point3d -> AddLists2:list2;
+ConvertRealTo3DPoint:point3d -> Make3DTransform:rotation;
+CopyListItems2:outputList -> ScaleList2:list;
+CountItemsInList:itemCount -> MakeParametricGrid:rows;
+Curve5:value -> MakeAudioWave2:frequency;
+FireOnStart2:started -> NumberOfPointsPerRingInSphere:refresh;
+FireOnStart2:started -> PlayAudioFile:play;
+FireOnStart:started -> MakeParametricGrid:refresh;
+FireOnStart:started -> ShadeWithUnlitColor:refresh;
+Make3DObject:object -> MakeList6:1;
+Make3DTransform:transform -> Make3DObject:transform;
+MakeAudioWave2:samples -> CalculateAmplitudeForFrequencies:samples;
+MakeAudioWave2:samples -> MakeList12:1;
+MakeAudioWave2:samples -> MakeList12:2;
+MakeDraggableCamera:updatedCamera -> MakeList6:2;
+MakeList0:list -> RenderSceneToWindow:setWindowProperties;
+MakeList12:list -> SendLiveAudio2:sendChannels;
+MakeList6:list -> RenderSceneToWindow:objects;
+MakeParametricGrid:points -> AddLists2:list1;
+MakePointVertices2:mesh -> Make3DObject:mesh;
+NumberOfPointsPerRingInSphere:sameValue -> CopyListItems2:copies;
+NumberOfPointsPerRingInSphere:sameValue -> MakeParametricGrid:columns;
+RenderSceneToWindow:requestedFrame -> ConvertRealTo3DPoint:y;
+RenderSceneToWindow:requestedFrame -> Curve5:time;
+RenderSceneToWindow:requestedFrame -> Make3DObject:refresh;
+RenderSceneToWindow:requestedFrame -> MakeParametricGrid:refresh;
+RenderSceneToWindow:showedWindow -> MakeDraggableCamera:window;
+ScaleList2:scaledList -> ConvertRealListTo3DPointList6:z;
+SendLiveAudio2:requestedChannels -> MakeAudioWave2:calculateSamples;
+ShadeWithUnlitColor:shader -> Make3DObject:shader;
+}

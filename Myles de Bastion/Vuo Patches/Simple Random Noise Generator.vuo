@@ -1,0 +1,20 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [smokris](https://vuo.org/user/9)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ConvertRealListToAudio [type="vuo.type.audio.list.real" version="1.0.0" label="Convert Real List to Audio|<refresh>refresh\l|<reals>reals\l|<samples>samples\r" pos="330,210"];
+MakeList5 [type="vuo.list.make.1.VuoAudioSamples" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="432,221"];
+MakeRandomList [type="vuo.noise.random.list.VuoReal" version="1.0.0" label="Make Random List|<refresh>refresh\l|<minimum>minimum\l|<maximum>maximum\l|<count>count\l|<list>list\r" pos="165,210" _minimum="-0.10000000000000001" _maximum="0.10000000000000001" _count="512"];
+SendLiveAudio [type="vuo.audio.send" version="1.0.1" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="465,195" _requestedChannels_eventThrottling="enqueue"];
+
+ConvertRealListToAudio:samples -> MakeList5:1;
+MakeList5:list -> SendLiveAudio:sendChannels;
+MakeRandomList:list -> ConvertRealListToAudio:reals;
+SendLiveAudio:requestedChannels -> MakeRandomList:refresh;
+}

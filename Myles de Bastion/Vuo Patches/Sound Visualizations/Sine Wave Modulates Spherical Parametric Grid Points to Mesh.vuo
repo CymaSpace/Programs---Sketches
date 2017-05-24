@@ -1,0 +1,68 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AddLists2 [type="vuo.math.add.list.2.VuoPoint3d" version="1.0.0" label="Add Lists|<refresh>refresh\l|<list1>list1\l|<list2>list2\l|<summedList>summedList\r" pos="740,155"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft2" version="2.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="499,62" _frequencyBins="\"4095\"" _frequencyBinAveraging="\"none\""];
+ConvertRealListTo3DPointList6 [type="vuo.type.list.real.point3d.z" version="1.0.1" label="Convert Real List to 3D Point List|<refresh>refresh\l|<z>z\l|<point3d>point3d\r" pos="839,280"];
+ConvertRealTo3DPoint [type="vuo.type.real.point3d.y" version="1.0.1" label="Convert Real to 3D Point|<refresh>refresh\l|<y>y\l|<point3d>point3d\r" pos="346,584"];
+Copy3DObject2 [type="vuo.scene.copy.trs.material.VuoGenericType1" version="1.0.0" label="Copy 3D Object|<refresh>refresh\l|<object>object\l|<materials>materials\l|<materialExtrapolation>materialExtrapolation\l|<translations>translations\l|<rotations>rotations\l|<scales>scales\l|<copies>copies\r" pos="879,249" _materialExtrapolation="\"wrap\""];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-129,51" fillcolor="yellow" _started_eventThrottling="enqueue"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="374,298"];
+Make3DTransform [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="114,449" _translation="{\"x\":0.000000,\"y\":-0.200000,\"z\":0.000000}" _scale="{\"x\":0.5,\"y\":0.5,\"z\":0.5}"];
+MakeAudioWave2 [type="vuo.audio.wave2" version="2.0.0" label="Make Audio Wave|<refresh>refresh\l|<calculateSamples>calculateSamples\l|<wave>wave\l|<frequency>frequency\l|<setPhase>setPhase\l|<samples>samples\r" pos="578,-282" _wave="\"sine\"" _setPhase="0.0"];
+MakeDraggableCamera [type="vuo.scene.make.camera.drag" version="1.0.1" label="Make Draggable Camera|<refresh>refresh\l|<name>name\l|<modifierKey>modifierKey\l|<window>window\l|<fieldOfView>fieldOfView\l|<distanceMin>distanceMin\l|<distanceMax>distanceMax\l|<reset>reset\l|<updatedCamera>updatedCamera\r" pos="625,617" _name="\"camera\"" _modifierKey="\"any\"" _fieldOfView="90.0" _distanceMin="0.1" _distanceMax="10.0" _updatedCamera_eventThrottling="drop"];
+MakeList0 [type="vuo.list.make.0.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="590,480" fillcolor="green"];
+MakeList10 [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="752,320" _1="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeList11 [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="833,335" _1="{\"x\":1,\"y\":1,\"z\":1}"];
+MakeList12 [type="vuo.list.make.2.VuoAudioSamples" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="787,-331" fillcolor="violet"];
+MakeList6 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="560,435" fillcolor="green"];
+MakeList8 [type="vuo.list.make.2.VuoGenericType1" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="591,275"];
+MakeList9 [type="vuo.list.make.1.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="672,305" _1="{\"x\":0,\"y\":0,\"z\":0}"];
+MakeParametricGrid [type="vuo.point.make.parametric.grid" version="1.0.1" label="Make Parametric Grid Points|<refresh>refresh\l|<time>time\l|<xExpression>xExpression\l|<yExpression>yExpression\l|<zExpression>zExpression\l|<rows>rows\l|<columns>columns\l|<uMin>uMin\l|<uMax>uMax\l|<vMin>vMin\l|<vMax>vMax\l|<points>points\r" pos="164,71" fillcolor="violet" _time="0.000000" _xExpression="\"1 * sin(u) * cos(v)\"" _yExpression="\"1 * cos(u) * cos(v)\"" _zExpression="\"1 * sin(v)\"" _rows="64" _columns="64" _uMin="0" _uMax="360" _vMin="0" _vMax="360"];
+MakePointVertices2 [type="vuo.mesh.make.points.VuoPoint3d" version="2.1.0" label="Make Point Mesh|<refresh>refresh\l|<positions>positions\l|<pointSize>pointSize\l|<mesh>mesh\r" pos="475,194" _pointSize="0.0070000000000000001"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="163,-92" _receivedChannels_eventThrottling="drop"];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.3.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<multisampling>multisampling\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="631,424" fillcolor="green" _cameraName="\"\"" _multisampling="\"4\"" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+Scale [type="vuo.math.scale.VuoReal" version="2.0.0" label="Scale|<refresh>refresh\l|<value>value\l|<start>start\l|<end>end\l|<scaledStart>scaledStart\l|<scaledEnd>scaledEnd\l|<limitToRange>limitToRange\l|<scaledValue>scaledValue\r" pos="384,-181" _start="-1" _end="1.000000" _scaledStart="20" _scaledEnd="20000" _limitToRange="false"];
+SendLiveAudio2 [type="vuo.audio.send" version="1.0.1" label="Send Live Audio|<refresh>refresh\l|<device>device\l|<sendChannels>sendChannels\l|<requestedChannels>requestedChannels\r" pos="833,-357" fillcolor="violet" _requestedChannels_eventThrottling="enqueue"];
+ShadeWithUnlitColor [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="103,326" _color="{\"r\":0.50000762939453125,\"g\":0,\"b\":0.50000762939453125,\"a\":1}"];
+Wave [type="vuo.motion.wave" version="2.0.0" label="Wave|<refresh>refresh\l|<time>time\l|<wave>wave\l|<period>period\l|<center>center\l|<amplitude>amplitude\l|<phase>phase\l|<value>value\r" pos="339,-328" _wave="\"sine\"" _period="5" _center="0.0" _amplitude="1.0" _phase="0.0"];
+
+AddLists2:summedList -> MakePointVertices2:positions;
+CalculateAmplitudeForFrequencies:amplitudes -> ConvertRealListTo3DPointList6:z;
+ConvertRealListTo3DPointList6:point3d -> AddLists2:list2;
+ConvertRealTo3DPoint:point3d -> Make3DTransform:rotation;
+FireOnStart:started -> MakeParametricGrid:refresh;
+FireOnStart:started -> ShadeWithUnlitColor:refresh;
+Make3DObject:object -> Copy3DObject2:object;
+Make3DObject:object -> MakeList6:1;
+Make3DTransform:transform -> Make3DObject:transform;
+MakeAudioWave2:samples -> CalculateAmplitudeForFrequencies:samples;
+MakeAudioWave2:samples -> MakeList12:1;
+MakeAudioWave2:samples -> MakeList12:2;
+MakeDraggableCamera:updatedCamera -> MakeList6:2;
+MakeList0:list -> RenderSceneToWindow:setWindowProperties;
+MakeList10:list -> Copy3DObject2:rotations;
+MakeList11:list -> Copy3DObject2:scales;
+MakeList12:list -> SendLiveAudio2:sendChannels;
+MakeList6:list -> RenderSceneToWindow:objects;
+MakeList8:list -> Copy3DObject2:materials;
+MakeList9:list -> Copy3DObject2:translations;
+MakeParametricGrid:points -> AddLists2:list1;
+MakePointVertices2:mesh -> Make3DObject:mesh;
+RenderSceneToWindow:requestedFrame -> ConvertRealTo3DPoint:y;
+RenderSceneToWindow:requestedFrame -> Make3DObject:refresh;
+RenderSceneToWindow:requestedFrame -> MakeParametricGrid:refresh;
+RenderSceneToWindow:requestedFrame -> Wave:time;
+RenderSceneToWindow:showedWindow -> MakeDraggableCamera:window;
+Scale:scaledValue -> MakeAudioWave2:frequency;
+SendLiveAudio2:requestedChannels -> MakeAudioWave2:calculateSamples;
+ShadeWithUnlitColor:shader -> Make3DObject:shader;
+Wave:value -> Scale:value;
+}
