@@ -1,0 +1,4 @@
+clipName	duration	startingTime	transitionAmount	clipSpeedValue	EffectTempo	tempoMultiplierButton	R	G	B	blackoutWipe	RainbowWipe	strobeWhite	strobeColor	strobeMultiply	chaseWhite	chaseMultipy	EffectSpeed	EffectBias	Jam_0	Jam_1	Jam_2	Jam_3	Jam_4	Jam_5	Jam_6	Jam_7	Jam_8	endParameters
+/project1/ED_PixelMapper/performer/contentBrowser/smartClip0/stream	5	0	0	0.273	115	2	1	1	1	0	0	0	0	0	0	0	0.250	0.250	0	0	0	0	0	0	0	0	0	1:self
+/project1/ED_PixelMapper/performer/contentBrowser/smartClip4/stream	5	5.0	1	0.717	115	2	1	1	1	0	0	0	0	0	0	0	0.250	0.250	0	0	0	0	0	0	0	0	0	-1:self
+/project1/ED_PixelMapper/performer/contentBrowser/smartClip8/stream	5	10.0	1	0.273	115	2	1	1	1	0	0	0	0	0	0	0	.250	.250	0	0	0	0	0	0	0	0	0	-1:self

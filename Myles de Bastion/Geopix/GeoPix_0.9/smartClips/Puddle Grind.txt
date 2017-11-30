@@ -1,0 +1,3 @@
+name	bgClip	altMapping	pixelMap	pixelMask	isSmartClip	isEffect	isSpout	altSpoutName	tags																	
+Puddle Grind	../_BUNDLEDLOOPS/puddleGrind.mov		.default.	.default.	0	1	0		effect,beat,white																	
+videoSrc	TL_U	TL_V	TLo_U	TLo_V	BR_U	BR_V	BRo_U	BRo_V		TL_active	BR_active	panel_selected		rot_TL	rot_BR	unsel_R	unsel_G	unsel_B	sel_R	sel_G	sel_B		pickedColorR	pickedColorG	pickedColorB	zHeight

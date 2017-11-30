@@ -1,0 +1,2 @@
+deviceID	signalChainID	panelID	panelName	xPos	yPos	zRot	geoGrp	isThisSelected	SX	SY
+0	3	0	Cymatic_Curtain	-20	0.0	0.0	0	1	1	1

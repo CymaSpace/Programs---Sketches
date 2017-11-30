@@ -1,0 +1,64 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [MartinusMagneson](https://vuo.org/user/3272)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+BuildList2 [type="vuo.list.build.VuoPoint3d" version="1.0.1" label="Build List|<refresh>refresh\l|<fire>fire\l|<builtItem>builtItem\l|<builtList>builtList\r|<buildItem>buildItem\r" pos="-197,468" fillcolor="blue" _builtList_eventThrottling="enqueue" _buildItem_eventThrottling="enqueue"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft2" version="2.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="-381,23" fillcolor="magenta" _frequencyBins="\"8191\"" _frequencyBinAveraging="\"quadratic\""];
+Convert3DPointListTo2DPointList4 [type="vuo.type.list.point3d.point2d.xy" version="1.0.1" label="Convert 3D Point List to 2D Point List|<refresh>refresh\l|<xyz>xyz\l|<xy>xy\r" pos="248,384"];
+CountItemsInList [type="vuo.list.count.VuoPoint3d" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="-476,467" fillcolor="yellow"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-90,-73" fillcolor="lime" _started_eventThrottling="enqueue"];
+GetItemFromList3 [type="vuo.list.get.VuoPoint3d" version="1.0.1" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="-296,688" fillcolor="blue"];
+GetItemFromList7 [type="vuo.list.get.VuoReal" version="1.0.1" label="Get Item from List|<refresh>refresh\l|<list>list\l|<which>which\l|<item>item\r" pos="-299,791" fillcolor="blue"];
+HoldList4 [type="vuo.data.hold.list.VuoPoint3d" version="1.0.0" label="Hold List|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-483,689" fillcolor="blue"];
+HoldList6 [type="vuo.data.hold.list.VuoReal" version="1.0.0" label="Hold List|<refresh>refresh\l|<initialValue>initialValue\l|<newValue>newValue\l|<heldValue>heldValue\r" pos="-489,765" fillcolor="blue"];
+Make3DObject2 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="359,292" fillcolor="cyan" _transform="{\"translation\":[0,0,0],\"eulerRotation\":[0,0,4.8380527496337891],\"scale\":[1,1,1]}"];
+MakeLineStripMesh2 [type="vuo.mesh.make.lineStrips.VuoPoint2d" version="2.1.0" label="Make Line Strip Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="149,274" fillcolor="cyan" _lineWidth="0.01"];
+MakeList42 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-529,700" fillcolor="blue"];
+MakeList51 [type="vuo.list.make.2.VuoReal" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-535,776" fillcolor="blue"];
+MakeList7 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="524,303" fillcolor="cyan"];
+MakeList8 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="819,317" fillcolor="cyan"];
+MakeParametricPoints [type="vuo.point.make.parametric" version="1.0.1" label="Make Parametric Points|<refresh>refresh\l|<time>time\l|<xExpression>xExpression\l|<yExpression>yExpression\l|<zExpression>zExpression\l|<subdivisions>subdivisions\l|<uMin>uMin\l|<uMax>uMax\l|<points>points\r" pos="-793,469" fillcolor="yellow" _time="1" _xExpression="\"sin(U)\"" _yExpression="\"cos(U)\"" _zExpression="\"0\"" _subdivisions="129" _uMin="0" _uMax="360"];
+MixAudioChannels4 [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="-282,133"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-758,35" fillcolor="magenta" _receivedChannels_eventThrottling="drop"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.3.0" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="865,291" fillcolor="cyan" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="594,292" fillcolor="cyan" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+ScalePoint3 [type="vuo.point.multiply.scalar.VuoPoint3d" version="1.0.0" label="Scale Point|<refresh>refresh\l|<point>point\l|<scaleFactor>scaleFactor\l|<scaledPoint>scaledPoint\r" pos="25,686" fillcolor="blue"];
+ShadeWithUnlitColor [type="vuo.shader.make.color.unlit" version="2.0.0" label="Shade with Unlit Color|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="142,385" fillcolor="cyan" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}"];
+Subtract [type="vuo.math.subtract.VuoReal" version="1.1.0" label="Subtract|<refresh>refresh\l|<a>a\l|<b>b\l|<difference>difference\r" pos="-117,777" fillcolor="blue" _a="0.5"];
+
+BuildList2:buildItem -> GetItemFromList3:which;
+BuildList2:buildItem -> GetItemFromList7:which;
+BuildList2:buildItem -> HoldList4:refresh;
+BuildList2:buildItem -> HoldList6:refresh;
+BuildList2:builtList -> Convert3DPointListTo2DPointList4:xyz;
+CalculateAmplitudeForFrequencies:amplitudes -> BuildList2:fire [event=true];
+CalculateAmplitudeForFrequencies:amplitudes -> HoldList6:newValue;
+Convert3DPointListTo2DPointList4:xy -> MakeLineStripMesh2:positions;
+CountItemsInList:itemCount -> BuildList2:fire;
+FireOnStart:started -> MakeParametricPoints:refresh;
+FireOnStart:started -> ShadeWithUnlitColor:refresh;
+GetItemFromList3:item -> ScalePoint3:point;
+GetItemFromList7:item -> Subtract:b;
+HoldList4:heldValue -> GetItemFromList3:list;
+HoldList6:heldValue -> GetItemFromList7:list;
+Make3DObject2:object -> MakeList7:1;
+MakeLineStripMesh2:mesh -> Make3DObject2:mesh;
+MakeList42:list -> HoldList4:initialValue;
+MakeList51:list -> HoldList6:initialValue;
+MakeList7:list -> RenderSceneToImage:objects;
+MakeList8:list -> RenderImageToWindow:setWindowProperties;
+MakeParametricPoints:points -> CountItemsInList:list;
+MakeParametricPoints:points -> HoldList4:newValue;
+MixAudioChannels4:mixedSamples -> CalculateAmplitudeForFrequencies:samples;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels4:samples;
+RenderSceneToImage:image -> RenderImageToWindow:image;
+ScalePoint3:scaledPoint -> BuildList2:builtItem;
+ShadeWithUnlitColor:shader -> Make3DObject2:shader;
+Subtract:difference -> ScalePoint3:scaleFactor;
+}

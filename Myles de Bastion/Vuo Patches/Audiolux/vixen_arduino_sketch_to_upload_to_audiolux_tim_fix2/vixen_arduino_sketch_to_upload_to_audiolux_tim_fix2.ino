@@ -26,7 +26,7 @@ Version   1.4
 #define NUM_LEDS 300
  
 // Sets the pin which is used to connect to the LED pixel strip
-#define DATA_PIN 6
+#define DATA_PIN 2
  
 CRGB leds[NUM_LEDS];
  
@@ -99,5 +99,8 @@ void loop() {
     // Tell the FastLED Library it is time to update the strip of pixels
     FastLED.show();
     // WOO HOO... We are all done and are ready to start over again!
+    Serial.println(d1);
+        Serial.println(d2);
+            Serial.println(d3);
     }
 }

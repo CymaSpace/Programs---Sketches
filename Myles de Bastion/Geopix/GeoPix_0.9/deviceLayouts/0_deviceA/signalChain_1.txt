@@ -1,0 +1,6 @@
+deviceID	signalChainID	panelID	panelName	xPos	yPos	zRot	geoGrp	isThisSelected	SX	SY
+0	1	0	GeoPix_Triangle	-0.1004329	9.34915	180.0	0	0	1	1
+0	1	1	GeoPix_Triangle	27.56638	48.19647	-30.0	0	0	1	1
+0	1	2	GeoPix_Triangle	-27.76782	48.19614	30.0	0	0	1	1
+0	1	3	GeoPix_Square	-20.51732	12.06295	-30.0	0	0	1	1
+0	1	4	GeoPix_Square	20.31605	12.06281	30.0	0	1	1	1

@@ -1,0 +1,1 @@
+deviceID	signalChainID	panelID	panelName	xPos	yPos	zRot	geoGrp	isThisSelected	SX	SY

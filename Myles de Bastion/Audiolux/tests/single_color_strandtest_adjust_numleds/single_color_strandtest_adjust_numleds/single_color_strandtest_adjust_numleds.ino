@@ -1,8 +1,8 @@
 #include <FastLED.h>
-#define NUM_LEDS 300
+#define NUM_LEDS 301
 #define DATA_PIN 6
-#define LEFT_POT_PIN 2 // Left pot controls Number of LEDs
-#define RIGHT_POT_PIN 3 // Right pot controls color
+//#define LEFT_POT_PIN 2 // Left pot controls brightness
+//#define RIGHT_POT_PIN 3 // Right pot controls color
 
 CRGB leds[NUM_LEDS];
 
@@ -26,10 +26,10 @@ void setup() {
 }
    
 void loop() { 
-        int val = analogRead(2);
-        //int potControlBrightness = analogRead(2);
+        int potControlnumLeds = analogRead(2);
+        //int potControlBrightness = analogRead(4);
         int potControlHue = analogRead(3);
-        int numLedsToLight = map(val, 1023, 0, 0, NUM_LEDS); // map number of LEDs to left pot
+        int numLedsToLight = map(potControlnumLeds, 1023, 0, 0, NUM_LEDS); // map number of LEDs to left pot
         //int brightness = map(potControlBrightness, 1023, 0, 0, 255); // map brightness to left pot
         int hue = map(potControlHue, 0, 1023, 0, 255); // map hue to right pot
         //Serial.println(potControlBrightness);
@@ -38,7 +38,7 @@ void loop() {
         // subtract the last reading:
         total = total - readings[readIndex];
         // read from the pot:
-        readings[readIndex] = analogRead(2);
+        readings[readIndex] = potControlnumLeds;
         // add the reading to the total:
         total = total + readings[readIndex];
         // advance to the next position in the array:
@@ -59,7 +59,7 @@ void loop() {
         // First, clear the existing led values
         FastLED.clear();
         for(int led = 0; led < numLedsToLight; led++) { 
-            leds[led] = CHSV(hue, 255, 255); 
+            leds[led] = CHSV(hue, 255, 160); 
         }
         FastLED.show();
 }
