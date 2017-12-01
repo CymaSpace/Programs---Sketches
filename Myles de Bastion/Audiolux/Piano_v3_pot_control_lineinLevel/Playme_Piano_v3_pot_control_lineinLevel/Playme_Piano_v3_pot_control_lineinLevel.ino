@@ -10,9 +10,17 @@
 #define PSTR // Make Arduino Due happy
 #endif
 
-#define PIN 21
-#define COLUMNS 25
-#define ROWS 6
+/* Mapping for Macron Productions LED Piano
+#define PIN 21 
+#define COLUMNS 38
+#define ROWS 12
+*/
+
+/* Mapping for Test with Audiolux Pixel Box */
+#define PIN 6 
+#define COLUMNS 24
+#define ROWS 12
+
 #define mBrightness 128 //matrix brightness
 
 // 
@@ -63,10 +71,10 @@ void setup()
   matrix.show(); // Initialize all pixels to 'off'
   matrix.setBrightness(lightsensor);
   matrix.setTextColor(drawRGB24toRGB565(0, 0, 0));
+  
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
   AudioMemory(12);
-
   // Enable the audio shield and set the output volume.
   audioShield.enable();
   audioShield.inputSelect(myInput);
@@ -85,10 +93,9 @@ void setup()
 
 }
 
-void loop()
+void loop() {
   audioShield.lineInLevel(map(analogRead(A1),0, 1023, 0, 15)); // remap analog pot A1 values 0-1023 to line in level 0-15.
   audioShield.micGain(map(analogRead(A1), 0, 1023, 0, 63)); // remap analog pot A1 values 0-1023 to mic gain 0-63dB.
-{
 
   // Set arrays for the current row and the RGB vals
   float bands[COLUMNS];

@@ -10,9 +10,17 @@
 #define PSTR // Make Arduino Due happy
 #endif
 
-#define PIN 21
-#define COLUMNS 25
-#define ROWS 6
+/* Mapping for Macron Productions LED Piano
+#define PIN 21 
+#define COLUMNS 38
+#define ROWS 12
+*/
+
+/* Mapping for Test with Audiolux Pixel Box */
+#define PIN 6 
+#define COLUMNS 24
+#define ROWS 12
+
 #define mBrightness 128 //matrix brightness
 
 // 
