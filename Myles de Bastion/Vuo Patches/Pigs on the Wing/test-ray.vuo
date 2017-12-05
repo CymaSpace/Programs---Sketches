@@ -1,0 +1,103 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ChangeLayerBlending2 [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="1245,405" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ChangeLayerBlending3 [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="1245,585" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ChangeLayerBlending4 [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="1245,765" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ConvertImageToLayer2 [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="1365,735"];
+ConvertImageToLayer3 [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="1365,915"];
+ConvertImageToLayer4 [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="1365,1095"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="780,405" fillcolor="violet"];
+Make3DObject2 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="780,585" fillcolor="violet"];
+Make3DObject3 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="780,765" fillcolor="violet"];
+MakeList [type="vuo.list.make.3.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-85,416" fillcolor="orange" _1="{\"x\":0,\"y\":0,\"z\":0}" _2="{\"x\":1,\"y\":0,\"z\":0}" _3="{\"x\":1,\"y\":0.10000000149011612,\"z\":0}"];
+MakeList10 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="935,416" fillcolor="blue"];
+MakeList11 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="935,596" fillcolor="blue"];
+MakeList12 [type="vuo.list.make.3.VuoInteger" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-30,611" fillcolor="orange" _1="0" _2="1" _3="2"];
+MakeList13 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="51,626" fillcolor="orange"];
+MakeList14 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="131,641" fillcolor="orange"];
+MakeList15 [type="vuo.list.make.7.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<7>7\l|<list>list\r" pos="1490,401" fillcolor="green"];
+MakeList16 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="212,656" fillcolor="orange"];
+MakeList17 [type="vuo.list.make.3.VuoPoint2d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="216,671" fillcolor="orange" _1="{\"x\":0.0,\"y\":0.0}" _2="{\"x\":1.0,\"y\":0.0}" _3="{\"x\":0.5,\"y\":0.8}"];
+MakeList18 [type="vuo.list.make.3.VuoInteger" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-30,791" fillcolor="orange" _1="0" _2="1" _3="2"];
+MakeList19 [type="vuo.list.make.1.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="935,776" fillcolor="blue"];
+MakeList20 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="51,806" fillcolor="orange"];
+MakeList21 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="131,821" fillcolor="orange"];
+MakeList22 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="212,836" fillcolor="orange"];
+MakeList23 [type="vuo.list.make.3.VuoPoint2d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="216,851" fillcolor="orange" _1="{\"x\":0.0,\"y\":0.0}" _2="{\"x\":1.0,\"y\":0.0}" _3="{\"x\":0.5,\"y\":0.8}"];
+MakeList24 [type="vuo.list.make.3.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-85,776" fillcolor="orange" _1="{\"x\":0,\"y\":0,\"z\":0}" _2="{\"x\":1,\"y\":-0.10000000149011612,\"z\":0}" _3="{\"x\":1,\"y\":0,\"z\":0}"];
+MakeList3 [type="vuo.list.make.3.VuoInteger" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-30,431" fillcolor="orange" _1="0" _2="1" _3="2"];
+MakeList4 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1769,416" fillcolor="lime"];
+MakeList5 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="51,446" fillcolor="orange"];
+MakeList6 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="131,461" fillcolor="orange"];
+MakeList7 [type="vuo.list.make.2.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="212,476" fillcolor="orange"];
+MakeList8 [type="vuo.list.make.3.VuoPoint2d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="216,491" fillcolor="orange" _1="{\"x\":0.0,\"y\":0.0}" _2="{\"x\":1.0,\"y\":0.0}" _3="{\"x\":0.5,\"y\":0.8}"];
+MakeList9 [type="vuo.list.make.3.VuoPoint3d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="-85,596" fillcolor="orange" _1="{\"x\":0,\"y\":0,\"z\":0}" _2="{\"x\":1,\"y\":-0.20000000298023224,\"z\":0}" _3="{\"x\":1,\"y\":-0.10000000149011612,\"z\":0}"];
+MakeMeshWithValues [type="co.parabox.mesh.make" version="2.0.0" label="Make Mesh with Values|<refresh>refresh\l|<positions>positions\l|<elements>elements\l|<normals>normals\l|<tangents>tangents\l|<bitangents>bitangents\l|<textures>textures\l|<elementAssemblyMethod>elementAssemblyMethod\l|<mesh>mesh\r" pos="345,405" fillcolor="orange" _elementAssemblyMethod="0"];
+MakeMeshWithValues2 [type="co.parabox.mesh.make" version="2.0.0" label="Make Mesh with Values|<refresh>refresh\l|<positions>positions\l|<elements>elements\l|<normals>normals\l|<tangents>tangents\l|<bitangents>bitangents\l|<textures>textures\l|<elementAssemblyMethod>elementAssemblyMethod\l|<mesh>mesh\r" pos="345,585" fillcolor="orange" _elementAssemblyMethod="0"];
+MakeMeshWithValues3 [type="co.parabox.mesh.make" version="2.0.0" label="Make Mesh with Values|<refresh>refresh\l|<positions>positions\l|<elements>elements\l|<normals>normals\l|<tangents>tangents\l|<bitangents>bitangents\l|<textures>textures\l|<elementAssemblyMethod>elementAssemblyMethod\l|<mesh>mesh\r" pos="345,765" fillcolor="orange" _elementAssemblyMethod="0"];
+MakeUnlitColorShader [type="vuo.shader.make.color.unlit" version="2.0.0" label="Make Unlit Color Shader|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="570,405" fillcolor="magenta" _color="{\"r\":1,\"g\":0,\"b\":0,\"a\":1}"];
+MakeUnlitColorShader2 [type="vuo.shader.make.color.unlit" version="2.0.0" label="Make Unlit Color Shader|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="570,585" fillcolor="magenta" _color="{\"r\":0,\"g\":0,\"b\":1,\"a\":1}"];
+MakeUnlitColorShader3 [type="vuo.shader.make.color.unlit" version="2.0.0" label="Make Unlit Color Shader|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="570,765" fillcolor="magenta" _color="{\"r\":0,\"g\":1,\"b\":0,\"a\":1}"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.3.0" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1815,390" fillcolor="lime" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="1560,390" fillcolor="green" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage2 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="1005,405" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage3 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="1005,585" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage4 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="1005,765" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+
+ChangeLayerBlending2:blendedLayer -> MakeList15:2;
+ChangeLayerBlending3:blendedLayer -> MakeList15:3;
+ChangeLayerBlending4:blendedLayer -> MakeList15:4;
+ConvertImageToLayer2:layer -> ChangeLayerBlending2:layer;
+ConvertImageToLayer3:layer -> ChangeLayerBlending3:layer;
+ConvertImageToLayer4:layer -> ChangeLayerBlending4:layer;
+Make3DObject2:object -> MakeList11:1;
+Make3DObject3:object -> MakeList19:1;
+Make3DObject:object -> MakeList10:1;
+MakeList10:list -> RenderSceneToImage2:objects;
+MakeList11:list -> RenderSceneToImage3:objects;
+MakeList12:list -> MakeMeshWithValues2:elements;
+MakeList13:list -> MakeMeshWithValues2:normals;
+MakeList14:list -> MakeMeshWithValues2:tangents;
+MakeList15:list -> RenderLayersToImage:layers;
+MakeList16:list -> MakeMeshWithValues2:bitangents;
+MakeList17:list -> MakeMeshWithValues2:textures;
+MakeList18:list -> MakeMeshWithValues3:elements;
+MakeList19:list -> RenderSceneToImage4:objects;
+MakeList20:list -> MakeMeshWithValues3:normals;
+MakeList21:list -> MakeMeshWithValues3:tangents;
+MakeList22:list -> MakeMeshWithValues3:bitangents;
+MakeList23:list -> MakeMeshWithValues3:textures;
+MakeList24:list -> MakeMeshWithValues3:positions;
+MakeList3:list -> MakeMeshWithValues:elements;
+MakeList4:list -> RenderImageToWindow:setWindowProperties;
+MakeList5:list -> MakeMeshWithValues:normals;
+MakeList6:list -> MakeMeshWithValues:tangents;
+MakeList7:list -> MakeMeshWithValues:bitangents;
+MakeList8:list -> MakeMeshWithValues:textures;
+MakeList9:list -> MakeMeshWithValues2:positions;
+MakeList:list -> MakeMeshWithValues:positions;
+MakeMeshWithValues2:mesh -> Make3DObject2:mesh;
+MakeMeshWithValues3:mesh -> Make3DObject3:mesh;
+MakeMeshWithValues:mesh -> Make3DObject:mesh;
+MakeUnlitColorShader2:shader -> Make3DObject2:shader;
+MakeUnlitColorShader3:shader -> Make3DObject3:shader;
+MakeUnlitColorShader:shader -> Make3DObject:shader;
+RenderImageToWindow:requestedFrame -> MakeMeshWithValues2:refresh;
+RenderImageToWindow:requestedFrame -> MakeMeshWithValues3:refresh;
+RenderImageToWindow:requestedFrame -> MakeMeshWithValues:refresh;
+RenderImageToWindow:requestedFrame -> MakeUnlitColorShader2:refresh;
+RenderImageToWindow:requestedFrame -> MakeUnlitColorShader3:refresh;
+RenderImageToWindow:requestedFrame -> MakeUnlitColorShader:refresh;
+RenderLayersToImage:image -> RenderImageToWindow:image;
+RenderSceneToImage2:image -> ConvertImageToLayer2:image;
+RenderSceneToImage3:image -> ConvertImageToLayer3:image;
+RenderSceneToImage4:image -> ConvertImageToLayer4:image;
+}

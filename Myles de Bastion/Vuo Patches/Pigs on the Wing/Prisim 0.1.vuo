@@ -1,0 +1,59 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2017 [cymaspace](https://vuo.org/user/421782)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ChangeLayerBlending [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="840,-105" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ChangeLayerBlending2 [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="840,45" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ChangeLayerBlending3 [type="vuo.layer.blendMode" version="1.0.0" label="Change Layer Blending|<refresh>refresh\l|<layer>layer\l|<blendMode>blendMode\l|<blendedLayer>blendedLayer\r" pos="840,210" fillcolor="cyan" _blendMode="\"linear-dodge\""];
+ConvertImageToLayer [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="825,-90"];
+ConvertImageToLayer2 [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="930,165"];
+ConvertImageToLayer3 [type="vuo.type.image.layer" version="1.0.0" label="Convert Image to Layer|<refresh>refresh\l|<image>image\l|<layer>layer\r" pos="930,315"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-75,60" fillcolor="yellow" _started_eventThrottling="enqueue"];
+Make3DTriangle2 [type="vuo.scene.make.triangle.VuoColor" version="1.0.0" label="Make 3D Triangle|<refresh>refresh\l|<transform>transform\l|<material>material\l|<object>object\r" pos="375,-105" fillcolor="violet" _transform="{\"translation\":[-0.33000001311302185,-0.10000000149011612,0],\"eulerRotation\":[0,0,0],\"scale\":[1,1,1]}"];
+Make3DTriangle3 [type="vuo.scene.make.triangle.VuoColor" version="1.0.0" label="Make 3D Triangle|<refresh>refresh\l|<transform>transform\l|<material>material\l|<object>object\r" pos="375,45" fillcolor="violet" _transform="{\"translation\":[0,-0.10000000149011612,0],\"eulerRotation\":[0,0,0],\"scale\":[1,1,1]}"];
+Make3DTriangle4 [type="vuo.scene.make.triangle.VuoColor" version="1.0.0" label="Make 3D Triangle|<refresh>refresh\l|<transform>transform\l|<material>material\l|<object>object\r" pos="375,210" fillcolor="violet" _transform="{\"translation\":[0.33000001311302185,-0.10000000149011612,0],\"eulerRotation\":[0,0,0],\"scale\":[1,1,1]}"];
+MakeHSLColor [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="120,-105" fillcolor="magenta" _hue="0.0" _saturation="1.0" _lightness="0.5" _opacity="1"];
+MakeHSLColor2 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="120,45" fillcolor="magenta" _hue="0.68999999999999995" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeHSLColor3 [type="vuo.color.make.hsl" version="2.0.0" label="Make HSL Color|<refresh>refresh\l|<hue>hue\l|<saturation>saturation\l|<lightness>lightness\l|<opacity>opacity\l|<color>color\r" pos="120,210" fillcolor="magenta" _hue="0.46999999999999997" _saturation="1.0" _lightness="0.5" _opacity="1.0"];
+MakeList10 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="1070,41" fillcolor="green"];
+MakeList11 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="530,56" fillcolor="blue"];
+MakeList12 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="530,221" fillcolor="blue"];
+MakeList2 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="530,-94" fillcolor="blue"];
+MakeList4 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1124,281" fillcolor="lime"];
+RenderImageToWindow [type="vuo.image.render.window" version="3.3.0" label="Render Image to Window|<refresh>refresh\l|<image>image\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1170,255" fillcolor="lime" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="1140,30" fillcolor="green" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="600,-105" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage2 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="600,45" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage3 [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="600,210" fillcolor="blue" _width="1024" _height="768" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+
+ChangeLayerBlending2:blendedLayer -> MakeList10:2;
+ChangeLayerBlending3:blendedLayer -> MakeList10:3;
+ChangeLayerBlending:blendedLayer -> MakeList10:1;
+ConvertImageToLayer2:layer -> ChangeLayerBlending2:layer;
+ConvertImageToLayer3:layer -> ChangeLayerBlending3:layer;
+ConvertImageToLayer:layer -> ChangeLayerBlending:layer;
+FireOnStart:started -> MakeHSLColor2:refresh;
+FireOnStart:started -> MakeHSLColor3:refresh;
+FireOnStart:started -> MakeHSLColor:refresh;
+Make3DTriangle2:object -> MakeList2:1;
+Make3DTriangle3:object -> MakeList11:1;
+Make3DTriangle4:object -> MakeList12:1;
+MakeHSLColor2:color -> Make3DTriangle3:material;
+MakeHSLColor3:color -> Make3DTriangle4:material;
+MakeHSLColor:color -> Make3DTriangle2:material;
+MakeList10:list -> RenderLayersToImage:layers;
+MakeList11:list -> RenderSceneToImage2:objects;
+MakeList12:list -> RenderSceneToImage3:objects;
+MakeList2:list -> RenderSceneToImage:objects;
+MakeList4:list -> RenderImageToWindow:setWindowProperties;
+RenderLayersToImage:image -> RenderImageToWindow:image;
+RenderSceneToImage2:image -> ConvertImageToLayer2:image;
+RenderSceneToImage3:image -> ConvertImageToLayer3:image;
+RenderSceneToImage:image -> ConvertImageToLayer:image;
+}
