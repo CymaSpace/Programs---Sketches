@@ -9,3 +9,9 @@ desktop.ini
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+*.mov
+
+*.dch~
+
+*.dip~
