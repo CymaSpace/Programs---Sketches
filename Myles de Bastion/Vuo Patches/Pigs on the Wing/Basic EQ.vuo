@@ -1,0 +1,40 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2018 [Bodysoulspirit](https://vuo.org/user/2475)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+AllowChanges2 [type="vuo.event.allowChanges2.VuoInteger" version="2.0.0" label="Allow Changes|<refresh>refresh\l|<value>value\l|<changedValue>changedValue\r" pos="630,240"];
+CalculateAmplitudeForFrequencies [type="vuo.audio.analyze.fft2" version="2.0.0" label="Calculate Amplitude for Frequencies|<refresh>refresh\l|<samples>samples\l|<frequencyBins>frequencyBins\l|<frequencyBinAveraging>frequencyBinAveraging\l|<amplitudes>amplitudes\r" pos="225,285" _frequencyBins="\"1023\"" _frequencyBinAveraging="\"quadratic\""];
+CountItemsInList2 [type="vuo.list.count.VuoReal" version="1.0.0" label="Count Items in List|<refresh>refresh\l|<list>list\l|<itemCount>itemCount\r" pos="210,180"];
+FireOnStart2 [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-60,405" _started_eventThrottling="enqueue"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="1560,330"];
+MakeLineStripMesh2 [type="vuo.mesh.make.lineStrips.VuoPoint2d" version="2.1.0" label="Make Line Strip Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="1335,330" _lineWidth="0.01"];
+MakeList10 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1769,386"];
+MakeList9 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="1719,341"];
+MakePointsAlongLine2 [type="vuo.point.make.curve.VuoReal" version="1.0.0" label="Make Points along Line|<refresh>refresh\l|<startPosition>startPosition\l|<endPosition>endPosition\l|<curve>curve\l|<easing>easing\l|<numberOfPoints>numberOfPoints\l|<points>points\r" pos="840,180" _startPosition="-1" _endPosition="1." _curve="\"linear\"" _easing="\"in\""];
+MakeUnlitColorShader [type="vuo.shader.make.color.unlit" version="2.0.0" label="Make Unlit Color Shader|<refresh>refresh\l|<color>color\l|<shader>shader\r" pos="1320,420" _color="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}"];
+MergeXYLists [type="vuo.point.merge.xy" version="1.0.0" label="Merge XY Lists|<refresh>refresh\l|<x>x\l|<y>y\l|<points>points\r" pos="1095,270"];
+MixAudioChannels [type="vuo.audio.mix" version="2.0.0" label="Mix Audio Channels|<refresh>refresh\l|<samples>samples\l|<mixedSamples>mixedSamples\r" pos="330,390"];
+ReceiveLiveAudio [type="vuo.audio.receive" version="1.0.1" label="Receive Live Audio|<refresh>refresh\l|<device>device\l|<receivedChannels>receivedChannels\r" pos="-105,285" _receivedChannels_eventThrottling="drop"];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.3.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<multisampling>multisampling\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="1815,330" _multisampling="\"4\"" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+
+AllowChanges2:changedValue -> MakePointsAlongLine2:numberOfPoints;
+CalculateAmplitudeForFrequencies:amplitudes -> CountItemsInList2:list;
+CalculateAmplitudeForFrequencies:amplitudes -> MergeXYLists:y;
+CountItemsInList2:itemCount -> AllowChanges2:value;
+FireOnStart2:started -> MakeUnlitColorShader:refresh;
+Make3DObject:object -> MakeList9:1;
+MakeLineStripMesh2:mesh -> Make3DObject:mesh;
+MakeList10:list -> RenderSceneToWindow:setWindowProperties;
+MakeList9:list -> RenderSceneToWindow:objects;
+MakePointsAlongLine2:points -> MergeXYLists:x;
+MakeUnlitColorShader:shader -> Make3DObject:shader;
+MergeXYLists:points -> MakeLineStripMesh2:positions;
+MixAudioChannels:mixedSamples -> CalculateAmplitudeForFrequencies:samples;
+ReceiveLiveAudio:receivedChannels -> MixAudioChannels:samples;
+}
